@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 
-    belongs_to :pool
+    self.primary_key = "user_id"
+    # belongs_to :pool
 
 end
