@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    @auth_code = request.original_url
   end
 
   # def create
