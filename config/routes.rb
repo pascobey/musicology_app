@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   # get 'login', to: 'users#new'
   root 'users#new'
+  get 'thanks', to: 'users#show'
   # get 'users/new'
   # get 'users/create'
   # get 'users/edit'
