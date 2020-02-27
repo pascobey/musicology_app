@@ -14,8 +14,8 @@ class UsersController < ApplicationController
   end
   
   def show
-    @auth_code = request.original_url.last(352)
-    @user = User.create(auth_code: @auth_code)
+    # @auth_code = request.original_url.last(352)
+    # @user = User.create(auth_code: @auth_code)
   end
 
   # def create
