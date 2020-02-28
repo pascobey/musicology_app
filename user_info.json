@@ -1,0 +1,20 @@
+{
+    "display_name" : "Cooper Scobey",
+    "email" : "scobey.cooper@gmail.com",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/user/cooper.scobey"
+    },
+    "followers" : {
+      "href" : null,
+      "total" : 36
+    },
+    "href" : "https://api.spotify.com/v1/users/cooper.scobey",
+    "id" : "cooper.scobey",
+    "images" : [ {
+      "height" : null,
+      "url" : "https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/67327518_2291246187858062_7003665275367194624_n.jpg?_nc_cat=110&_nc_sid=0c64ff&_nc_oc=AQkdhWOzfFlhp7NpO_R6G-92RpWjMc4NJUAp8GXiYBOGbPiwQ3NcEX4nJmqPHXgVwls&_nc_ht=scontent.xx&_nc_tp=6&oh=df2df2f558d8ad321d217c8631e00482&oe=5EBBC91C",
+      "width" : null
+    } ],
+    "type" : "user",
+    "uri" : "spotify:user:cooper.scobey"
+  }
