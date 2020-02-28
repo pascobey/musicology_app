@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def new
     @spotify_data_request = 'https://accounts.spotify.com/authorize' +
       '?client_id=' + @@spotifyClientID + '&response_type=code' +
-      '&redirect_uri=' +  URI.escape('https://guarded-hollows-17803.herokuapp.com/create', Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) +
+      '&redirect_uri=' +  URI.escape('https://floating-hamlet-63269.herokuapp.com/create', Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) +
       '&scope=' + URI.escape(@@scopes, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   end
   
