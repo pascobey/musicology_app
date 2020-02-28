@@ -32,7 +32,7 @@ class UsersController < ApplicationController
                   :redirect_url => @app_landing
         }.to_json,
       :headers => { 'Authorization' => 'Basic'} )
-    @user = User.create(auth_code: auth_code)
+    @user = User.create(auth_code: auth_code, access_token_json: access_token_json)
     redirect_to(user_path(@user))
   end
 
