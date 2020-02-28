@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(auth_code: request.original_url.last(352))
-    redirect_to(user_path(@user.id))
+    redirect_to(user_path(@user))
     # redirect_to('/')
   end
 
