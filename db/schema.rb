@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_002302) do
 
   create_table "users", force: :cascade do |t|
     t.string "auth_code"
+    t.json "access_token_json"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

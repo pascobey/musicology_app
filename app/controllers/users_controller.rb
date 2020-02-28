@@ -1,11 +1,16 @@
 class UsersController < ApplicationController
 
-  # appLanding = 'https://guarded-hollows-17803.herokuapp.com/'
-  
+  # include HTTParty
+
+  @@app_landing = URI.escape('https://floating-hamlet-63269.herokuapp.com/create', Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+  @@spotify_client_id = 'd7f2ddcb58784a428ff86348869cbfd9'
+  @@scopes = 'user-top-read user-follow-read user-library-read user-read-recently-played user-read-email'
+  # @request ="poop"
+
   def new
-    @spotify_data_request = 'https://accounts.spotify.com/authorize' +
-      '?client_id=' + @@spotifyClientID + '&response_type=code' +
-      '&redirect_uri=' +  URI.escape('https://floating-hamlet-63269.herokuapp.com/create', Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) +
+    @request = 'https://accounts.spotify.com/authorize' +
+      '?client_id=' + @@spotify_client_id + '&response_type=code' +
+      '&redirect_uri=' + @@app_landing +
       '&scope=' + URI.escape(@@scopes, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   end
   
@@ -17,9 +22,16 @@ class UsersController < ApplicationController
 
   def create
     auth_code = request.original_url.last(352)
-    # command = "curl -H “Authorization: Basic” -d client_id=d7f2ddcb58784a428ff86348869cbfd9 -d client_secret=164b375ae4864c11a25810f923ebf9c8 -d grant_type=authorization_code -d code="
-    # + auth_code + "-d redirect_uri=https%3A%2F%2Ffloating-hamlet-63269.herokuapp.com%2Fcreate https://accounts.spotify.com/api/token > access_tokens.json"
-    # system("echo", command)
+    # auth_code = "AQAWPSfcDXNTWOhnEDKoB9ny0_ee1NYSHpfNiOTJYzjAOUI2MbI39IwH39T2BYsegEnmiENpgvw7UKDqJnGqZEcSrLPHTPnIXKYKFqLpuu4Kn5gCL3cuGAD7Uwyc2OZBcqcKs5BNuuPFk2n6Acfth9Lu3td1ELzyqXHpKgRNHr7NEhjENhCDzqS0neMaCYlapJJXxLs_DALCPC2jLAPdDsBIqzRJcWTEPapXIw5_c0JtO9cRdt8uj90IsDvwFPxHDRrWqEOu7bzQOUo72bOW7pTRPerRy3Nf7md0VtIqgd8ZAPbNd9ZtOjHipekMDykieJNjsETY6liWeOsvUSfGE6amTzqIEU0v"
+    access_token_json = HTTParty.post(
+      "https://accounts.spotify.com/api/token",
+      :body => {  :client_id => @spotify_client_id,
+                  :client_secret => '164b375ae4864c11a25810f923ebf9c8',
+                  :grant_type => 'authorization_code',
+                  :code => auth_code,
+                  :redirect_url => @app_landing
+        }.to_json,
+      :headers => { 'Authorization' => 'Basic'} )
     @user = User.create(auth_code: auth_code)
     redirect_to(user_path(@user))
   end
