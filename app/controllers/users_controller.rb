@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.[request.original_url.last(1)]
+    @user = User.where(id: request.original_url.last(1))
   end
 
   def create
