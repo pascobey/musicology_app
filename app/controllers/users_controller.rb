@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def create
     system("echo", "curl -H “Authorization: Basic” -d client_id=d7f2ddcb58784a428ff86348869cbfd9 -d client_secret=164b375ae4864c11a25810f923ebf9c8 -d grant_type=authorization_code -d code="
       + request.original_url.last(352) + "-d redirect_uri=https%3A%2F%2Ffloating-hamlet-63269.herokuapp.com%2Fcreate https://accounts.spotify.com/api/token > access_tokens.json")
-    # @user = User.create(auth_code: request.original_url.last(352))
+    @user = User.create(auth_code: request.original_url.last(352))
     redirect_to(user_path(@user))
   end
 
