@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       'https://accounts.spotify.com/api/token',
       headers: {
         'Authorization: Basic ZDdmMmRkY2I1ODc4NGE0MjhmZjg2MzQ4ODY5Y2JmZDk6MTY0YjM3NWFlNDg2NGMxMWEyNTgxMGY5MjNlYmY5Yzg='
-      }
+      },
       parameters: {
         "grant_type" => "authorization_code", 
         "code" => "#{auth_code}",
