@@ -19,14 +19,25 @@ class UsersController < ApplicationController
     auth_code = request.original_url.last(352)
     access_token_json = Faraday.post(
       'https://accounts.spotify.com/api/token',
-      URI.encode_www_form(
-        client_id: @@spotify_client_id,
-        client_secret: @@spotify_client_secret,
-        grant_type: 'authorization_code',
-        code: auth_code,
-        redirect_uri: @@app_landing
-      )
+      headers: {
+        'Authorization: Basic ZDdmMmRkY2I1ODc4NGE0MjhmZjg2MzQ4ODY5Y2JmZDk6MTY0YjM3NWFlNDg2NGMxMWEyNTgxMGY5MjNlYmY5Yzg='
+      }
+      parameters: {
+        "grant_type" => "authorization_code", 
+        "code" => "#{auth_code}",
+        "redirect_uri" => "#{@@app_landing}"
+      }
     )
+    # access_token_json = Faraday.post(
+    #   'https://accounts.spotify.com/api/token',
+    #   URI.encode_www_form(
+    #     client_id: @@spotify_client_id,
+    #     client_secret: @@spotify_client_secret,
+    #     grant_type: 'authorization_code',
+    #     code: auth_code,
+    #     redirect_uri: @@app_landing
+    #   )
+    # )
     @user = User.create(auth_code: auth_code, access_token_json: access_token_json)
     redirect_to(user_path(@user))
   end
