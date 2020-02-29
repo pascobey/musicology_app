@@ -26,8 +26,7 @@ class UsersController < ApplicationController
         "grant_type" => "authorization_code", 
         "code" => "#{auth_code}",
         "redirect_uri" => "#{@@app_landing}"
-      }
-    )
+      })
     # access_token_json = Faraday.post(
     #   'https://accounts.spotify.com/api/token',
     #   URI.encode_www_form(
