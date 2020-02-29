@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def create
     auth_code = request.original_url.last(352)
     access_token_json = Faraday.post(
-      'https://accounts.spotify.com/authorize',
+      'https://accounts.spotify.com/api/token',
       URI.encode_www_form(
         client_id: @@spotify_client_id,
         client_secret: @@spotify_client_secret,
