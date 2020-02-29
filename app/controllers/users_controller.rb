@@ -17,17 +17,29 @@ class UsersController < ApplicationController
 
   def create
     auth_code = request.original_url.last(352)
-    access_token_json = Faraday.new(
-      'https://accounts.spotify.com/api/token',
-      URI.encode_www_form(
-        grant_type: "authorization_code",
-        code: auth_code,
-        redirect_uri: @@app_landing
-      ),
+
+    headers = {
+      :authorization => 'Basic ZDdmMmRkY2I1ODc4NGE0MjhmZjg2MzQ4ODY5Y2JmZDk6MTY0YjM3NWFlNDg2NGMxMWEyNTgxMGY5MjNlYmY5Yzg='
+    }
+    access_token_json = RestClient.post 'https://accounts.spotify.com/api/token',
       {
-        'Authorization: Basic ZDdmMmRkY2I1ODc4NGE0MjhmZjg2MzQ4ODY5Y2JmZDk6MTY0YjM3NWFlNDg2NGMxMWEyNTgxMGY5MjNlYmY5Yzg='
-      }
-    )
+        grant_type: "authorization_code",
+        code: "#{auth_code}",
+        redirect_uri: "#{@@app_landing}"
+      }.to_json,
+      headers
+
+    # access_token_json = Faraday.new(
+    #   'https://accounts.spotify.com/api/token',
+    #   URI.encode_www_form(
+    #     grant_type: "authorization_code",
+    #     code: auth_code,
+    #     redirect_uri: @@app_landing
+    #   ),
+    #   {
+    #     'Authorization: Basic ZDdmMmRkY2I1ODc4NGE0MjhmZjg2MzQ4ODY5Y2JmZDk6MTY0YjM3NWFlNDg2NGMxMWEyNTgxMGY5MjNlYmY5Yzg='
+    #   }
+    # )
     # access_token_json = Faraday.post(
     #   'https://accounts.spotify.com/api/token',
     #   URI.encode_www_form(
