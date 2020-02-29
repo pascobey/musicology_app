@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       "https://accounts.spotify.com/api/token",
       :body => {  :client_id => @spotify_client_id,
                   :client_secret => '164b375ae4864c11a25810f923ebf9c8',
-                  :grant_type => 'authorization_code',
+                  # :grant_type => 'authorization_code',
                   :code => auth_code,
                   :redirect_url => @app_landing
         }.to_json,
