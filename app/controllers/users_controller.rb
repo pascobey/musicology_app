@@ -8,8 +8,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    # WILL BREAK!!!!!
-    @user = User.find_by(id: request.original_url.last(1))
+    @user = User.find_by(id: request.original_url.delete("#{APP_BASE_URL}/users/"))
   end
 
   def create
@@ -21,7 +20,6 @@ class UsersController < ApplicationController
         Authorization: "Basic #{CLIENT_B64}"
       }
     )
-    puts access_token_json
     user_profile_json = HTTParty.get(
       "#{SPOTIFY_API_URL}/v1/me",
       headers: {
@@ -30,7 +28,6 @@ class UsersController < ApplicationController
     )
     @user = User.create(user_id: user_profile_json['id'], email: user_profile_json['email'],
       account_url: user_profile_json.dig('external_urls', 'spotify'), refresh_token: access_token_json['refresh_token'])
-    # @user = User.create(user_profile_json: user_profile_json, refresh_token: access_token_json['refresh_token'])
     redirect_to(user_path(@user))
   end
 
