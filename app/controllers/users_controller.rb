@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       }
     )
     puts access_token_json
-    user_profile_json = HTTParty.post(
+    user_profile_json = HTTParty.get(
       "#{SPOTIFY_API_URL}/v1/me",
       headers: {
         Authorization: "Bearer #{access_token_json['access_token']}"
