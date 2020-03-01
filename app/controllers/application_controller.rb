@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
     SPOTIFY_BASE_URL = 'https://accounts.spotify.com'.freeze
-    SPOTIFY_AUTH_CODE_PATH = '/authorize'.freeze
-    SPOTIFY_TOKEN_REQUEST_PATH = '/api/token'.freeze
+    SPOTIFY_API_URL = 'https://api.spotify.com'
     APP_LANDING_URL = 'https://floating-hamlet-63269.herokuapp.com/create'.freeze
     APP_LANDING_URI = URI.escape(APP_LANDING_URL, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")).freeze
     APP_CLIENT_ID = 'd7f2ddcb58784a428ff86348869cbfd9'.freeze
