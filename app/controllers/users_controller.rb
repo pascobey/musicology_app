@@ -1,15 +1,10 @@
 class UsersController < ApplicationController
 
-  @@app_landing = URI.escape('https://floating-hamlet-63269.herokuapp.com/create', Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
-  @@spotify_client_id = 'd7f2ddcb58784a428ff86348869cbfd9'
-  @@spotify_client_secret = '164b375ae4864c11a25810f923ebf9c8'
-  @@scopes = 'user-top-read user-follow-read user-library-read user-read-recently-played user-read-email'
-
   def new
-    @request = 'https://accounts.spotify.com/authorize' +
-      '?client_id=' + @@spotify_client_id + '&response_type=code' +
-      '&redirect_uri=' + @@app_landing +
-      '&scope=' + URI.escape(@@scopes, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+    @request = SPOTIFY_BASE_URL + SPOTIFY_AUTH_CODE_PATH +
+      '?client_id=' + APP_CLIENT_ID + '&response_type=code' +
+      '&redirect_uri=' + APP_LANDING_URI +
+      '&scope=' + SCOPES_URI
   end
   
   def show
@@ -17,17 +12,33 @@ class UsersController < ApplicationController
 
   def create
     auth_code = request.original_url.last(352)
-
-    headers = {
-      :authorization => 'Basic ZDdmMmRkY2I1ODc4NGE0MjhmZjg2MzQ4ODY5Y2JmZDk6MTY0YjM3NWFlNDg2NGMxMWEyNTgxMGY5MjNlYmY5Yzg='
-    }
-    access_token_json = RestClient.post 'https://accounts.spotify.com/api/token',
-      {
+    response = HTTParty.post(
+      "#{SPOTIFY_BASE_URL}#{SPOTIFY_TOKEN_REQUEST_PATH}",
+      multipart: true,
+      headers: {
+        Authorization: "Basic #{CLIENT_B64}"
+      },
+      body: {
         grant_type: "authorization_code",
         code: "#{auth_code}",
-        redirect_uri: "#{@@app_landing}"
-      }.to_json,
-      headers
+        redirect_uri: "#{APP_LANDING_URI}"
+      }
+    )
+
+
+    @user = User.create(auth_code: auth_code, access_token_json: access_token_json)
+    redirect_to(user_path(@user))
+
+    # headers = {
+    #   :authorization => 'Basic ZDdmMmRkY2I1ODc4NGE0MjhmZjg2MzQ4ODY5Y2JmZDk6MTY0YjM3NWFlNDg2NGMxMWEyNTgxMGY5MjNlYmY5Yzg='
+    # }
+    # access_token_json = RestClient.post 'https://accounts.spotify.com/api/token',
+    #   {
+    #     grant_type: "authorization_code",
+    #     code: "#{auth_code}",
+    #     redirect_uri: "#{@@app_landing}"
+    #   }.to_json,
+    #   headers
 
     # access_token_json = Faraday.new(
     #   'https://accounts.spotify.com/api/token',
@@ -50,8 +61,6 @@ class UsersController < ApplicationController
     #     redirect_uri: @@app_landing
     #   )
     # )
-    @user = User.create(auth_code: auth_code, access_token_json: access_token_json)
-    redirect_to(user_path(@user))
   end
 
 end
