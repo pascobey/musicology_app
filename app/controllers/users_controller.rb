@@ -21,14 +21,15 @@ class UsersController < ApplicationController
         Authorization: "Basic #{CLIENT_B64}"
       }
     )
-    user_profile_json = HTTParty.post(
-      "#{SPOTIFY_API_URL}/v1/me",
-      headers: {
-        Authorization: "Bearer #{access_token_json['access_token']}"
-      }
-    )
+    # puts access_token_json
+    # user_profile_json = HTTParty.post(
+    #   "#{SPOTIFY_API_URL}/v1/me",
+    #   headers: {
+    #     Authorization: "Bearer #{access_token_json['access_token']}"
+    #   }
+    # )
 
-    @user = User.create(refresh_token: access_token_json['refresh_token'], user_profile_json: user_profile_json)
+    @user = User.create(refresh_token: access_token_json['refresh_token'])
     redirect_to(user_path(@user))
   end
 
