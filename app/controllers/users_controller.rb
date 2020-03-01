@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     auth_code = request.original_url.last(352)
-    response = HTTParty.get(
+    response = HTTParty.post(
       "#{SPOTIFY_BASE_URL}#{SPOTIFY_TOKEN_REQUEST_PATH}",
       multipart: true,
       headers: {
