@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         code: "#{auth_code}",
         redirect_uri: "#{APP_LANDING_URI}"
       }
-    ))
+    )
 
 
     @user = User.create(auth_code: auth_code, access_token_json: response)
