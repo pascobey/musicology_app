@@ -14,17 +14,18 @@ class UsersController < ApplicationController
 
   def create
     auth_code = request.original_url.last(352)
-    access_token_json_hash = HTTParty.post(
+    access_token_json = HTTParty.post(
       "#{SPOTIFY_BASE_URL}#{SPOTIFY_TOKEN_REQUEST_PATH}",
       body: "grant_type=authorization_code&code=#{auth_code}&redirect_uri=#{APP_LANDING_URI}",
       headers: {
         Authorization: "Basic #{CLIENT_B64}"
       }
-    ).parse string
+    )
+    access_token_hash = access_token_json.parse string
 
 
 
-    @user = User.create(auth_code: auth_code, access_token_json: access_token_json_hash)
+    @user = User.create(auth_code: auth_code, access_token_json: access_token_hash)
     redirect_to(user_path(@user))
 
     # headers = {
