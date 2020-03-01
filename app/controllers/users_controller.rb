@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def create
     auth_code = request.original_url.last(352)
-    access_token_json = HTTParty.post(
+    access_token_json = HTTParty.get(
       "#{SPOTIFY_BASE_URL}/api/token",
       body: "grant_type=authorization_code&code=#{auth_code}&redirect_uri=#{APP_LANDING_URI}",
       headers: {
