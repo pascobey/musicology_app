@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     )
 
 
-    @user = User.create(auth_code: auth_code, access_token_json: access_token_json)
+    @user = User.create(auth_code: auth_code, access_token_json: response)
     redirect_to(user_path(@user))
 
     # headers = {
