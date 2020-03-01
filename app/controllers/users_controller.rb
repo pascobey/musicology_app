@@ -28,7 +28,7 @@ class UsersController < ApplicationController
         Authorization: "Bearer #{access_token_json['access_token']}"
       }
     )
-    @user = User.create(id: user_profile_json['id'], email: user_profile_json['email'],
+    @user = User.create(user_id: user_profile_json['id'], email: user_profile_json['email'],
       account_url: user_profile_json.dig('external_urls', 'spotify'), refresh_token: access_token_json['refresh_token'])
     # @user = User.create(user_profile_json: user_profile_json, refresh_token: access_token_json['refresh_token'])
     redirect_to(user_path(@user))
