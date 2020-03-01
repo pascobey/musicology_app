@@ -14,13 +14,9 @@ class UsersController < ApplicationController
     auth_code = request.original_url.last(352)
     response = HTTParty.post(
       "#{SPOTIFY_BASE_URL}#{SPOTIFY_TOKEN_REQUEST_PATH}",
+      body: "grant_type=authorization_code&code=#{auth_code}&redirect_uri=#{APP_LANDING_URI}",
       headers: {
         Authorization: "Basic #{CLIENT_B64}"
-      },
-      body: {
-        grant_type: "authorization_code",
-        code: "#{auth_code}",
-        redirect_uri: "#{APP_LANDING_URI}"
       }
     )
 
