@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   end
   
   def show
+    # WILL BREAK!!!!!
+    @user = User.find_by(id: request.original_url.last(1))
   end
 
   def create
