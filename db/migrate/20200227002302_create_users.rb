@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration[6.0]
   def up
-    create_table :users id: false do |t|
+    create_table :users do |t|
       t.string :user_id
       t.string :email
       t.string :account_url
