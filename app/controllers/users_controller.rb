@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     auth_code = request.original_url.last(352)
-    response = HTTParty.post(
+    response = URI.encode_www_form(HTTParty.post(
       "#{SPOTIFY_BASE_URL}#{SPOTIFY_TOKEN_REQUEST_PATH}",
       multipart: true,
       headers: {
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         code: "#{auth_code}",
         redirect_uri: "#{APP_LANDING_URI}"
       }
-    )
+    ))
 
 
     @user = User.create(auth_code: auth_code, access_token_json: response)
