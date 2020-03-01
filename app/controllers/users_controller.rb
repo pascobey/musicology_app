@@ -21,11 +21,10 @@ class UsersController < ApplicationController
         Authorization: "Basic #{CLIENT_B64}"
       }
     )
-    access_token_hash = access_token_json.parse string
 
 
 
-    @user = User.create(auth_code: auth_code, access_token_json: access_token_hash)
+    @user = User.create(auth_code: auth_code, access_token_json: access_token_json)
     redirect_to(user_path(@user))
 
     # headers = {
