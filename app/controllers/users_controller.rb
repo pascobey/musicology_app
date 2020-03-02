@@ -46,7 +46,7 @@ class UsersController < ApplicationController
             track_artists += ' '
           end
           artist = Artist.create(library_id: @library_id, name: ah['name'])
-          track_artists += artist
+          track_artists += artist.name
         end
       end
       @track = Track.create(artists: track_artists, track_name: tracks.dig(i, 'track')['name'], album_name: tracks.dig(i, 'track')['album']['name'])
