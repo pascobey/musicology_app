@@ -36,7 +36,7 @@ class UsersController < ApplicationController
       }
     )
     i = 0
-    items.each do |t|
+    saved_tracks_json.each do |t|
       artists_hash = t[i]['track']['album']['artists']
       artists = []
       artists_hash.each do |ah|
