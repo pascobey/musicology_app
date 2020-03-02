@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       account_url: user_profile_json.dig('external_urls', 'spotify'), refresh_token: access_token_json['refresh_token'])
     @library = Library.create(user_id: @user.id)
     saved_tracks_json = HTTParty.get(
-      "#{SPOTIFY_API_URL}/v1/tracks",
+      "#{SPOTIFY_API_URL}/v1/me/tracks",
       headers: {
         Authorization: "Bearer #{access_token_json['access_token']}"
       }
