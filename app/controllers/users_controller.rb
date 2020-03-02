@@ -37,22 +37,22 @@ class UsersController < ApplicationController
     )
     
     puts playlists_json['items']
-    i = 0
-    while i < saved_tracks_json['total']
-      artist_hashes = tracks.dig(i, 'track')['album']['artists']
-      track_artists = ''
-      artist_hashes.each do |ah|
-        if  !Artist.find_by(name: ah['name'])
-          if ah != artist_hashes.first
-            track_artists += ' '
-          end
-          artist = Artist.create(library_id: @library_id, name: ah['name'])
-          track_artists += artist.name
-        end
-      end
-      @track = Track.create(artists: track_artists, track_name: tracks.dig(i, 'track')['name'], album_name: tracks.dig(i, 'track')['album']['name'])
-      i = i.next
-    end
+    # i = 0
+    # while i < saved_tracks_json['total']
+    #   artist_hashes = tracks.dig(i, 'track')['album']['artists']
+    #   track_artists = ''
+    #   artist_hashes.each do |ah|
+    #     if  !Artist.find_by(name: ah['name'])
+    #       if ah != artist_hashes.first
+    #         track_artists += ' '
+    #       end
+    #       artist = Artist.create(library_id: @library_id, name: ah['name'])
+    #       track_artists += artist.name
+    #     end
+    #   end
+    #   @track = Track.create(artists: track_artists, track_name: tracks.dig(i, 'track')['name'], album_name: tracks.dig(i, 'track')['album']['name'])
+    #   i = i.next
+    # end
     redirect_to(user_path(@user))
   end
 

@@ -1,8 +1,11 @@
 class CreatePlaylists < ActiveRecord::Migration[6.0]
-  def change
+  def up
     create_table :playlists do |t|
       t.integer :library_id
       t.timestamps
     end
+  end
+  def down 
+    drop_table :playlists
   end
 end
