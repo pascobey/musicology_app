@@ -53,9 +53,12 @@ class UsersController < ApplicationController
           if ah != artists_hash.first
             artists_names += ', '
           end
+          if !Artist.find_by(name: ah['name'])
+            Artist.create(name: ah['name'])
+          end
           artists_names += ah['name']
         end
-        Track.create(playlist_id: p.id, artist_id: artist_names,
+        Track.create(playlist_id: p.id, artist_name: artist_names,
           track_name: t['track']['name'], album_name: t['track']['album']['name'])
         # puts t['track']['name'] + ' by ' + artists_names + ' found on ' + t['track']['album']['name']
       end
