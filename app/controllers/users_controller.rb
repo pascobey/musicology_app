@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find_by(id: request.original_url.delete("#{APP_BASE_URL}/users/"))
+    id = request.or
+    @user = User.find_by(id: request.original_url[("#{APP_BASE_URL}/users/").size, 100000000])
   end
 
   def create
