@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_033231) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "library_id"
-    t.string "artist_name"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_033231) do
   end
 
   create_table "tracks", force: :cascade do |t|
-    t.integer "artist_name"
+    t.string "artists"
     t.string "track_name"
     t.string "album_name"
     t.datetime "created_at", precision: 6, null: false

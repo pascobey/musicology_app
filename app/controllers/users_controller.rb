@@ -37,13 +37,18 @@ class UsersController < ApplicationController
     )
     tracks = saved_tracks_json['items']
     i = 0
-    until i >= saved_tracks_json['total']
-      artists = []
-      artists_hash = tracks[i]['track']['album']['artists']
-      artists_hash.each do |ah|
-        artists << Artist.create(library_id: @library_id, artist_name: ah['name'])
+    while i > saved_tracks_json['total']
+      artist_hashes = tracks.dig(i, 'track')['album']['artists']
+      track_artists = ''
+      artist_hashes.each do |ah|
+        if  !Artist.find_by(name: ah['name'])
+          if ah != artist_hashes.first
+            track_artists += ' '
+          end
+          track_artists += Artist.create(library_id: @library_id, name: ah['name']).name
+        end
       end
-      @track = Track.create(artist_name: artists.each.artist_name, track_name: tracks['track']['name'], album_name: tracks['track']['album']['name'])
+      @track = Track.create(artists: track_artists, track_name: tracks.dig(i, 'track')['name'], album_name: tracks.dig(i, 'track')['album']['name'])
       i = i.next
     end
     redirect_to(user_path(@user))
