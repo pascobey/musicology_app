@@ -29,14 +29,14 @@ class UsersController < ApplicationController
     @user = User.create(user_id: user_profile_json['id'], email: user_profile_json['email'],
       account_url: user_profile_json.dig('external_urls', 'spotify'), refresh_token: access_token_json['refresh_token'])
     @library = Library.create(user_id: @user.id)
-    saved_tracks_json = HTTParty.get(
-      "#{SPOTIFY_API_URL}/v1/me/tracks",
+    playlists_json = HTTParty.get(
+      "#{SPOTIFY_API_URL}/v1/me/playlists",
       headers: {
         Authorization: "Bearer #{access_token_json['access_token']}"
       }
     )
     
-    puts saved_tracks_json
+    puts playlists_json
     i = 0
     while i < saved_tracks_json['total']
       artist_hashes = tracks.dig(i, 'track')['album']['artists']
