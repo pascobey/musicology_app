@@ -39,7 +39,15 @@ class UsersController < ApplicationController
       Playlist.create(library_id: @library.id, spotify_unique: p['id'], name: p['name'])
     end
     playlists = Playlist.find_by(library_id: @library.id)
-    puts playlists
+    playlists.each do |p|
+      playlist_tracks_json = HTTParty.get(
+        "#{SPOTIFY_API_URL}/v1/playlists/#{p.spotify_unique}/tracks",
+        headers: {
+          Authorization: "Bearer #{access_token_json['access_token']}"
+        }
+      )
+      puts playlist_tracks_json
+    end
     redirect_to(user_path(@user))
   end
 
