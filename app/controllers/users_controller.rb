@@ -47,16 +47,15 @@ class UsersController < ApplicationController
         }
       )['items']
       playlist_tracks_json.each do |t|
-        artists_hash = t['track']['artists']
         artists_names = ''
         track_name = t['track']['name']
         artists_hash.each do |ah|
           if ah != artists_hash.first
-            artists_names += ' '
+            artists_names += ', '
           end
           artists_names += ah['name']
         end
-        puts track_name + ' by ' + artists_names
+        puts t['track']['artists'] + ' by ' + artists_names + ' found on ' + t['track']['album']['name']
       end
     end
     redirect_to(user_path(@user))
