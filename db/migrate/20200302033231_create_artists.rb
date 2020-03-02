@@ -2,7 +2,7 @@ class CreateArtists < ActiveRecord::Migration[6.0]
   def up
     create_table :artists do |t|
       t.integer :library_id
-      t.string :name
+      t.string :artist_name
       t.timestamps
     end
   end

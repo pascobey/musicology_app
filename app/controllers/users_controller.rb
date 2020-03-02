@@ -35,15 +35,16 @@ class UsersController < ApplicationController
         Authorization: "Bearer #{access_token_json['access_token']}"
       }
     )
-    items = saved_tracks_json['items']
+    tracks = saved_tracks_json['items']
     i = 0
-    items.each do |t|
-      artists_hash = t[i]['track']['album']['artists']
+    until i >= saved_tracks_json['total']
       artists = []
+      artists_hash = tracks[i]['track']['album']['artists']
       artists_hash.each do |ah|
         artists << Artist.create(library_id: @library_id, artist_name: ah['name'])
       end
-      @track = Track.create(artist_id: artists, track_name: t['track']['name'], album_name: t['track']['album']['name'])
+      @track = Track.create(artist_name: artists.each.artist_name, track_name: tracks['track']['name'], album_name: tracks['track']['album']['name'])
+      i = i.next
     end
     redirect_to(user_path(@user))
   end
