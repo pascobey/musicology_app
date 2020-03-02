@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       artists_hash.each do |ah|
         artists << Artist.create(library_id: @library_id, artist_name: ah['name'])
       end
-      @track = Track.create(artist_names: artists, track_name: t['track']['name'], album_name: t['track']['album']['name'])
+      @track = Track.create(artist_id: artists, track_name: t['track']['name'], album_name: t['track']['album']['name'])
     end
     redirect_to(user_path(@user))
   end
