@@ -45,8 +45,9 @@ class UsersController < ApplicationController
         headers: {
           Authorization: "Bearer #{access_token_json['access_token']}"
         }
-      )
-      puts playlist_tracks_json['items']['track']
+      )['items']
+      puts playlist_tracks_json
+
     end
     redirect_to(user_path(@user))
   end
