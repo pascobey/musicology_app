@@ -49,7 +49,7 @@ class UsersController < ApplicationController
       playlist_tracks_json.each do |t|
         track_name = t['track']['name']
         # artist_hash = t['track']['artist']
-        @print puts t['track']
+        @print t['track']
       end
     end
     redirect_to(user_path(@user))
