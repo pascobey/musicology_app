@@ -35,28 +35,11 @@ class UsersController < ApplicationController
         Authorization: "Bearer #{access_token_json['access_token']}"
       }
     )
-    
-    puts playlists_json['items']
-
     playlists_json['items'].each do |p|
       Playlist.create(library_id: @library.id, spotify_unique: p['id'], name: p['name'])
     end
-    # i = 0
-    # while i < saved_tracks_json['total']
-    #   artist_hashes = tracks.dig(i, 'track')['album']['artists']
-    #   track_artists = ''
-    #   artist_hashes.each do |ah|
-    #     if  !Artist.find_by(name: ah['name'])
-    #       if ah != artist_hashes.first
-    #         track_artists += ' '
-    #       end
-    #       artist = Artist.create(library_id: @library_id, name: ah['name'])
-    #       track_artists += artist.name
-    #     end
-    #   end
-    #   @track = Track.create(artists: track_artists, track_name: tracks.dig(i, 'track')['name'], album_name: tracks.dig(i, 'track')['album']['name'])
-    #   i = i.next
-    # end
+    playlists = Playlist.find_by(library_id: @library.id)
+    puts playlists
     redirect_to(user_path(@user))
   end
 
