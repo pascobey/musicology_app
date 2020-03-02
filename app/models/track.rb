@@ -1,3 +1,3 @@
 class Track < ApplicationRecord
-    belongs_to :library
+    belongs_to :artist
 end
