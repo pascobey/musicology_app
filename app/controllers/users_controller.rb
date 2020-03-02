@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     playlists_json['items'].each do |p|
       Playlist.create(library_id: @library.id, spotify_unique: p['id'], name: p['name'])
     end
-    playlists = Playlist.find_by(library_id: @library.id)
+    playlists = Playlist.where(library_id: @library.id)
     playlists.each do |p|
       playlist_tracks_json = HTTParty.get(
         "#{SPOTIFY_API_URL}/v1/playlists/#{p.spotify_unique}/tracks",
