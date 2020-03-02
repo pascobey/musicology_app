@@ -46,8 +46,9 @@ class UsersController < ApplicationController
           Authorization: "Bearer #{access_token_json['access_token']}"
         }
       )['items']
-      puts playlist_tracks_json
-
+      playlist_tracks_json.each do |t|
+        puts t['track'] 
+      end
     end
     redirect_to(user_path(@user))
   end
