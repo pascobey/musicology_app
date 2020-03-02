@@ -35,8 +35,8 @@ class UsersController < ApplicationController
         Authorization: "Bearer #{access_token_json['access_token']}"
       }
     )
-    tracks = saved_tracks_json['items']
-    puts tracks
+    
+    puts saved_tracks_json
     i = 0
     while i < saved_tracks_json['total']
       artist_hashes = tracks.dig(i, 'track')['album']['artists']
