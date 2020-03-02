@@ -28,6 +28,14 @@ class UsersController < ApplicationController
     )
     @user = User.create(user_id: user_profile_json['id'], email: user_profile_json['email'],
       account_url: user_profile_json.dig('external_urls', 'spotify'), refresh_token: access_token_json['refresh_token'])
+    @library = Library.create(user_id: user_profile_json['id'])
+    saved_tracks_json = HTTParty.get(
+      "#{SPOTIFY_API_URL}/v1/tracks",
+      headers: {
+        Authorization: "Bearer #{access_token_json['access_token']}"
+      }
+    )
+    @track = Track.create(library_id: user_profile_json['id'], tracks_json: saved_tracks_json)
     redirect_to(user_path(@user))
   end
 
