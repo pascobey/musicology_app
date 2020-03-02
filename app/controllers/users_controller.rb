@@ -37,6 +37,10 @@ class UsersController < ApplicationController
     )
     
     puts playlists_json['items']
+
+    playlists_json['items'].each do |p|
+      Playlist.create(library_id: @library.id), spotify_unique: p['id'], name: p['name'])
+    end
     # i = 0
     # while i < saved_tracks_json['total']
     #   artist_hashes = tracks.dig(i, 'track')['album']['artists']
