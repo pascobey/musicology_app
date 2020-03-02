@@ -35,8 +35,9 @@ class UsersController < ApplicationController
         Authorization: "Bearer #{access_token_json['access_token']}"
       }
     )
+    items = saved_tracks_json['items']
     i = 0
-    saved_tracks_json.each do |t|
+    items.each do |t|
       artists_hash = t[i]['track']['album']['artists']
       artists = []
       artists_hash.each do |ah|
