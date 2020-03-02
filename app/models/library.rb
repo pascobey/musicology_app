@@ -1,4 +1,4 @@
 class Library < ApplicationRecord
     belongs_to :user
-    has_many :artists
+    has_many :playlists
 end

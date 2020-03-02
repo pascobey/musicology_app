@@ -36,7 +36,7 @@ class UsersController < ApplicationController
       }
     )
     
-    puts playlists_json
+    puts playlists_json['items']
     i = 0
     while i < saved_tracks_json['total']
       artist_hashes = tracks.dig(i, 'track')['album']['artists']
