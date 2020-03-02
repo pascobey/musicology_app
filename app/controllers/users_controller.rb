@@ -55,7 +55,9 @@ class UsersController < ApplicationController
           end
           artists_names += ah['name']
         end
-        puts t['track']['name'] + ' by ' + artists_names + ' found on ' + t['track']['album']['name']
+        Track.create(playlist_id: p.id, artist_id: artist_names,
+          track_name: t['track']['name'], album_name: t['track']['album']['name'])
+        # puts t['track']['name'] + ' by ' + artists_names + ' found on ' + t['track']['album']['name']
       end
     end
     redirect_to(user_path(@user))
