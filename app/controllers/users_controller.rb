@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     )
     tracks = saved_tracks_json['items']
     i = 0
-    while i > saved_tracks_json['total']
+    while i < saved_tracks_json['total']
       artist_hashes = tracks.dig(i, 'track')['album']['artists']
       track_artists = ''
       artist_hashes.each do |ah|
