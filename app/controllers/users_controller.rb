@@ -47,7 +47,7 @@ class UsersController < ApplicationController
         }
       )['items']
       playlist_tracks_json.each do |t|
-        artists_hash = t['track']['artists']['name']
+        artists_hash = t['track']['artists']
         artists_names = ''
         track_name = t['track']['name']
         artists_hash.each do |ah|
