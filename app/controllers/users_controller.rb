@@ -45,7 +45,8 @@ class UsersController < ApplicationController
           if ah != artist_hashes.first
             track_artists += ' '
           end
-          track_artists += Artist.create(library_id: @library_id, name: ah['name']).name
+          artist = Artist.create(library_id: @library_id, name: ah['name'])
+          track_artists += artist
         end
       end
       @track = Track.create(artists: track_artists, track_name: tracks.dig(i, 'track')['name'], album_name: tracks.dig(i, 'track')['album']['name'])
