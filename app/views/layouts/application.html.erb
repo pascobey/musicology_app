@@ -12,7 +12,7 @@
     <!-- notice bar - flex-row -->
     <div class="d-flex flex-row justify-content-center bg-light w-100">
       <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, class:name %>
+        <%= content_tag :div, msg, id: flash, class:name %>
       <% end %>
     </div><!-- notice bar - flex-row -->
     <!-- Content Containter - d-flex -->
