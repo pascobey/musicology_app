@@ -18,6 +18,8 @@ require('jquery')
 // const imagePath = (name) => images(name, true)
 $(document).ready(function() {
     setTimeout(function() {
-        $('#flash').remove();
-    }, 500);
+        $('#flash').fadeOut("normal", function() {
+            $(this).remove();
+        });
+    }, 2000);
 })
