@@ -1,3 +1,2 @@
-<% playlists = @user.library.playlist.all %>
-<% playlists.each do |p| %>
+<% @user.library.playlists.each do |p| %>
     <%= p.name %>
