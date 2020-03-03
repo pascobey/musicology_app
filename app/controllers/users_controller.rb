@@ -58,8 +58,8 @@ class UsersController < ApplicationController
           if ah != artists_hash.first
             artists_names += ', '
           end
-          if !Artist.find_by(name: ah['name'])
-            Artist.create(name: ah['name'])
+          if !Artist.find_by(user_id: @user.user_id, name: ah['name'])
+            Artist.create(library_id: @library.id, name: ah['name'])
           end
           artists_names += ah['name']
         end

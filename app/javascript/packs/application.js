@@ -18,7 +18,7 @@ require('jquery')
 // const imagePath = (name) => images(name, true)
 
 $(document).ready(function() {
-    $('#flash').fadeOut("normal", function() {
+    $('#flash').fadeOut(2000, function() {
         $(this).remove();
     });
 })
