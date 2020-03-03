@@ -62,14 +62,9 @@ class UsersController < ApplicationController
         # puts artists_names
         # puts t['track']['name']
         # puts t['track']['album']['name']
-        save_track(p.id, artists_names, t['track']['name'], t['track']['album']['name'])
-      end
+        Track.create(playlist_id: playlist_id, artists_names: artists_names, track_name: track_name, album_name: album_name)      end
     end
     redirect_to(user_path(@user))
-  end
-
-  def save_track(playlist_id, artists_names, track_name, album_name)
-    Track.create(playlist_id: playlist_id, artists_names: artists_names, track_name: track_name, album_name: album_name)
   end
 
 end
