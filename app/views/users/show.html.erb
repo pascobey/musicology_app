@@ -1,3 +1,7 @@
-<% @user.library.playlists.each do |p| %>
-    <%= p.name %>
-<% end %>
+<div id="user-playlists-container" class="d-flex flex-column m-2">
+    <% @user.library.playlists.each do |p| %>
+        <div class="d-flex flex-row">
+            <%= p.name %>
+        </div>
+    <% end %>
+</div>
