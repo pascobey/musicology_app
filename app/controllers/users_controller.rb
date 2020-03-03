@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   def new
     if cookies[:user_id]
-      redirect_to(user_path(@user.find_by(user_id: cookies[:user_id])))
+      redirect_to(user_path(User.find_by(user_id: cookies[:user_id])))
     end
     @request = SPOTIFY_BASE_URL + '/authorize' +
       '?client_id=' + APP_CLIENT_ID + '&response_type=code' +
