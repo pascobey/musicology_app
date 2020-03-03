@@ -16,10 +16,10 @@ require('jquery')
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-$(document).ready(function() {
-    setTimeout(function() {
-        $('#flash').fadeOut("normal", function() {
-            $(this).remove();
-        });
-    }, 2000);
-})
+// $(document).ready(function() {
+//     setTimeout(function() {
+//         $('#flash').fadeOut("normal", function() {
+//             $(this).remove();
+//         });
+//     }, 2000);
+// })
