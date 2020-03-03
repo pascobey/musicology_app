@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def new
     if User.find_by(user_id: cookies[:user_id])
+      flash[:notice] = "USER FOUND! Welcome Back, #{User.find_by(user_id: cookies[:user_id]).email}"
       redirect_to(user_path(User.find_by(user_id: cookies[:user_id])))
     end
     @request = SPOTIFY_BASE_URL + '/authorize' +
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    flash[:notice] = "Fetching profile..."
     auth_code = request.original_url.last(352)
     access_token_json = HTTParty.post(
       "#{SPOTIFY_BASE_URL}/api/token",

@@ -9,6 +9,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    <!-- notice bar - flex-row -->
+    <div class="d-flex flex-row justify-content-center bg-light w-100">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class:name %>
+      <% end %>
+    </div><!-- notice bar - flex-row -->
+    <!-- Content Containter - d-flex -->
     <div id="yield-container" class="d-flex flex-row">
       <%= yield %>
     </div>
