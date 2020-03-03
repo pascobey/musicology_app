@@ -1,6 +1,6 @@
-<div class="d-flex flex-column m-1 bg-info align-self-start">
-    <p class="h2 m-1">Your Playlists</p>
-    <div class="d-flex flex-row m-1">
+<div class="d-flex flex-column m-1 bg-info align-self-start rounded">
+    <p class="h2 m-2">Your Playlists</p>
+    <div class="d-flex flex-row m-1 bg-light">
         <div id="user-playlists-container" class="d-flex flex-column m-2">
             <% @user.library.playlists.each do |p| %>
                 <div class="d-flex flex-row">
