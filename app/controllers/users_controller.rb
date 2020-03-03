@@ -62,7 +62,7 @@ class UsersController < ApplicationController
         # puts artists_names
         # puts t['track']['name']
         # puts t['track']['album']['name']
-        Track.create(playlist_id: playlist_id, artists_names: artists_names, track_name: track_name, album_name: album_name)      end
+        Track.create(playlist_id: p.id, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      end
     end
     redirect_to(user_path(@user))
   end
