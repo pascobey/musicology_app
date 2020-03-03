@@ -3,7 +3,7 @@
     <div class="d-flex flex-row m-1 border border-dark rounded">
         <div id="user-playlists-container" class="d-flex flex-column m-2">
             <% @user.library.playlists.each do |p| %>
-                <div class="d-flex flex-row">
+                <div class="d-flex flex-row border border-dark w-100">
                     <%= "'#{p.name}'" %>
                 </div>
             <% end %>
