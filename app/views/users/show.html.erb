@@ -1,10 +1,10 @@
-<div class="d-flex flex-column m-1 bg-info align-self-start rounded">
-    <p class="h2 m-2">Your Playlists</p>
-    <div class="d-flex flex-row m-1 bg-light">
+<div class="d-flex flex-column m-1 border border-primary align-self-start rounded">
+    <p class="h2 py-1 px-2">Your Playlists</p>
+    <div class="d-flex flex-row m-1 border border-dark rounded">
         <div id="user-playlists-container" class="d-flex flex-column m-2">
             <% @user.library.playlists.each do |p| %>
                 <div class="d-flex flex-row">
-                    <%= p.name %>
+                    <%= "'#{p.name}'" %>
                 </div>
             <% end %>
         </div>
