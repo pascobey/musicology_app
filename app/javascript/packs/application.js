@@ -21,4 +21,10 @@ $(document).ready(function() {
     $('#flash').fadeOut(2000, function() {
         $(this).remove();
     });
+    $('#playlists-btn').click(function() {
+        $('#playlists-container').removeClass('hid-dir');
+    });
+    $('#artists-btn').click(function() {
+        $('#artists-container').removeClass('hid-dir');
+    });
 })

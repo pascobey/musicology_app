@@ -1,6 +1,23 @@
 <div class="d-flex flex-column">
     <div class="d-flex flex-row">
-        <div class="d-flex flex-column m-1 border border-dark align-self-start rounded">
+        <div class="d-flex flex-column m-1 border border-dark align-self-center rounded">
+            <p class="h2 mb-0 px-2">Your Music</p>
+            <div class="d-flex flex-row m-1 border border-dark rounded justify-content-start">
+                <div id="user-music-container" class="d-flex flex-column m-2">
+                    <div class="d-flex flex-row border border-light border-top-0 border-right-0 border-left-0 w-100">
+                        <p id="playlist-btn" class="h4 btn">Playlists</p>
+                    </div>
+                    <div class="d-flex flex-row border border-light border-top-0 border-right-0 border-left-0 w-100">
+                        <p id="artists-btn" class="h4 btn">Artists</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="playlists-container" class="d-flex flex-column hid-dir">
+    <div class="d-flex flex-row">
+        <div class="d-flex flex-column m-1 border border-dark align-self-center rounded">
             <p class="h2 mb-0 px-2">Your Playlists</p>
             <div class="d-flex flex-row m-1 border border-dark rounded justify-content-start">
                 <div id="user-playlists-container" class="d-flex flex-column m-2">
@@ -14,9 +31,9 @@
         </div>
     </div>
 </div>
-<div class="d-flex flex-column">
+<div id="artists-container" class="d-flex flex-column hid-dir">
     <div class="d-flex flex-row">
-        <div class="d-flex flex-column m-1 border border-dark align-self-start rounded">
+        <div class="d-flex flex-column m-1 border border-dark align-self-center rounded">
             <p class="h2 mb-0 px-2">Your Artists</p>
             <div class="d-flex flex-row m-1 border border-dark rounded justify-content-start">
                 <div id="user-playlists-container" class="d-flex flex-column m-2">
