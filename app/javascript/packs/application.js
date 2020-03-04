@@ -21,10 +21,10 @@ $(document).ready(function() {
     $('#flash').fadeOut(2000, function() {
         $(this).remove();
     });
-    $('#playlists-btn').click(function() {
-        $('#playlists-container').removeClass('d-none');
-    });
-    $('#artists-btn').click(function() {
-        $('#artists-container').removeClass('d-none');
-    });
-})
+});
+$('#playlists-btn').click(function() {
+    $('#playlists-container').removeClass('d-none');
+});
+$('#artists-btn').click(function() {
+    $('#artists-container').removeClass('d-none');
+});
