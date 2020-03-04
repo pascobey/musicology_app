@@ -22,9 +22,9 @@ $(document).ready(function() {
         $(this).remove();
     });
     $('#playlists-btn').click(function() {
-        $('#playlists-container').removeClass('hid-dir');
+        $('#playlists-container').removeClass('d-none');
     });
     $('#artists-btn').click(function() {
-        $('#artists-container').removeClass('hid-dir');
+        $('#artists-container').removeClass('d-none');
     });
 })
