@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find_by(id: request.original_url[("#{APP_BASE_URL}/users/").size, 100000000])
-    if @user.user_id != cookies[:user_id]
+    if !@user || @user.user_id != cookies[:user_id]
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')
     end
