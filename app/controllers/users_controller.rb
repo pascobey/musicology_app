@@ -20,7 +20,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    flash[:notice] = "Fetching profile..."
     auth_code = request.original_url.last(352)
     access_token_json = HTTParty.post(
       "#{SPOTIFY_BASE_URL}/api/token",
