@@ -1,3 +1,16 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#yield-container {
+    width: 100vw;
+    height: 100vh;
+}
+#sign-up-with-container {
+
+}
+#spotify-data-request-button {
+    background-color: rgb(0,229,97);
+}
+.c-hover:hover {
+    opacity: 70%;
+}

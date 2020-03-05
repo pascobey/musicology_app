@@ -22,9 +22,11 @@ $(document).ready(function() {
         $(this).remove();
     });
 });
-// $('#playlists-btn').click(function() {
-//     $('#playlists-container').removeClass('d-none');
-// });
-// $('#artists-btn').click(function() {
-//     $('#artists-container').removeClass('d-none');
-// });
+$('#playlists-btn').click(function() {
+    $('#playlists-container').removeClass('d-none');
+    $('#playlists-container').addClass('d-flex');
+});
+$('#artists-btn').click(function() {
+    $('#artists-container').removeClass('d-none');
+    $('#artists-container').addClass('d-flex');
+});
