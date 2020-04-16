@@ -18,8 +18,9 @@ require('jquery')
 // const imagePath = (name) => images(name, true)
 
 $(document).ready(function() {
+    // if ($('#flash').msg)
     $('#flash').fadeOut(2000, function() {
-        $(this).remove();
+        // $(this).remove();
     });
     $('#playlists-btn').click(function() {
         $('#playlists-container').removeClass('d-none');
