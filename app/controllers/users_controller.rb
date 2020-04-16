@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def create
     puts "create started! Spotify granted authorization code..."
-    auth_code = request.original_url.last(352)
+    puts auth_code = request.original_url.last(352)
     puts "requesting access_token... |access_token_json below|"
     puts access_token_json = HTTParty.post(
       "#{SPOTIFY_BASE_URL}/api/token",
