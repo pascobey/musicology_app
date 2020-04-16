@@ -69,7 +69,7 @@ class UsersController < ApplicationController
             if ah != artists_hash.first
               artists_names += ', '
             end
-            if !Artist.find_by(artist_spotify_unique: , library_id: @library.id, name: ah['name'])
+            if !Artist.find_by(library_id: @library.id, name: ah['name'])
               artist_json = HTTParty.get(
                 "#{SPOTIFY_API_URL}/v1/artists/#{ah['id']}",
                 headers: {
