@@ -18,7 +18,9 @@ require('jquery')
 // const imagePath = (name) => images(name, true)
 
 $(document).ready(function() {
-    // if ($('#flash').msg)
+    if ($('#flash').childNodes.length == 0) {
+        $('#flash').remove();
+    }
     $('#flash').fadeOut(2000, function() {
         // $(this).remove();
     });
