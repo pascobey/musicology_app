@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     APP_CLIENT_ID = 'd7f2ddcb58784a428ff86348869cbfd9'
     APP_CLIENT_SECRET = '164b375ae4864c11a25810f923ebf9c8'
     CLIENT_B64 = "ZDdmMmRkY2I1ODc4NGE0MjhmZjg2MzQ4ODY5Y2JmZDk6MTY0YjM3NWFlNDg2NGMxMWEyNTgxMGY5MjNlYmY5Yzg="
-    SCOPES = 'ugc-image-upload user-read-playback-state user-modify-playback-state user-read-currently-playing streaming app-remote-control user-read-collaborative user-read-private user-read-playback-position user-top-read user-follow-read user-library-read user-read-recently-played user-read-email'
+    SCOPES = 'ugc-image-upload user-read-playback-state user-read-currently-playing streaming user-read-email playlist-read-collaborative playlist-read-private user-library-read user-top-read user-read-playback-position user-read-recently-played user-follow-read'
     SCOPES_URI = URI.escape(SCOPES, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     
 end
