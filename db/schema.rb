@@ -16,7 +16,15 @@ ActiveRecord::Schema.define(version: 2020_03_02_201109) do
   enable_extension "plpgsql"
 
   create_table "artists", force: :cascade do |t|
+    t.string "artist_spotify_unique"
+    t.integer "library_id"
     t.string "name"
+    t.string "spotify_open_url"
+    t.string "spotify_api_url"
+    t.integer "follower_count"
+    t.string "genres"
+    t.string "artist_image_url"
+    t.integer "spotify_popularity_index"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -37,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_201109) do
 
   create_table "tracks", force: :cascade do |t|
     t.integer "playlist_id"
-    t.integer "artist_id"
+    t.string "artists_names"
     t.string "track_name"
     t.string "album_name"
     t.datetime "created_at", precision: 6, null: false

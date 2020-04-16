@@ -65,11 +65,19 @@ class UsersController < ApplicationController
           artists_names = ''
           artists_hash = t['track']['artists']
           artists_hash.each do |ah|
+            puts ah
             if ah != artists_hash.first
               artists_names += ', '
             end
-            if !Artist.find_by(library_id: @library.id, name: ah['name'])
-              Artist.create(library_id: @library.id, name: ah['name'])
+            if !Artist.find_by(artist_spotify_unique: , library_id: @library.id, name: ah['name'])
+              artist_json = HTTParty.get(
+                "#{SPOTIFY_API_URL}/v1/artists/#{ah['id']}",
+                headers: {
+                  Authorization: "Bearer #{access_token_json['access_token']}"
+                }
+              )
+              puts artist_json
+              # Artist.create(artist_spotify_unique: , library_id: @library.id, name: ah['name'], :spotify_open_url , :spotify_api_url , :follower_count , :genres , :artist_image_url , :spotify_popularity_index )
             end
             artists_names += ah['name']
           end
