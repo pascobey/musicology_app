@@ -39,7 +39,10 @@ class UsersController < ApplicationController
     )['items']
     puts "creating playlists..."
     playlists_json.each do |p|
-      Playlist.create(library_id: @library.id, spotify_unique: p['id'], name: p['name'])
+      puts @library.id
+      puts p['id']
+      puts p['name']
+      puts Playlist.create(library_id: @library.id, spotify_unique: p['id'], name: p['name'])
     end
     playlists = Playlist.where(library_id: @library.id)
     playlists.each do |p|
