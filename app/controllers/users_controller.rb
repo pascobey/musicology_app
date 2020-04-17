@@ -112,10 +112,11 @@ class UsersController < ApplicationController
                 end
                 puts genres
                 artist_image_url = ''
-                if artist_json['images'].first['url']
-                  artist_image_url = artist_json['images'].first['url']
+                if artist_json['images']
+                  first_image_hash = artist_json['images'].first
+                  # artist_image_url = artist_json['images'].first['url']
                 end
-                puts artist_image_url
+                puts first_image_hash
                 puts spotify_popularity_index = artist_json['popularity']
                 # Artist.create(artist_spotify_unique: artist_json['id'], library_id: @library.id, name: artist_json['name'], :spotify_open_url artist_json.dig('external_urls', 'spotify'), :spotify_api_url artist_json['href'], :follower_count artist_json.dig('followers', 'total'), :genres artist_json['genres'], :artist_image_url , :spotify_popularity_index artist_json['popularity'])
               end
