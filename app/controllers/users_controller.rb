@@ -90,7 +90,7 @@ class UsersController < ApplicationController
                   puts artist_spotify_unique = artist_json['id']
                   puts artist_name = artist_json['name']
                   spotify_open_url = ''
-                  if artist_json.['external_urls']
+                  if artist_json['external_urls']
                     external_urls = artist_json.['external_urls']
                     spotify_open_url = external_urls['spotify']
                   end
