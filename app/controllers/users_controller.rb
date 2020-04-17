@@ -26,6 +26,8 @@ class UsersController < ApplicationController
   def build
     puts "build started!"
     puts "creating library... |@library object below|"
+    access_token = request.original_url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
+    user_id = request.original_url.gsub("https://www.graphurmusic.com/building?access_token=#{access_token}&user_id=", "")
     puts @library = Library.create(user_id: user_id)
     puts "requesting user playlists... |playlists_json below|"
     puts playlists_json = HTTParty.get(
