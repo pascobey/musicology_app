@@ -22,6 +22,10 @@ class UsersController < ApplicationController
     end
   end
 
+  
+  def build
+
+  end
 
 
   def create
