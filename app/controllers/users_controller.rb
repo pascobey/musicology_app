@@ -28,16 +28,17 @@ class UsersController < ApplicationController
     puts "creating library... |@library object below|"
     access_token = request.original_url[(request.original_url.index("access_token=") + "access_token=".length), (request.original_url.index("&") - (request.original_url.index("access_token=") + "access_token=".length))]
     user_id = request.original_url.gsub("https://www.graphurmusic.com/building?access_token=#{access_token}&user_id=", "")
-    puts @library = Library.create(user_id: user_id)
+    @library = Library.create(user_id: user_id)
+    puts "library id - #{@library.id}"
     puts "requesting user playlists... |playlists_json below|"
     puts playlists_json = HTTParty.get(
       "#{SPOTIFY_API_URL}/v1/me/playlists",
       headers: {
         Authorization: "Bearer #{access_token}"
       }
-    )
+    )['items']
     puts "creating playlists..."
-    playlists_json['items'].each do |p|
+    playlists_json.each do |p|
       Playlist.create(library_id: @library.id, spotify_unique: p['id'], name: p['name'])
     end
     playlists = Playlist.where(library_id: @library.id)
