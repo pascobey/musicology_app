@@ -51,7 +51,7 @@ class UsersController < ApplicationController
       puts playlist_tracks_json = HTTParty.get(
         "#{SPOTIFY_API_URL}/v1/playlists/#{p.spotify_unique}/tracks",
         headers: {
-          Authorization: "Bearer #{access_token_json['access_token']}"
+          Authorization: "Bearer #{access_token}"
         }
       )['items']
       if playlist_tracks_json
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
               puts artist_json = HTTParty.get(
                 "#{SPOTIFY_API_URL}/v1/artists/#{ah['id']}",
                 headers: {
-                  Authorization: "Bearer #{access_token_json['access_token']}"
+                  Authorization: "Bearer #{access_token}"
                 }
               )
               if artist_json
