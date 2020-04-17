@@ -81,12 +81,13 @@ class UsersController < ApplicationController
               end
               if !Artist.find_by(library_id: @library.id, name: ah['name'])
                 puts "requesting artist info... |test info below|"
-                artist_json = HTTParty.get(
+                puts artist_json = HTTParty.get(
                   "#{SPOTIFY_API_URL}/v1/artists/#{ah['id']}",
                   headers: {
                     Authorization: "Bearer #{access_token_json['access_token']}"
                   }
                 )
+                sleep 1
                 if artist_json
                   puts artist_spotify_unique = artist_json['id']
                   puts artist_name = artist_json['name']
