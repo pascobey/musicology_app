@@ -104,7 +104,7 @@ class UsersController < ApplicationController
         end
       end
     end
-    redirect_to(user_path(@user))
+    redirect_to(user_path(User.find_by(user_id: user_id)))
   end
 
 
