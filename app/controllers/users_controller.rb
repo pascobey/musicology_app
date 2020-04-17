@@ -105,7 +105,8 @@ class UsersController < ApplicationController
             sleep 0.5
           end
           puts "create track..."
-          Track.create(playlist_id: p.id, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
+          artist_spotify_unique = Artist.find_by(name: (artists_names[0,artists_names.index(",")])).artist_spotify_unique
+          Track.create(playlist_id: p.id, artist_spotify_unique: artist_spotify_unique, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
         end
       end
     end
