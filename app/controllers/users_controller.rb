@@ -62,14 +62,13 @@ class UsersController < ApplicationController
       playlists = Playlist.where(library_id: @library.id)
       playlists.each do |p|
         puts "requesting tracks in playlist... |playlist_tracks_json below|"
-        sleep 2
         puts playlist_tracks_json = HTTParty.get(
           "#{SPOTIFY_API_URL}/v1/playlists/#{p.spotify_unique}/tracks",
           headers: {
             Authorization: "Bearer #{access_token_json['access_token']}"
           }
         )['items']
-        sleep 2
+        sleep 1
         if playlist_tracks_json
           playlist_tracks_json.each do |t|
             artists_names = ''
@@ -88,37 +87,39 @@ class UsersController < ApplicationController
                     Authorization: "Bearer #{access_token_json['access_token']}"
                   }
                 )
-                puts artist_spotify_unique = artist_json['id']
-                puts artist_name = artist_json['name']
-                spotify_open_url = ''
-                if artist_json.dig('external_urls', 'spotify')
-                  spotify_open_url = artist_json.dig('external_urls', 'spotify')
-                end
-                puts spotify_open_url
-                follower_count = ''
-                if artist_json.dig('followers', 'total')
-                  follower_count = artist_json.dig('followers', 'total')
-                end
-                puts follower_count
-                genres = ''
-                if artist_json['genres']
-                  artist_json['genres'].each do |g|
-                    if genres == ''
-                      genres = g
-                    else
-                      genres = genres + ", #{g}"
+                if artist_json
+                  puts artist_spotify_unique = artist_json['id']
+                  puts artist_name = artist_json['name']
+                  spotify_open_url = ''
+                  if artist_json.dig('external_urls', 'spotify')
+                    spotify_open_url = artist_json.dig('external_urls', 'spotify')
+                  end
+                  puts spotify_open_url
+                  follower_count = ''
+                  if artist_json.dig('followers', 'total')
+                    follower_count = artist_json.dig('followers', 'total')
+                  end
+                  puts follower_count
+                  genres = ''
+                  if artist_json['genres']
+                    artist_json['genres'].each do |g|
+                      if genres == ''
+                        genres = g
+                      else
+                        genres = genres + ", #{g}"
+                      end
                     end
                   end
+                  puts genres
+                  artist_image_url = ''
+                  if artist_json['images']
+                    first_image_hash = artist_json['images'].first
+                    # artist_image_url = artist_json['images'].first['url']
+                  end
+                  puts first_image_hash
+                  puts spotify_popularity_index = artist_json['popularity']
+                  # Artist.create(artist_spotify_unique: artist_json['id'], library_id: @library.id, name: artist_json['name'], :spotify_open_url artist_json.dig('external_urls', 'spotify'), :spotify_api_url artist_json['href'], :follower_count artist_json.dig('followers', 'total'), :genres artist_json['genres'], :artist_image_url , :spotify_popularity_index artist_json['popularity'])
                 end
-                puts genres
-                artist_image_url = ''
-                if artist_json['images']
-                  first_image_hash = artist_json['images'].first
-                  # artist_image_url = artist_json['images'].first['url']
-                end
-                puts first_image_hash
-                puts spotify_popularity_index = artist_json['popularity']
-                # Artist.create(artist_spotify_unique: artist_json['id'], library_id: @library.id, name: artist_json['name'], :spotify_open_url artist_json.dig('external_urls', 'spotify'), :spotify_api_url artist_json['href'], :follower_count artist_json.dig('followers', 'total'), :genres artist_json['genres'], :artist_image_url , :spotify_popularity_index artist_json['popularity'])
               end
               artists_names += ah['name']
             end
