@@ -60,7 +60,7 @@ class UsersController < ApplicationController
           artists_hash = t['track']['artists']
           artists_hash.each do |ah|
             if ah != artists_hash.first
-              artists_names += ', '
+              artists_names += '| '
             end
             if !Artist.find_by(artist_spotify_unique: ah['id'])
               puts "artist info not yet stored in db... requesting artist info... |test info below|"
@@ -107,7 +107,7 @@ class UsersController < ApplicationController
           puts "create track..."
           main_artist_name = artists_names
           if artists_names.include?(",")
-            main_artist_name = artists_names[0, artists_names.index(",")]
+            main_artist_name = artists_names[0, artists_names.index("|")]
           end
           main_artist_unique = Artist.find_by(name: main_artist_name).artist_spotify_unique
           puts p.id
