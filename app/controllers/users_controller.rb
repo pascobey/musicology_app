@@ -23,15 +23,15 @@ class UsersController < ApplicationController
   end
 
 
-  def build
+  def build(user_id, access_token)
     puts "build started!"
     puts "creating library... |@library object below|"
-    puts @library = Library.create(user_id: @user.id)
+    puts @library = Library.create(user_id: user_id)
     puts "requesting user playlists... |playlists_json below|"
     puts playlists_json = HTTParty.get(
       "#{SPOTIFY_API_URL}/v1/me/playlists",
       headers: {
-        Authorization: "Bearer #{access_token_json['access_token']}"
+        Authorization: "Bearer #{access_token}"
       }
     )
     puts "creating playlists..."
