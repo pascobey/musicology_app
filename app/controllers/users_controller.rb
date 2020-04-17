@@ -111,7 +111,7 @@ class UsersController < ApplicationController
                 puts genres
                 artist_image_url = ''
                 if artist_json['images']
-                  artist_image_url = artist_json['images'].first[url]
+                  artist_image_url = artist_json['images'].first['url']
                 end
                 puts artist_image_url
                 puts spotify_popularity_index = artist_json['popularity']
