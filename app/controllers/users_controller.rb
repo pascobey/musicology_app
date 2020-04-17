@@ -110,12 +110,7 @@ class UsersController < ApplicationController
             main_artist_name = artists_names[0, artists_names.index("|")]
           end
           main_artist_unique = Artist.find_by(name: main_artist_name).artist_spotify_unique
-          puts p.id
-          puts main_artist_unique
-          puts artists_names
-          puts t['track']['name']
-          puts t['track']['album']['name']
-          # Track.create(playlist_id: p.id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
+          Track.create(playlist_id: p.id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
         end
       end
     end
@@ -148,7 +143,7 @@ class UsersController < ApplicationController
       puts 
       cookies.permanent[:user_id] = @user.user_id
       puts "redirecting to build"
-      redirect_to controller: 'users', action: 'build', user_id: @user.user_id, access_token: access_token_json['access_token']
+      # redirect_to controller: 'users', action: 'build', user_id: @user.user_id, access_token: access_token_json['access_token']
     else
       puts "user found! UPDATE INFORMATION CODE NON-EXISTENT"
       # UPDATE INFORMATION
