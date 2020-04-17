@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     puts user_id = request.original_url.gsub("https://www.graphurmusic.com/building?access_token=#{access_token}&user_id=", "")
     puts id = User.find_by(user_id: user_id).id
     puts "creating library..."
-    @library = Library.create(id: id, user_id: id)
+    @library = Library.create(user_id: id)
     puts "library id - #{@library.id}"
     puts "requesting user playlists... |playlists_json below|"
     puts playlists_json = HTTParty.get(
