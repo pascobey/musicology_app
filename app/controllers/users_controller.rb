@@ -102,7 +102,7 @@ class UsersController < ApplicationController
               end
             end
             artists_names += ah['name']
-            sleep 4
+            sleep 0.5
           end
           puts "create track..."
           Track.create(playlist_id: p.id, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      

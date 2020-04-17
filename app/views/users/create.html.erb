@@ -1,9 +1,9 @@
 <div class="d-flex flex-column" style="height:100vh;width:100vw;background-color:black;">
     <div class="d-flex flex-row justify-content-center">
-        <h1 class="text-light">Complete Graph</h1>
+        <h1 class="text-light">Hi, <%= "#{@user.email}" %>, please wait while we gather your data.</h1>
     </div>
     <div class="d-flex flex-row mx-2 mb-2 border border-rounded bg-light" style="height:100%;">
-        <% vertices_count = 20 %>
+        <% vertices_count = rand(4..40) %>
         <% center = {:x => 50, :y => 50} %>
         <% if vertices_count == 1 %>
             <svg id="graph-window" width="100%" height="100%">
@@ -16,7 +16,7 @@
             <% vertices_coordinates = {} %>
             <% i = 1 %>
             <% build_angle_sum_rad = 0 %>
-            <% circumradius = 45 %>
+            <% circumradius = 35 %>
             <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
             <svg id="graph-window" width="100%" height="100%">
                 <% until i == (vertices_count + 1) %>
