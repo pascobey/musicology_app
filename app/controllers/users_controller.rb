@@ -91,7 +91,7 @@ class UsersController < ApplicationController
                     artist_image_url = first_image_hash['url']
                   end
                 end
-                Artist.create(artist_spotify_unique: artist_json['id'], name: artist_json['name'], :spotify_open_url spotify_open_url, :follower_count follower_count, :genres genres, :artist_image_url artist_image_url, :spotify_popularity_index artist_json['popularity'])
+                Artist.create(artist_spotify_unique: artist_json['id'], name: artist_json['name'], spotify_open_url: spotify_open_url, follower_count: follower_count, genres: genres, artist_image_url: artist_image_url, spotify_popularity_index: artist_json['popularity'])
               end
             end
             artists_names += ah['name']
