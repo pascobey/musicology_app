@@ -68,29 +68,31 @@ class UsersController < ApplicationController
             Authorization: "Bearer #{access_token_json['access_token']}"
           }
         )['items']
-        playlist_tracks_json.each do |t|
-          artists_names = ''
-          artists_hash = t['track']['artists']
-          artists_hash.each do |ah|
-            puts "|artist hash for a track below|"
-            puts ah
-            if ah != artists_hash.first
-              artists_names += ', '
+        if playlist_tracks_json
+          playlist_tracks_json.each do |t|
+            artists_names = ''
+            artists_hash = t['track']['artists']
+            artists_hash.each do |ah|
+              puts "|artist hash for a track below|"
+              puts ah
+              if ah != artists_hash.first
+                artists_names += ', '
+              end
+              if !Artist.find_by(library_id: @library.id, name: ah['name'])
+                puts "requesting artist info... |artist_json below|"
+                puts artist_json = HTTParty.get(
+                  "#{SPOTIFY_API_URL}/v1/artists/#{ah['id']}",
+                  headers: {
+                    Authorization: "Bearer #{access_token_json['access_token']}"
+                  }
+                )
+                # Artist.create(artist_spotify_unique: , library_id: @library.id, name: ah['name'], :spotify_open_url , :spotify_api_url , :follower_count , :genres , :artist_image_url , :spotify_popularity_index )
+              end
+              artists_names += ah['name']
             end
-            if !Artist.find_by(library_id: @library.id, name: ah['name'])
-              puts "requesting artist info... |artist_json below|"
-              puts artist_json = HTTParty.get(
-                "#{SPOTIFY_API_URL}/v1/artists/#{ah['id']}",
-                headers: {
-                  Authorization: "Bearer #{access_token_json['access_token']}"
-                }
-              )
-              # Artist.create(artist_spotify_unique: , library_id: @library.id, name: ah['name'], :spotify_open_url , :spotify_api_url , :follower_count , :genres , :artist_image_url , :spotify_popularity_index )
-            end
-            artists_names += ah['name']
+            puts "create track... |track object below|"
+            Track.create(playlist_id: p.id, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
           end
-          puts "create track... |track object below|"
-          Track.create(playlist_id: p.id, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
         end
       end
       cookies.permanent[:user_id] = @user.user_id
