@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
 
-  def build(user_id, access_token)
+  def build
     puts "build started!"
     puts "creating library... |@library object below|"
     puts @library = Library.create(user_id: user_id)
