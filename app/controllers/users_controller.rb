@@ -62,12 +62,14 @@ class UsersController < ApplicationController
       playlists = Playlist.where(library_id: @library.id)
       playlists.each do |p|
         puts "requesting tracks in playlist... |playlist_tracks_json below|"
+        sleep 2
         puts playlist_tracks_json = HTTParty.get(
           "#{SPOTIFY_API_URL}/v1/playlists/#{p.spotify_unique}/tracks",
           headers: {
             Authorization: "Bearer #{access_token_json['access_token']}"
           }
         )['items']
+        sleep 2
         if playlist_tracks_json
           playlist_tracks_json.each do |t|
             artists_names = ''

@@ -18,9 +18,6 @@ require('jquery')
 // const imagePath = (name) => images(name, true)
 
 $(document).ready(function() {
-    if ($('#flash').childNodes.length < 1) {
-        $('#flash').addClass('d-none');
-    }
     $('#flash').fadeOut(2000, function() {
         $(this).remove();
     });
