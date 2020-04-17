@@ -86,19 +86,41 @@ class UsersController < ApplicationController
                     Authorization: "Bearer #{access_token_json['access_token']}"
                   }
                 )
-                puts artist_json['id']
-                puts artist_json['name']
-                puts artist_json.dig('external_urls', 'spotify')
-                puts artist_json.dig('followers', 'total')
-                puts artist_genre_array = artist_json['genres']
-                puts artist_image_hash = artist_json['images']
-                puts artist_json['popularity']
+                puts artist_spotify_unique = artist_json['id']
+                puts artist_name = artist_json['name']
+                spotify_open_url = ''
+                if artist_json.dig('external_urls', 'spotify')
+                  spotify_open_url = artist_json.dig('external_urls', 'spotify')
+                end
+                puts spotify_open_url
+                follower_count = ''
+                if artist_json.dig('followers', 'total')
+                  follower_count = artist_json.dig('followers', 'total')
+                end
+                puts follower_count
+                genres = ''
+                if artist_json['genres']
+                  artist_json['genres'].each do |g|
+                    if genres == ''
+                      genres = g
+                    else
+                      genres = genres + ", #{g}"
+                    end
+                  end
+                end
+                puts genres
+                artist_image_url = ''
+                if artist_json['images']
+                  artist_image_url = artist_json['images'].first[url]
+                end
+                puts artist_image_url
+                puts spotify_popularity_index = artist_json['popularity']
                 # Artist.create(artist_spotify_unique: artist_json['id'], library_id: @library.id, name: artist_json['name'], :spotify_open_url artist_json.dig('external_urls', 'spotify'), :spotify_api_url artist_json['href'], :follower_count artist_json.dig('followers', 'total'), :genres artist_json['genres'], :artist_image_url , :spotify_popularity_index artist_json['popularity'])
               end
               artists_names += ah['name']
             end
             puts "create track... |track object below|"
-            Track.create(playlist_id: p.id, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
+            puts Track.create(playlist_id: p.id, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
           end
         end
       end
