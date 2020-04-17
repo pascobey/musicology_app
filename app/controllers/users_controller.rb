@@ -110,7 +110,7 @@ class UsersController < ApplicationController
                 end
                 puts genres
                 artist_image_url = ''
-                if artist_json['images']
+                if artist_json['images'].first['url']
                   artist_image_url = artist_json['images'].first['url']
                 end
                 puts artist_image_url
