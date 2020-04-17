@@ -79,14 +79,21 @@ class UsersController < ApplicationController
                 artists_names += ', '
               end
               if !Artist.find_by(library_id: @library.id, name: ah['name'])
-                puts "requesting artist info... |artist_json below|"
-                puts artist_json = HTTParty.get(
+                puts "requesting artist info... |test info below|"
+                artist_json = HTTParty.get(
                   "#{SPOTIFY_API_URL}/v1/artists/#{ah['id']}",
                   headers: {
                     Authorization: "Bearer #{access_token_json['access_token']}"
                   }
                 )
-                # Artist.create(artist_spotify_unique: , library_id: @library.id, name: ah['name'], :spotify_open_url , :spotify_api_url , :follower_count , :genres , :artist_image_url , :spotify_popularity_index )
+                puts artist_json['id']
+                puts artist_json['name']
+                puts artist_json.dig('external_urls', 'spotify')
+                puts artist_json.dig('followers', 'total')
+                puts artist_genre_array = artist_json['genres']
+                puts artist_image_hash = artist_json['images']
+                puts artist_json['popularity']
+                # Artist.create(artist_spotify_unique: artist_json['id'], library_id: @library.id, name: artist_json['name'], :spotify_open_url artist_json.dig('external_urls', 'spotify'), :spotify_api_url artist_json['href'], :follower_count artist_json.dig('followers', 'total'), :genres artist_json['genres'], :artist_image_url , :spotify_popularity_index artist_json['popularity'])
               end
               artists_names += ah['name']
             end
