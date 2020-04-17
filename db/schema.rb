@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_201109) do
   end
 
   create_table "libraries", force: :cascade do |t|
-    t.string "user_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
