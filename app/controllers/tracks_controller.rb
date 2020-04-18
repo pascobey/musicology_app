@@ -5,7 +5,7 @@ class TracksController < ApplicationController
     puts url = request.original_url
     puts access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
     puts library_id = url[(url.length - 1), 1]
-    playlists = Playlist.where(library_id: library_id)
+    puts playlists = Playlist.where(library_id: library_id)
     playlists.each do |p|
       playlist_tracks_json = HTTParty.get(
         "#{SPOTIFY_API_URL}/v1/playlists/#{p.spotify_unique}/tracks",
