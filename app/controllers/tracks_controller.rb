@@ -71,7 +71,7 @@ class TracksController < ApplicationController
           puts main_artist_unique = Artist.find_by(name: main_artist_name).artist_spotify_unique
           puts p_id = p.id
           puts "create track..."
-          puts Track.create(playlist_id: p_id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])   
+          # puts Track.create(playlist_id: p_id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])   
           puts "track created?"   
         end
       end
