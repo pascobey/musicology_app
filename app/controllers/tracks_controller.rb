@@ -68,7 +68,8 @@ class TracksController < ApplicationController
           if artists_names.include?("|")
             main_artist_name = artists_names[0, artists_names.index("|")]
           end
-          main_artist_unique = Artist.find_by(name: main_artist_name).artist_spotify_unique
+          puts main_artist_unique = Artist.find_by(name: main_artist_name).artist_spotify_unique
+          puts p.id
           puts "create track..."
           puts Track.create(playlist_id: p.id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
         end
