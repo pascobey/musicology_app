@@ -23,7 +23,8 @@ class TracksController < ApplicationController
             end
             if !Artist.find_by(artist_spotify_unique: ah['id'])
               puts "artist info not yet stored in db... requesting artist info... |test info below|"
-              artist_json = HTTParty.get(
+              # sleep 0.5
+              puts artist_json = HTTParty.get(
                 "#{SPOTIFY_API_URL}/v1/artists/#{ah['id']}",
                 headers: {
                   Authorization: "Bearer #{access_token}"
@@ -68,13 +69,13 @@ class TracksController < ApplicationController
           if artists_names.include?("|")
             main_artist_name = artists_names[0, artists_names.index("|")]
           end
-          puts main_artist_unique = Artist.find_by(name: main_artist_name).artist_spotify_unique
           puts p_id = p.id
+          puts main_artist_unique = Artist.find_by(name: main_artist_name).artist_spotify_unique
           puts artists_names
-          puts t['track']['name']
-          puts t['track']['album']['name']
+          puts track_name = t['track']['name']
+          puts album_name = t['track']['album']['name']
           puts "create track..."
-          # puts Track.create(playlist_id: p_id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])   
+          Track.create(playlist_id: p_id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: track_name, album_name: album_name)
           puts "track created?"   
         end
       end
