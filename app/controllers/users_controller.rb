@@ -142,7 +142,6 @@ class UsersController < ApplicationController
       @user = User.create(user_id: user_profile_json['id'], email: user_profile_json['email'], account_url: user_profile_json.dig('external_urls', 'spotify'), refresh_token: access_token_json['refresh_token'])
       puts 
       cookies.permanent[:user_id] = @user.user_id
-      sleep 1
       puts "redirecting to build"
       redirect_to controller: 'users', action: 'build', user_id: @user.user_id, access_token: access_token_json['access_token']
     else
