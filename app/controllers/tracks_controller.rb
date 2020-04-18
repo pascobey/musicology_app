@@ -59,7 +59,6 @@ class TracksController < ApplicationController
               end
             end
             artists_names += ah['name']
-            sleep 0.5
           end
           puts "create track..."
           main_artist_name = artists_names
