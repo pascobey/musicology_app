@@ -1,8 +1,9 @@
 class PlaylistsController < ApplicationController
 
   def create
-    access_token = request.original_url[(request.original_url.index("access_token=") + "access_token=".length), (request.original_url.index("&") - (request.original_url.index("access_token=") + "access_token=".length))]
-    library_id = request.original_url.gsub("https://www.graphurmusic.com/building?access_token=#{access_token}&library_id=", "")
+    puts "playlists_controller create started!"
+    puts access_token = request.original_url[(request.original_url.index("access_token=") + "access_token=".length), (request.original_url.index("&") - (request.original_url.index("access_token=") + "access_token=".length))]
+    puts library_id = request.original_url.gsub("https://www.graphurmusic.com/building?access_token=#{access_token}&library_id=", "")
     playlists_json = HTTParty.get(
       "#{SPOTIFY_API_URL}/v1/me/playlists",
       headers: {

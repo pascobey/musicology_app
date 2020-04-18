@@ -1,8 +1,9 @@
 class TracksController < ApplicationController
 
   def create
-    access_token = request.original_url[(request.original_url.index("access_token=") + "access_token=".length), (request.original_url.index("&") - (request.original_url.index("access_token=") + "access_token=".length))]
-    library_id = request.original_url.gsub("https://www.graphurmusic.com/building?access_token=#{access_token}&library_id=", "")
+    puts "tracks_controller create started!"
+    puts access_token = request.original_url[(request.original_url.index("access_token=") + "access_token=".length), (request.original_url.index("&") - (request.original_url.index("access_token=") + "access_token=".length))]
+    puts library_id = request.original_url.gsub("https://www.graphurmusic.com/building?access_token=#{access_token}&library_id=", "")
     playlists = Playlist.where(library_id: library_id)
     playlists.each do |p|
       playlist_tracks_json = HTTParty.get(
@@ -60,7 +61,6 @@ class TracksController < ApplicationController
             end
             artists_names += ah['name']
           end
-          puts "create track..."
           main_artist_name = artists_names
           if artists_names.include?("|")
             main_artist_name = artists_names[0, artists_names.index("|")]

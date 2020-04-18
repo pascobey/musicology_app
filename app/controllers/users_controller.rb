@@ -32,10 +32,9 @@ class UsersController < ApplicationController
 
 
   def create
-    puts "create started! Spotify granted authorization code..."
-    puts auth_code = request.original_url.gsub("https://www.graphurmusic.com/create?code=", "")
-    puts "requesting access_token... |access_token_json below|"
-    puts access_token_json = HTTParty.post(
+    puts "users_controller create started! Spotify granted authorization code..."
+    auth_code = request.original_url.gsub("https://www.graphurmusic.com/create?code=", "")
+    access_token_json = HTTParty.post(
       "#{SPOTIFY_BASE_URL}/api/token",
       body: "grant_type=authorization_code&code=#{auth_code}&redirect_uri=#{APP_LANDING_URI}",
       headers: {
