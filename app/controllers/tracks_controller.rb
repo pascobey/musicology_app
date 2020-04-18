@@ -2,7 +2,6 @@ class TracksController < ApplicationController
 
   def create
     puts "tracks_controller create started!"
-    puts "playlists_controller create started!"
     puts url = request.original_url
     puts access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
     puts library_id = url[(url.length - 1), 1]
@@ -24,7 +23,7 @@ class TracksController < ApplicationController
             end
             if !Artist.find_by(artist_spotify_unique: ah['id'])
               puts "artist info not yet stored in db... requesting artist info... |test info below|"
-              puts artist_json = HTTParty.get(
+              artist_json = HTTParty.get(
                 "#{SPOTIFY_API_URL}/v1/artists/#{ah['id']}",
                 headers: {
                   Authorization: "Bearer #{access_token}"
@@ -58,9 +57,11 @@ class TracksController < ApplicationController
                     artist_image_url = first_image_hash['url']
                   end
                 end
+                puts "creating artist..."
                 Artist.create(artist_spotify_unique: artist_json['id'], name: artist_json['name'], spotify_open_url: spotify_open_url, follower_count: follower_count, genres: genres, artist_image_url: artist_image_url, spotify_popularity_index: artist_json['popularity'])
               end
             end
+            puts "adding artist name to 'artists_name'..."
             artists_names += ah['name']
           end
           main_artist_name = artists_names
@@ -68,6 +69,7 @@ class TracksController < ApplicationController
             main_artist_name = artists_names[0, artists_names.index("|")]
           end
           main_artist_unique = Artist.find_by(name: main_artist_name).artist_spotify_unique
+          puts "create track..."
           Track.create(playlist_id: p.id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: t['track']['name'], album_name: t['track']['album']['name'])      
         end
       end
