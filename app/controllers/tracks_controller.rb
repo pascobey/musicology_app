@@ -75,7 +75,8 @@ class TracksController < ApplicationController
           puts track_name = t['track']['name']
           puts album_name = t['track']['album']['name']
           puts "create track..."
-          puts Track.new(playlist_id: p_id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: track_name, album_name: album_name)
+          puts track = Track.new(playlist_id: p_id, artist_spotify_unique: main_artist_unique, artists_names: artists_names, track_name: track_name, album_name: album_name)
+          track.save!
           puts "track created?"   
         end
       end
