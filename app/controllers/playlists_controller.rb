@@ -1,10 +1,9 @@
 class PlaylistsController < ApplicationController
 
   def create
-    puts "playlists_controller create started!"
-    puts url = request.original_url
-    puts access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
-    puts library_id = url[(url.length - 1), 1]
+    url = request.original_url
+    access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
+    library_id = url[(url.length - 1), 1]
     playlists_json = HTTParty.get(
       "#{SPOTIFY_API_URL}/v1/me/playlists",
       headers: {

@@ -5,14 +5,11 @@ class UsersController < ApplicationController
       flash[:notice] = "USER FOUND! Welcome Back, #{User.find_by(user_id: cookies[:user_id]).email}"
       redirect_to(user_path(User.find_by(user_id: cookies[:user_id])))
     end
-    puts "no user found by cookies[:user_id]..."
     @request = SPOTIFY_BASE_URL + '/authorize' +
       '?client_id=' + APP_CLIENT_ID + '&response_type=code' +
       '&redirect_uri=' + APP_LANDING_URI +
       '&scope=' + SCOPES_URI
   end
-  
-
 
   def show
     @user = User.find_by(id: request.original_url[("#{APP_BASE_URL}/users/").size, 100000000])
@@ -22,17 +19,7 @@ class UsersController < ApplicationController
     end
   end
 
-
-  # def build
-    
-      
-  #   end
-  #   redirect_to(user_path(User.find_by(user_id: user_id)))
-  # end
-
-
   def create
-    puts "users_controller create started! Spotify granted authorization code..."
     auth_code = request.original_url.gsub("https://www.graphurmusic.com/create?code=", "")
     access_token_json = HTTParty.post(
       "#{SPOTIFY_BASE_URL}/api/token",
@@ -58,6 +45,4 @@ class UsersController < ApplicationController
     end
   end
 
-
-  
 end
