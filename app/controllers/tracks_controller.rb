@@ -4,7 +4,7 @@ class TracksController < ApplicationController
     url_vars = retrieve_url_vars(request.original_url)
     playlists = Playlist.where(library_id: url_vars[:library_id])
     playlists.each do |p|
-      playlist_tracks_json = Track.retrieve_playlist_tracks_json(SPOTIFY_API_URL, url_vars[:access_token])
+      playlist_tracks_json = Track.retrieve_playlist_tracks_json(SPOTIFY_API_URL, url_vars[:access_token], p.spotify_unique)
       if playlist_tracks_json
         playlist_tracks_json.each do |t|
           artists_names = ''
@@ -14,7 +14,7 @@ class TracksController < ApplicationController
               artists_names += '| '
             end
             if !Artist.find_by(artist_spotify_unique: ah['id'])
-              artist_info = retrieve_artist_json
+              artist_info = Artist.retrieve_artist_json(SPOTIFY_API_URL, url_vars[:access_token], ah['id'])
               Artist.create(artist_spotify_unique: artist_info[:artist_spotify_unique], name: artist_info[:name], spotify_open_url: artist_info[:spotify_open_url], follower_count: artist_info[:follower_count], genres: artist_info[:genres], artist_image_url: artist_info[:artist_image_url], spotify_popularity_index: artist_info[:spotify_popularity_index])
             end
             artists_names += ah['name']
@@ -35,7 +35,7 @@ class TracksController < ApplicationController
     url_vars = retrieve_url_vars(request.original_url)
     playlists = Playlist.where(library_id: url_vars[:library_id])
     playlist.each do |p|
-      playlist_tracks_json = Track.retrieve_playlist_tracks_json(SPOTIFY_API_URL, url_vars[:access_token])
+      playlist_tracks_json = Track.retrieve_playlist_tracks_json(SPOTIFY_API_URL, url_vars[:access_token], p.spotify_unique)
       if !playlist_tracks_json
         Playlist.find_by(playlist_id: p.id).destroy
       else
@@ -48,7 +48,7 @@ class TracksController < ApplicationController
               artists_names += '| '
             end
             if !Artist.find_by(artist_spotify_unique: ah['id'])
-              artist_info = retrieve_artist_json
+              artist_info = Artist.retrieve_artist_json(SPOTIFY_API_URL, url_vars[:access_token], ah['id'])
               Artist.create(artist_spotify_unique: artist_info[:artist_spotify_unique], name: artist_info[:name], spotify_open_url: artist_info[:spotify_open_url], follower_count: artist_info[:follower_count], genres: artist_info[:genres], artist_image_url: artist_info[:artist_image_url], spotify_popularity_index: artist_info[:spotify_popularity_index])
             end
             artists_names += ah['name']

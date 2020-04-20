@@ -2,9 +2,9 @@ class Artist < ApplicationRecord
 
     has_many :tracks
 
-    def self.retrieve_artist_json(spotify_api_url, access_token)
+    def self.retrieve_artist_json(spotify_api_url, access_token, artist_spotify_unique)
         artist_json = HTTParty.get(
-            "#{spotify_api_url}/v1/artists/#{ah['id']}",
+            "#{spotify_api_url}/v1/artists/#{artist_spotify_unique}",
             headers: {
               Authorization: "Bearer #{access_token}"
             }
