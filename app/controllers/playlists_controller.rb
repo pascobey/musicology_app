@@ -1,22 +1,27 @@
 class PlaylistsController < ApplicationController
 
   def create
-    url = request.original_url
-    access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
-    library_id = url[(url.length - 1), 1]
-    playlists_json = HTTParty.get(
-      "#{SPOTIFY_API_URL}/v1/me/playlists",
-      headers: {
-        Authorization: "Bearer #{access_token}"
-      }
-    )['items']
-    playlists_json.each do |p|
-      Playlist.create(library_id: library_id, spotify_unique: p['id'], name: p['name'])
+    url_vars = retrieve_url_vars(request.original_url)
+    playlists_json = Playlist.retrieve_playlists_json(SPOTIFY_API_URL, url_vars[:access_token])
+    if playlists_json
+      playlists_json.each do |p|
+        Playlist.create(library_id: url_vars[:library_id], spotify_unique: p['id'], name: p['name'])
+      end
     end
-    redirect_to controller: 'tracks', action: 'create', library_id: library_id, access_token: access_token
+    redirect_to controller: 'tracks', action: 'create', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
   end
 
-  def show
+  def update
+    url_vars = retrieve_url_vars(request.original_url)
+    playlists_json = Playlist.retrieve_playlist_json(SPOTIFY_API_URL, url_vars[:access_token])
+    if playlists_json  
+      playlists_json.each do |p|
+        if !Playlist.find_by(spotify_unique: p['id'])
+          Playlist.create(library_id: url_vars[:library_id], spotify_unique: p['id'], name: p['name'])
+        end
+      end
+    end
+    redirect_to controller: 'tracks', action: 'update', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
   end
 
 end

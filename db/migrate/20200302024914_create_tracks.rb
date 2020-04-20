@@ -6,6 +6,7 @@ class CreateTracks < ActiveRecord::Migration[6.0]
       t.string :artist_spotify_unique
       t.string :artists_names
       t.string :track_name
+      t.string :track_spotify_unique
       t.string :album_name
       t.timestamps
     end

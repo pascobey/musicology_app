@@ -40,8 +40,7 @@ class UsersController < ApplicationController
       cookies.permanent[:user_id] = @user.user_id
       redirect_to controller: 'playlists', action: 'create', library_id: @library.id, access_token: access_token_json['access_token']
     else
-      puts "user found! UPDATE INFORMATION CODE NON-EXISTENT"
-      # UPDATE INFORMATION
+      redirect_to controller: 'playlists', action: 'update', library_id: @library.id, access_token: access_token_json['access_token']
     end
   end
 
