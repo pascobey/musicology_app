@@ -17,6 +17,7 @@ class PlaylistsController < ApplicationController
     if playlists_json  
       playlists_json.each do |p|
         if !Playlist.find_by(spotify_unique: p['id'])
+          puts p['name']
           Playlist.create(library_id: url_vars[:library_id], spotify_unique: p['id'], name: p['name'])
         end
       end
