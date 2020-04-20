@@ -32,7 +32,7 @@ class TracksController < ApplicationController
       end
       sleep 1
     end
-    redirect_to(user_path(User.find_by(id: cookies[:user_id])))
+    redirect_to(user_path(User.find_by(id: url_vars[:library_id])))
   end
 
   def update
@@ -66,7 +66,7 @@ class TracksController < ApplicationController
         end
       end
     end
-    redirect_to(user_path(User.find_by(id: cookies[:user_id])))
+    redirect_to(user_path(User.find_by(id: url_vars[:library_id])))
   end
 
 end
