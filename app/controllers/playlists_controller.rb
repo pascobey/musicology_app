@@ -8,7 +8,7 @@ class PlaylistsController < ApplicationController
         Playlist.create(library_id: url_vars[:library_id], spotify_unique: p['id'], name: p['name'])
       end
     end
-    redirect_to controller: 'users', action: 'finished', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
+    redirect_to controller: 'status', action: 'finished', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
   end
 
   def update
@@ -21,7 +21,7 @@ class PlaylistsController < ApplicationController
         end
       end
     end
-    redirect_to(user_path(User.find_by(id: cookies[:user_id])))
+    redirect_to controller: 'status', action: 'finished', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
   end
 
 end
