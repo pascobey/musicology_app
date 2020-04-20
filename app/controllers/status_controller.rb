@@ -3,11 +3,10 @@ class StatusController < ApplicationController
   def finished
     puts "started finished"
     url_vars = retrieve_url_vars(request.original_url)
-    library = Library.find_by(id: url_vars[:library_id])
-    if !library.playlists.find_by(id: library.playlists.size).tracks
+    if Library.find_by(id: url_vars[:library_id]).playlists.find_by(id: Library.find_by(id: url_vars[:library_id]).playlists.size).tracks == []
       puts "should redirect to finish_build"
       redirect_to controller: 'status', action: 'finish_build', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
-    else library.playlists.find_by(id: 1).tracks
+    elsif Library.find_by(id: url_vars[:library_id]).playlists.find_by(id: 1).tracks == []
       puts "should redirect to update_build"
       redirect_to controller: 'status', action: 'update_build', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
     end
