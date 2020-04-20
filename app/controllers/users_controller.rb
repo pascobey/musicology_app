@@ -11,8 +11,28 @@ class UsersController < ApplicationController
       '&scope=' + SCOPES_URI
   end
 
+  def finished
+    url_vars = retreive_url_vars(request.original_url)
+    if @user && !@user.library.playlist.find_by(id: @user.library.playlists.size).tracks
+      redirect_to controller: 'users', action: 'finish_build', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
+    else @user && !@user.library.playlist.find_by(id: 1).tracks
+      redirect_to controller: 'users', action: 'update_build', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
+    end
+  end
+
+  def finish_build
+    @library_id = url_vars[:library_id]
+    @access_token = url_vars[:access_token]
+  end
+
+  def update_build
+    @library_id = url_vars[:library_id]
+    @access_token = url_vars[:access_token]
+    redirect_to controller: 'tracks', action: 'update', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
+  end
+
   def show
-    @user = User.find_by(id: request.original_url[("#{APP_BASE_URL}/users/").size, 100000000])
+    @user = User.find_by(id: request.original_url[("#{APP_BASE_URL}/users/").size, 10000000000])
     if !@user || @user.user_id != cookies[:user_id]
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')

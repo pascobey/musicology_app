@@ -8,7 +8,7 @@ class Playlist < ApplicationRecord
           "#{spotify_api_url}/v1/me/playlists",
           query: { 
             limit: "50"
-          }
+          },
           headers: {
             Authorization: "Bearer #{access_token}"
           }
