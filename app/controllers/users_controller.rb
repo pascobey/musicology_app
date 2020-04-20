@@ -12,10 +12,13 @@ class UsersController < ApplicationController
   end
 
   def finished
+    puts "started finished"
     url_vars = retreive_url_vars(request.original_url)
     if @user && !@user.library.playlist.find_by(id: @user.library.playlists.size).tracks
+      puts "should redirect to finish_build"
       redirect_to controller: 'users', action: 'finish_build', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
     else @user && !@user.library.playlist.find_by(id: 1).tracks
+      puts "should redirect to finish_build"
       redirect_to controller: 'users', action: 'update_build', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
     end
   end
