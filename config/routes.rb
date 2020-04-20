@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get "playlists/update"
   root 'users#new'
   get 'create', to: 'users#create'
-  resources :users, only: [:show, :finished, :finish_build, :update_build]
+  resources :users, only: [:show]
+  get 'users/finished'
+  get 'users/finish_build'
+  get 'users/update_build'
 
 end
