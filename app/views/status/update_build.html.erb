@@ -1,0 +1,5 @@
+<div class="d=flex flex-column">
+    <h1 class="align-self-center">Almost There...</h1>
+    <p class="align-self-center">We see you've updated your playlists.</p>
+    <%= link_to "Update my library!", {controller: 'tracks', action: 'update', library_id: @library_id, access_token: @access_token}, class: 'btn' %>
+</div>

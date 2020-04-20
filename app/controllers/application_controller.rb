@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
     SCOPES = 'ugc-image-upload user-read-playback-state user-read-currently-playing streaming user-read-email playlist-read-collaborative playlist-read-private user-library-read user-top-read user-read-playback-position user-read-recently-played user-follow-read'
     SCOPES_URI = URI.escape(SCOPES, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     
+    def retrieve_url_vars(url)
+        access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
+        library_id = url[(url.length - 1), 1]
+        return {:access_token => access_token, :library_id => library_id}
+    end
+    
 end
