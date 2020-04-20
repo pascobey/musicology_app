@@ -14,7 +14,7 @@ class TracksController < ApplicationController
               artists_names += '| '
             end
             if !Artist.find_by(artist_spotify_unique: ah['id'])
-              artist_info = Artist.retrieve_artist_json(SPOTIFY_API_URL, url_vars[:access_token], ah['id'])
+              puts artist_info = Artist.retrieve_artist_json(SPOTIFY_API_URL, url_vars[:access_token], ah['id'])
               Artist.create(artist_spotify_unique: artist_info[:artist_spotify_unique], name: artist_info[:name], spotify_open_url: artist_info[:spotify_open_url], follower_count: artist_info[:follower_count], genres: artist_info[:genres], artist_image_url: artist_info[:artist_image_url], spotify_popularity_index: artist_info[:spotify_popularity_index])
             end
             artists_names += ah['name']
