@@ -1,8 +1,8 @@
 class PlaylistsController < ApplicationController
 
   def create
-    url_vars = retrieve_url_vars(request.original_url)
-    playlists_json = Playlist.retrieve_playlists_json(SPOTIFY_API_URL, url_vars[:access_token])
+    puts url_vars = retrieve_url_vars(request.original_url)
+    puts playlists_json = Playlist.retrieve_playlists_json(SPOTIFY_API_URL, url_vars[:access_token])
     if playlists_json
       playlists_json.each do |p|
         Playlist.create(library_id: url_vars[:library_id], spotify_unique: p['id'], name: p['name'])
