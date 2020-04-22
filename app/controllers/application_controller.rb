@@ -12,11 +12,13 @@ class ApplicationController < ActionController::Base
     SCOPES_URI = URI.escape(SCOPES, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     
     def retrieve_url_vars(url)
-        access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
-        library_id = url[(url.index("library_id=") + "library_id=".length), (url.index("&") - (url.index("library_id=") + "library_id=".length))]
+        aaccess_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
         if url.include?("playlist_id=")
+            puts "playlist condition not working"
+            library_id = url[(url.index("library_id=") + "library_id=".length), (url.index("&p") - (url.index("library_id=") + "library_id=".length))]
             playlist_id = url[(url.index("playlist_id=") + "playlist_id=".length), (url.index("&") - (url.index("playlist_id=") + "playlist_id=".length))]
         else
+            library_id = url[(url.index("library_id=") + "library_id=".length), (url.index("&x") - (url.index("library_id=") + "library_id=".length))]
             playlist_id = ''
         end
         return {:access_token => access_token, :library_id => library_id, :playlist_id => playlist_id}
