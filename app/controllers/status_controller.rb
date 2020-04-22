@@ -1,29 +1,17 @@
 class StatusController < ApplicationController
 
-  def finished
-    puts "started finished"
+  def build
+    puts "started build"
     url_vars = retrieve_url_vars(request.original_url)
-    if Library.find_by(id: url_vars[:library_id]).playlists.find_by(id: Library.find_by(id: url_vars[:library_id]).playlists.size).tracks == []
-      puts "should redirect to finish_build"
-      redirect_to controller: 'status', action: 'finish_build', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
-    elsif Library.find_by(id: url_vars[:library_id]).playlists.find_by(id: 1).tracks == []
-      puts "should redirect to update_build"
-      redirect_to controller: 'status', action: 'update_build', library_id: url_vars[:library_id], access_token: url_vars[:access_token]
+    @library_id = url_vars[:library_id]
+    @access_token = url_vars[:access_token]
+    @playlists = Playlist.find_by(library_id: @library_id)
+    # Conditional checks if every playlist empty or are there new playlists?
+    if @playlists.find_by(id: @playlists.size).tracks == []
+      @header = 'Retrieving Playlists Data'
+    elsif @playlists.find_by(id: 1).tracks == []
+      @header = 'Updating Playlists Data'
     end
-  end
-
-  def finish_build
-    puts "started finish_build"
-    url_vars = retrieve_url_vars(request.original_url)
-    @library_id = url_vars[:library_id]
-    @access_token = url_vars[:access_token]
-  end
-
-  def update_build
-    puts "started update_build"
-    url_vars = retrieve_url_vars(request.original_url)
-    @library_id = url_vars[:library_id]
-    @access_token = url_vars[:access_token]
   end
 
 end

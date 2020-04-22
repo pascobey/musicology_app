@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'status/finished'
-  get 'status/finish_build'
-  get 'status/update_build'
+  get 'status/build'
   get 'tracks/create'
   get 'tracks/update'
   get 'playlists/create'

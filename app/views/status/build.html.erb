@@ -1,0 +1,26 @@
+<!-- page container - column -->
+<div id="build-content-container" class="d-flex flex-column">
+    <!-- header container - row -->
+    <div class="d-flex flex-row">
+        <h1 class="align-self-center"><%= @header %></h1>
+    </div><!-- header container - row -->
+    <!-- playlists image container - row -->
+    <div id="playlist-img-container" class="d-flex flex-row">
+        
+
+        <%# NEEDS LOGIC FOR LAYOUT FLOW %>
+
+        <div class="d-flex flex-column">
+            <div class="d-flex flex-row">
+                <%  = 1 %>
+                <% until i == (@playlists.size + 1) %>
+                    <%= link_to "PLAYLIST_IMAGE", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, exit: '0'} %>
+                <% end %>
+            </div>
+        </div>
+
+        <%# NEEDS LOGIC FOR LAYOUT FLOW %>
+
+
+    </div><!-- playlists image container - row -->
+</div><!-- page container - column -->
