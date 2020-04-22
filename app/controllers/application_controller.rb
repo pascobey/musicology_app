@@ -12,16 +12,8 @@ class ApplicationController < ActionController::Base
     SCOPES_URI = URI.escape(SCOPES, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     
     def retrieve_url_vars(url)
-        if url.include?("access_token=")
-            access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
-        else
-            access_token = ''
-        end
-        if url.include?("library_id=")
-            library_id = url[(url.index("library_id=") + "library_id=".length), (url.index("&") - (url.index("library_id=") + "library_id=".length))]
-        else
-            library_id = ''
-        end
+        access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
+        library_id = url[(url.index("library_id=") + "library_id=".length), (url.index("&") - (url.index("library_id=") + "library_id=".length))]
         if url.include?("playlist_id=")
             playlist_id = url[(url.index("playlist_id=") + "playlist_id=".length), (url.index("&") - (url.index("playlist_id=") + "playlist_id=".length))]
         else
