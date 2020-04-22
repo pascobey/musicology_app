@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
     def retrieve_url_vars(url)
         access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
         if url.include?("playlist_id=")
-            puts "playlist condition not working"
             library_id = url[(url.index("library_id=") + "library_id=".length), (url.index("&p") - (url.index("library_id=") + "library_id=".length))]
             playlist_id = url[(url.index("playlist_id=") + "playlist_id=".length), (url.index("&") - (url.index("playlist_id=") + "playlist_id=".length))]
         else
