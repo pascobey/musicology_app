@@ -38,9 +38,9 @@ class UsersController < ApplicationController
       @user = User.create(user_id: user_profile_json['id'], email: user_profile_json['email'], account_url: user_profile_json.dig('external_urls', 'spotify'), refresh_token: access_token_json['refresh_token'])
       @library = Library.create(user_id: @user.id)
       cookies.permanent[:user_id] = @user.user_id
-      redirect_to controller: 'playlists', action: 'create', library_id: @library.id, access_token: access_token_json['access_token'], exit: '0'
+      redirect_to controller: 'playlists', action: 'create', library_id: @library.id, access_token: access_token_json['access_token'], xt: '0'
     else
-      redirect_to controller: 'playlists', action: 'update', library_id: @library.id, access_token: access_token_json['access_token'], exit: '0'
+      redirect_to controller: 'playlists', action: 'update', library_id: @library.id, access_token: access_token_json['access_token'], xt: '0'
     end
   end
 

@@ -14,7 +14,7 @@
             <div class="d-flex flex-row">
                 <%  = 1 %>
                 <% until i == (@playlists.size + 1) %>
-                    <%= link_to "PLAYLIST_IMAGE", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, exit: '0'} %>
+                    <%= link_to "PLAYLIST_IMAGE", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'} %>
                 <% end %>
             </div>
         </div>

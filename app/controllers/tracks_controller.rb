@@ -28,7 +28,7 @@ class TracksController < ApplicationController
         Track.create(playlist_id: url_vars[:playlist_id], artist_id: Artist.find_by(name: main_artist_name).id, artist_spotify_unique: Artist.find_by(name: main_artist_name).artist_spotify_unique, artists_names: artists_names, track_name: t['track']['name'], track_spotify_unique: t['track']['id'], album_name: t['track']['album']['name'])
       end
     end
-    redirect_to controller: 'status', action: 'build', library_id: url_vars[:library_id], access_token: url_vars[:access_token], exit: '0'
+    redirect_to controller: 'status', action: 'build', library_id: url_vars[:library_id], access_token: url_vars[:access_token], xt: '0'
   end
 
   def update
