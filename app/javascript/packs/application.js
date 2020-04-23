@@ -18,31 +18,6 @@ require('jquery')
 // const imagePath = (name) => images(name, true)
 
 $(document).ready(function() {
-    $('#flash').fadeOut(2000, function() {
-        $(this).remove();
-    });
-    $('#playlists-btn').click(function() {
-        $('#playlists-container').removeClass('d-none');
-        $('#music-container').removeClass('d-flex');
-        $('#music-container').addClass('d-none');
-        $('#playlists-container').addClass('d-flex');
-    });
-    $('#artists-btn').click(function() {
-        $('#artists-container').removeClass('d-none');
-        $('#music-container').removeClass('d-flex');
-        $('#music-container').addClass('d-none');
-        $('#artists-container').addClass('d-flex');
-    });
-    $('#playlists-back').click(function() {
-        $('#music-container').removeClass('d-none');
-        $('#playlists-container').removeClass('d-flex');
-        $('#playlists-container').addClass('d-none');
-        $('#music-container').addClass('d-flex');
-    });
-    $('#artists-back').click(function() {
-        $('#music-container').removeClass('d-none');
-        $('#artists-container').removeClass('d-flex');
-        $('#artists-container').addClass('d-none');
-        $('#music-container').addClass('d-flex');
-    });
+    var i = $("#javascript-what-to-click").text
+    $("#" + i).click();
 });

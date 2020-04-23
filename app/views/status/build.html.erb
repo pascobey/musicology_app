@@ -14,6 +14,7 @@
             <div class="d-flex flex-row">
                 <div class="d-flex flex-column">
                     <%  i = 1 %>
+                    <span id="javascript-what-to-click" style="display:none;"><%= @playlist_id %></span>
                     <% until i == (@playlists.size + 1) %>
                         <% if ((i - 1) % 4) == 0 %>
                             <div class="d-flex flex-row">
@@ -23,6 +24,7 @@
                                 <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1" style="height:15vw;width:15vw;">
                             <% elsif %>
                                 <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1" style="height:15vw;width:15vw;filter:grayscale(100%)blur(4px);">
+                                <%= link_to "playlist #{i} retrieval", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'}, style: "display:none;" id: i %>
                             <% end %>
                         </div>
                         <% if (i % 4) == 0 %>
