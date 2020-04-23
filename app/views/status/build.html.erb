@@ -5,7 +5,7 @@
         <h3><%= @header %></h3>
     </div><!-- header container - row -->
     <!-- playlists image container - row -->
-    <div id="playlist-img-container" class="d-flex flex-row">
+    <div id="playlist-img-container" class="d-flex flex-row mx-2">
         
 
         <%# NEEDS LOGIC FOR LAYOUT FLOW %>
@@ -19,7 +19,11 @@
                             <div class="d-flex flex-row">
                         <% end %>
                         <div>
-                            <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow" style="height:15vw;width:15vw;">
+                            <% if @playlist_id >= i %>
+                                <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1" style="height:15vw;width:15vw;">
+                            <% elsif %>
+                                <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1" style="height:15vw;width:15vw;filter:grayscale(100%);filter:blur(6px);">
+                            <% end %>
                         </div>
                         <% if (i % 4) == 0 %>
                             </div>
