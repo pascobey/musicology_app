@@ -12,12 +12,21 @@
 
         <div class="d-flex flex-column">
             <div class="d-flex flex-row">
-                <%  i = 1 %>
-                <% until i == (@playlists.size + 1) %>
-                    <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE">
-                    <%# <%= link_to "PLAYLIST_IMAGE", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'} %>
-                    <% i = i.next %>
-                <% end %>
+                <div class="d-flex flex-column">
+                    <%  i = 1 %>
+                    <% until i == (@playlists.size + 1) %>
+                        <% if (i % 4) = 0 %>
+                            <div class="d-flex flex-row">
+                        <% end %>
+                            <div>
+                                <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" height="15vw" width="15vw">
+                            </div>
+                        <% if ((i - 3) % 4) == 0 %>
+                            </div>
+                        <% end %>
+                        <%# <%= link_to "PLAYLIST_IMAGE", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'} %>
+                        <% i = i.next %>
+                    <% end %>
             </div>
         </div>
 
