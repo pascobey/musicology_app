@@ -16,5 +16,7 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-var i = document.getElementById("javascript-what-to-click").innerHTML;
-document.getElementById(i).click();
+document.addEventListener("DOMContentLoaded", function(event) {
+    var i = document.getElementById("javascript-what-to-click").innerHTML;
+    document.getElementById(i).click();
+});
