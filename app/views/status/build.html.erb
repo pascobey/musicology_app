@@ -21,7 +21,7 @@
                         <div>
                             <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" style="height:15vw;width:15vw;">
                         </div>
-                        <% if ((i - 2) % 4) == 0 %>
+                        <% if ((i - 5) % 4) == 0 %>
                             </div>
                         <% end %>
                         <%# <%= link_to "PLAYLIST_IMAGE", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'} %>
