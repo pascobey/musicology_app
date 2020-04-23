@@ -14,7 +14,7 @@
             <div class="d-flex flex-row">
                 <div class="d-flex flex-column">
                     <%  i = 1 %>
-                    <span id="javascript-what-to-click" style="display:none;"><%= @playlist_id %></span>
+                    <span id="javascript-what-to-click" style="display:none;"><%= "#{@playlist_id.to_i + 1}" %></span>
                     <% until i == (@playlists.size + 1) %>
                         <% if ((i - 1) % 4) == 0 %>
                             <div class="d-flex flex-row">
