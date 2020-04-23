@@ -16,8 +16,9 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-document.addEventListener("DOMContentLoaded", function(event) {
+window.onload = autoClick();
+function autoClick() {
     setTimeout(function() {
         document.getElementById(document.getElementById("javascript-what-to-click").innerHTML).click();
     }, 1200);
-});
+}
