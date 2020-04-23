@@ -5,7 +5,7 @@ class PlaylistsController < ApplicationController
     playlists_json = Playlist.retrieve_playlists_json(SPOTIFY_API_URL, url_vars[:access_token])
     if playlists_json
       playlists_json.each do |p|
-        if p['images']
+        if p['images'] != []
           first_image_hash = p['images'].first
           if first_image_hash
             playlist_image_url = first_image_hash['url']
