@@ -14,7 +14,8 @@
             <div class="d-flex flex-row">
                 <%  i = 1 %>
                 <% until i == (@playlists.size + 1) %>
-                    <%= link_to "PLAYLIST_IMAGE", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'} %>
+                    <img src="<%= @playlists[i].playlist_image_url %>" alt="PLAYLIST_IMAGE">
+                    <%# <%= link_to "PLAYLIST_IMAGE", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'} %>
                     <% i = i.next %>
                 <% end %>
             </div>
