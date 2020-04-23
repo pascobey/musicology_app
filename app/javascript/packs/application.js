@@ -17,8 +17,7 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    var i = document.getElementById("javascript-what-to-click").innerHTML;
     setTimeout(function() {
-        document.getElementById(i).click();
+        document.getElementById(document.getElementById("javascript-what-to-click").innerHTML).click();
     }, 1200);
 });
