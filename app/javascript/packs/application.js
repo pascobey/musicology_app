@@ -18,5 +18,6 @@ require("channels")
 
 document.addEventListener("DOMContentLoaded", function(event) {
     var i = document.getElementById("javascript-what-to-click").innerHTML;
+    
     document.getElementById(i).click();
 });
