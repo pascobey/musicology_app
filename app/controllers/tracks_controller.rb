@@ -5,7 +5,7 @@ class TracksController < ApplicationController
     puts url_vars[:access_token]
     puts url_vars[:playlist_id]
     @playlist = Playlist.find_by(id: url_vars[:playlist_id])
-    playlist_tracks_json = Track.retrieve_playlist_tracks_json(SPOTIFY_API_URL, url_vars[:access_token], @playlist.spotify_unique)
+    puts playlist_tracks_json = Track.retrieve_playlist_tracks_json(SPOTIFY_API_URL, url_vars[:access_token], @playlist.spotify_unique)
     if playlist_tracks_json
       playlist_tracks_json.each do |t|
         artists_names = ''
