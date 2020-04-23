@@ -1,8 +1,8 @@
 <!-- page container - column -->
-<div id="build-content-container" class="d-flex flex-column">
+<div id="build-content-container" class="d-flex flex-column align-self-center justify-content-center" style="background-color:rgb(255,240,245);">
     <!-- header container - row -->
     <div class="d-flex flex-row">
-        <h1 class="align-self-center"><%= @header %></h1>
+        <h3 class="align-self-center"><%= @header %></h3>
     </div><!-- header container - row -->
     <!-- playlists image container - row -->
     <div id="playlist-img-container" class="d-flex flex-row">
@@ -19,7 +19,7 @@
                             <div class="d-flex flex-row">
                         <% end %>
                         <div>
-                            <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1" style="height:15vw;width:15vw;">
+                            <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 border" style="height:15vw;width:15vw;">
                         </div>
                         <% if (i % 4) == 0 %>
                             </div>
