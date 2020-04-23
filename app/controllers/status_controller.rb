@@ -1,7 +1,6 @@
 class StatusController < ApplicationController
 
   def build
-    puts "started build"
     url_vars = retrieve_url_vars(request.original_url)
     @library_id = url_vars[:library_id]
     @access_token = url_vars[:access_token]
