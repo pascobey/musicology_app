@@ -18,7 +18,8 @@ require("channels")
 
 window.onload = autoClick();
 function autoClick() {
-    while (parseInt(document.getElementById("js-click").innerHTML) < parseInt(document.getElementById("js-stop").innerHTML)) {
+    location.reload();
+    if (parseInt(document.getElementById("js-click").innerHTML) < parseInt(document.getElementById("js-stop").innerHTML)) {
         setTimeout(function() {
             document.getElementById(document.getElementById("js-click").innerHTML).click();
         }, 1200);
