@@ -1,7 +1,7 @@
 class PlaylistsController < ApplicationController
 
   def create
-    puts url_vars = retrieve_url_vars(request.original_url)
+    url_vars = retrieve_url_vars(request.original_url)
     puts playlists_json = Playlist.retrieve_playlists_json(SPOTIFY_API_URL, url_vars[:access_token])
     if playlists_json
       playlists_json.each do |p|
