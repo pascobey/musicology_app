@@ -14,13 +14,13 @@
             <div class="d-flex flex-row">
                 <div class="d-flex flex-column">
                     <%  i = 1 %>
-                    <span id="javascript-what-to-click" style="display:none;"><%= "#{@playlist_id.to_i + 1}" %></span>
+                    <span id="javascript-what-to-click" style="display:none;"><%= "#{@playlist_id}" %></span>
                     <% until i == (@playlists.size + 1) %>
                         <% if ((i - 1) % 4) == 0 %>
                             <div class="d-flex flex-row">
                         <% end %>
                         <div>
-                            <% if @playlist_id.to_i >= i %>
+                            <% if @playlist_id.to_i > i %>
                                 <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1" style="height:15vw;width:15vw;">
                             <% elsif %>
                                 <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">

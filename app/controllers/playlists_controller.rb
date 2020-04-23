@@ -15,7 +15,7 @@ class PlaylistsController < ApplicationController
         Playlist.create(library_id: url_vars[:library_id], spotify_unique: p['id'], playlist_image_url: playlist_image_url, name: p['name'])
       end
     end
-    redirect_to controller: 'status', action: 'build', library_id: url_vars[:library_id], access_token: url_vars[:access_token], xt: '0'
+    redirect_to controller: 'status', action: 'build', library_id: url_vars[:library_id], access_token: url_vars[:access_token], playlist_id: "1", xt: '0'
   end
 
   def update
@@ -28,7 +28,7 @@ class PlaylistsController < ApplicationController
         end
       end
     end
-    redirect_to controller: 'status', action: 'finished', library_id: url_vars[:library_id], access_token: url_vars[:access_token], xt: '0'
+    redirect_to controller: 'status', action: 'finished', library_id: url_vars[:library_id], access_token: url_vars[:access_token], playlist_id: "1", xt: '0'
   end
 
 end
