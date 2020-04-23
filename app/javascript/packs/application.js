@@ -18,7 +18,7 @@ require("channels")
 
 window.onload = autoClick();
 function autoClick() {
-    location.reload();
+    if (document.getElementById("build-content-container"))
     if (parseInt(document.getElementById("js-click").innerHTML) < parseInt(document.getElementById("js-stop").innerHTML)) {
         setTimeout(function() {
             document.getElementById(document.getElementById("js-click").innerHTML).click();
