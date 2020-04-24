@@ -12,14 +12,14 @@ class User < ApplicationRecord
                 until artists_names_string.include?("|") == ""
                     if artists_names_string.include?("|")
                         artists_names_array << artists_names_string[0, artists_names_string.index("|")]
-                        artists_names_string = artists_names_string.gsub("#{artists_names_string[0, (artists_name_string.index("|") + 1)]}", "")
+                        artists_names_string = artists_names_string.gsub("#{artists_names_string[0, (artists_names_string.index("|") + 1)]}", "")
                     else
                         artists_name_array << artists_names_string
                         artists_names_string = ""
                     end
                 end
             else
-                artists_names_array << Artist.find_by(name: artists_names_string)
+                artists_names_array << artists_names_string
             end
             artists_names_array.each do |a|
                 puts a
