@@ -21,7 +21,7 @@ class PlaylistsController < ApplicationController
 
   def update
     url_vars = retrieve_url_vars(request.original_url)
-    playlists_json = Playlist.retrieve_playlist_json(SPOTIFY_API_URL, url_vars[:access_token])
+    playlists_json = Playlist.retrieve_playlists_json(SPOTIFY_API_URL, url_vars[:access_token])
     if playlists_json  
       playlists_json.each do |p|
         if !Playlist.find_by(spotify_unique: p['id'])
