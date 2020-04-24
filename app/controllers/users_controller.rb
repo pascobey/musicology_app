@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     else @user.user_id != cookies[:user_id]
       redirect_to(user_path(User.find_by(user_id: cookies[:user_id]).id)
     end
-    @playlists = Library.find_by(user_id: request.original_url.gsub("#{APP_BASE_URL}/users/", "").playlists
+    @playlists = Library.find_by(user_id: request.original_url.gsub("#{APP_BASE_URL}/users/", "")).playlists
     @playlists_stratifications = []
     @playlists.each do |p|
       @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
