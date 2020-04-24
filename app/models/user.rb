@@ -10,16 +10,19 @@ class User < ApplicationRecord
             artists_names_string = t.artists_names
             if artists_names_string.include?("|")
                 until artists_names_string.include?("|") == ""
-                    if artists_names_array.include?("|")
-                        temp_artists_array << Artist.find_by(name: artists_names_string[0, artists_names_string.index("|")]).artist_spotify_unique
-                        puts artists_names_string = artists_names_string.gsub("#{artists_names_string[0, (artists_name_string.index("|") + 1)]}", "")
+                    if artists_names_string.include?("|")
+                        artists_names_array << artists_names_string[0, artists_names_string.index("|")])
+                        artists_names_string = artists_names_string.gsub("#{artists_names_string[0, (artists_name_string.index("|") + 1)]}", "")
                     else
-                        temp_artists_array << Artist.find_by(name: artists_names_string).artist_spotify_unique
+                        artists_name_array << artists_names_string
                         artists_names_string = ""
                     end
                 end
             else
-                temp_artists_array << Artist.find_by(name: artists_names_string).artist_spotify_unique
+                artists_names_array << Artist.find_by(name: artists_names_string)
+            end
+            artists_names_array.each do |a|
+                temp_artists_array << Artist.find_by(name: a).artist_spotify_unique
             end
         end
         counts = Hash.new(0)
