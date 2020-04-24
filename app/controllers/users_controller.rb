@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       @playlists.each do |p|
         @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
       end
-      @library_stratified = @playlists_stratifications.inject{ |artist_spotify_unique, pr| artist_spotify_unique.merge( pr ){ |k, pr, lr| pr + lr } }
+      @library_stratified = @playlists_stratifications.inject{ |artist_spotify_unique, pr| artist_spotify_unique.merge( pr ){ |k, pr, lr| pr + lr } }.sort_by{ |k,v| v }.to_a.reverse.to_h
     end
   end
 
