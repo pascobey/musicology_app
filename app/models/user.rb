@@ -9,7 +9,7 @@ class User < ApplicationRecord
             artists_names_array = []
             puts artists_names_string = t.artists_names
             if artists_names_string.include?("|")
-                until artists_names_string.include?("|") == ""
+                until artists_names_string == ""
                     if artists_names_string.include?("|")
                         artists_names_array << artists_names_string[0, artists_names_string.index("|")]
                         artists_names_string = artists_names_string.gsub("#{artists_names_string[0, (artists_names_string.index("|") + 1)]}", "")
