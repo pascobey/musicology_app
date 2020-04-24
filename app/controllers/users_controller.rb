@@ -18,12 +18,13 @@ class UsersController < ApplicationController
       puts "User nil"
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')
-    end 
-    puts "you belong here..."
-    @playlists = Library.find_by(user_id: @user.id).playlists
-    @playlists_stratifications = []
-    @playlists.each do |p|
-      @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
+    else
+      puts "you belong here..."
+      @playlists = Library.find_by(user_id: @user.id).playlists
+      @playlists_stratifications = []
+      @playlists.each do |p|
+        @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
+      end
     end
   end
 
