@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authorized?, except: [:new, :create]
+
   def new
     if User.find_by(user_id: cookies[:user_id])
       flash[:notice] = "USER FOUND! Welcome Back, #{User.find_by(user_id: cookies[:user_id]).email}"

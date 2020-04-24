@@ -1,5 +1,7 @@
 class TracksController < ApplicationController
 
+  before_action :authorized?
+  
   def create
     url_vars = retrieve_url_vars(request.original_url)
     url_vars[:access_token]

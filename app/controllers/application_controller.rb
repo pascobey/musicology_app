@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
     SCOPES = 'ugc-image-upload user-read-playback-state user-read-currently-playing streaming user-read-email playlist-read-collaborative playlist-read-private user-library-read user-top-read user-read-playback-position user-read-recently-played user-follow-read'
     SCOPES_URI = URI.escape(SCOPES, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     
+    def authorized?
+        if !User.find_by(user_id: cookies[:user_id])
+            flash[:notice] = "Please Sign In..."
+            redirect_to('/')
+        end
+    end
+
     def retrieve_url_vars(url)
         access_token = url[(url.index("access_token=") + "access_token=".length), (url.index("&") - (url.index("access_token=") + "access_token=".length))]
         if url.include?("playlist_id=")

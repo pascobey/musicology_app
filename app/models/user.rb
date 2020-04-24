@@ -2,7 +2,7 @@ class User < ApplicationRecord
 
     has_one :library
 
-    def self.stratify_artist_representation_playlist(playlist_spotify_unique)
+    def self.stratify_artist_representation_in_playlist(playlist_spotify_unique)
         temp_artists_array = []
         playlist = Playlist.find_by(spotify_unique: playlist_spotify_unique)
         playlist.tracks.each do |t|
@@ -24,5 +24,5 @@ class User < ApplicationRecord
         counts = Hash.new(0)
         return temp_artists_array.each { |artist_spotify_unique| counts[artist_spotify_unique] += 1 }
     end
-    
+
 end
