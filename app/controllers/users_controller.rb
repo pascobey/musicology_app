@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if User.find_by(user_spotify_unique: cookies[:user_id])
       @user = User.find_by(user_spotify_unique: cookies[:user_id])
       flash[:notice] = "USER FOUND! Welcome Back, #{@user.email}"
-      redirect_to controller: 'playlists', action: 'update', library_id: @user.id, access_token: @user.refresh_token
+      redirect_to controller: 'playlists', action: 'update', library_id: @user.id, access_token: @user.refresh_token, xt: '0'
     end
     @request = SPOTIFY_BASE_URL + '/authorize' +
       '?client_id=' + APP_CLIENT_ID + '&response_type=code' +
