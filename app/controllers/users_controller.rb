@@ -12,10 +12,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: request.original_url[("#{APP_BASE_URL}/users/").size, 10000000000])
+    @user = User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
     if !@user || @user.user_id != cookies[:user_id]
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')
+    end
+    @playlists = @user.library.playlists
+    @platlists.each do |p|
+      puts playlist_stratification_hash = User.stratify_artist_representation_in_playlist(p.spotify_unique)
     end
   end
 

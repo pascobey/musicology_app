@@ -12,7 +12,7 @@ class TracksController < ApplicationController
         artists_hash = t['track']['artists']
         artists_hash.each do |ah|
           if ah != artists_hash.first
-            artists_names += '| '
+            artists_names += '|'
           end
           if !Artist.find_by(artist_spotify_unique: ah['id'])
             artist_info = Artist.retrieve_artist_json(SPOTIFY_API_URL, url_vars[:access_token], ah['id'])
