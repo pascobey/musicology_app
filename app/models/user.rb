@@ -12,7 +12,7 @@ class User < ApplicationRecord
                 until artists_names_string.include?("|") == ""
                     if artists_names_array.include?("|")
                         temp_artists_array << Artist.find_by(name: artists_names_string[0, artists_names_string.index("|")]).artist_spotify_unique
-                        artists_names_string = artists_names_string.gsub("#{artists_names_string[0, (artists_name_string.index("|") + 1)]}", "")
+                        puts artists_names_string = artists_names_string.gsub("#{artists_names_string[0, (artists_name_string.index("|") + 1)]}", "")
                     else
                         temp_artists_array << Artist.find_by(name: artists_names_string).artist_spotify_unique
                         artists_names_string = ""
