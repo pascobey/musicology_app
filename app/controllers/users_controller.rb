@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       puts "User nil"
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')
-    elsif @user.id != cookies[:user_id]
+    elsif User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", "")) != cookies[:user_id]
       puts "User wrong"
       redirect_to(user_path(User.find_by(user_id: cookies[:user_id]).id))
     else
