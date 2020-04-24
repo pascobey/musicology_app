@@ -12,7 +12,7 @@
     <!-- notice bar - flex-row -->
     <div id="flash" class="d-flex flex-row justify-content-center bg-light w-100">
       <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, class: name %>
+        <%= content_tag :div, msg, class: "#{name} shadow", style: "background-color:rgb(255,240,245);" %>
       <% end %>
     </div><!-- notice bar - flex-row -->
     <!-- Content Containter - d-flex -->
