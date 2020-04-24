@@ -24,7 +24,6 @@ class UsersController < ApplicationController
     @playlists.each do |p|
       @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
     end
-    puts @playlists_stratifications
   end
 
   def create
