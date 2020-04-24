@@ -8,7 +8,7 @@ class User < ApplicationRecord
         playlist.tracks.each do |t|
             artists_names_string = t.artists_names
             if artists_names_string.include?("|")
-                until artists_names_string.contains?("|") == ""
+                until artists_names_string.include?("|") == ""
                     if artists_names_array.include?("|")
                         temp_artists_array << Artist.find_by(name: artists_names_string[0, artists_names_string.index("|")]).artist_spotify_unique
                         artists_names_string = artists_names_string.gsub("#{artists_names_string[0, (artists_name_string.index("|") + 1)]}", "")
