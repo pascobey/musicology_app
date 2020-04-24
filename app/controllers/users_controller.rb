@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def new
     if User.find_by(user_spotify_unique: cookies[:user_id])
       flash[:notice] = "USER FOUND! Welcome Back, #{User.find_by(user_spotify_unique: cookies[:user_id]).email}"
-      redirect_to controller: 'playlists', action: 'update', library_id: User.find_by(user_spotify_unique: cookies[:user_id])id, access_token: access_token_json['access_token']
+      redirect_to controller: 'playlists', action: 'update', library_id: User.find_by(user_spotify_unique: cookies[:user_id]).id, access_token: access_token_json['access_token']
     end
     @request = SPOTIFY_BASE_URL + '/authorize' +
       '?client_id=' + APP_CLIENT_ID + '&response_type=code' +
