@@ -15,6 +15,8 @@ class UsersController < ApplicationController
 
   def show
     @user
+    @playlists
+    @playlists_stratifications = []
     if !User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
       puts "User nil"
       flash[:notice] = "Not permitted, please sign in."
@@ -25,12 +27,11 @@ class UsersController < ApplicationController
     else
       puts "you belong here... assign @user"
       @user = User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
-    end
-    @playlists = Library.find_by(user_id: @user.id).playlists
-    @playlists_stratifications = []
-    @playlists.each do |p|
-      puts p.id
-      @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
+      @playlists = Library.find_by(user_id: @user.id).playlists
+      @playlists.each do |p|
+        puts p.id
+        @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
+      end
     end
   end
 
