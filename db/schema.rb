@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_201109) do
   end
 
   create_table "libraries", force: :cascade do |t|
-    t.integer "user_id"
+    t.string "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_201109) do
   create_table "playlists", force: :cascade do |t|
     t.integer "library_id"
     t.string "spotify_unique"
+    t.string "playlist_image_url"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -43,16 +44,18 @@ ActiveRecord::Schema.define(version: 2020_03_02_201109) do
 
   create_table "tracks", force: :cascade do |t|
     t.integer "playlist_id"
+    t.integer "artist_id"
     t.string "artist_spotify_unique"
     t.string "artists_names"
     t.string "track_name"
+    t.string "track_spotify_unique"
     t.string "album_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "user_id"
+    t.string "user_spotify_unique"
     t.string "email"
     t.string "account_url"
     t.string "refresh_token"

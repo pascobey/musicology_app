@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     SCOPES_URI = URI.escape(SCOPES, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     
     def authorized?
-        if !User.find_by(user_id: cookies[:user_id])
+        if !User.find_by(user_spotify_unique: cookies[:user_id])
             flash[:notice] = "Please Sign In..."
             redirect_to('/')
         end
