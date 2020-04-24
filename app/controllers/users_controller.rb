@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
 
   def new
-    puts "it really is sending you here"
     if User.find_by(user_spotify_unique: cookies[:user_id])
       flash[:notice] = "USER FOUND! Welcome Back, #{User.find_by(user_spotify_unique: cookies[:user_id]).email}"
       redirect_to controller: 'playlists', action: 'update', library_id: @library.id, access_token: access_token_json['access_token']
@@ -20,6 +19,7 @@ class UsersController < ApplicationController
       redirect_to('/')
     else
       puts "you belong here..."
+      @user = User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
       @playlists = Library.find_by(user_id: @user.id).playlists
       @playlists_stratifications = []
       @playlists.each do |p|
