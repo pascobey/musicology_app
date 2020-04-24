@@ -20,9 +20,11 @@ class UsersController < ApplicationController
       redirect_to('/')
     end
     @playlists = @user.library.playlists
+    @playlists_stratifications = []
     @playlists.each do |p|
-      puts User.stratify_artist_representation_in_playlist(p.spotify_unique)
+      @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
     end
+    puts @playlists_stratifications
   end
 
   def create
