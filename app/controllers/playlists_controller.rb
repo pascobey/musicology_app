@@ -29,7 +29,7 @@ class PlaylistsController < ApplicationController
         end
       end
     end
-    redirect_to controller: 'status', action: 'finished', library_id: url_vars[:library_id], access_token: url_vars[:access_token], playlist_id: "1", xt: '0'
+    redirect_to controller: 'status', action: 'build', library_id: url_vars[:library_id], access_token: url_vars[:access_token], playlist_id: "1", xt: '0'
   end
 
 end

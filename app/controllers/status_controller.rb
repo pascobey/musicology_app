@@ -13,6 +13,8 @@ class StatusController < ApplicationController
       @header = 'Retrieving Playlists Data'
     elsif @playlists.find_by(id: 1).tracks == []
       @header = 'Updating Playlists Data'
+    else
+      redirect_to(user_path(User.find_by(id: @library_id)))
     end
   end
 
