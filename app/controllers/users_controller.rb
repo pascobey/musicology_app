@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')
     else @user.user_id != cookies[:user_id]
-      redirect_to(user_path(User.find_by(user_id: cookies[:user_id]).id)
+      redirect_to(user_path(User.find_by(user_id: cookies[:user_id]).id))
     end
     @playlists = Library.find_by(user_id: request.original_url.gsub("#{APP_BASE_URL}/users/", "")).playlists
     @playlists_stratifications = []
