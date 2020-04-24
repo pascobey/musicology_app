@@ -14,14 +14,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user
+    puts @user = User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
     @playlists
     @playlists_stratifications = []
-    if !User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
+    if @user == ''
       puts "User nil"
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')
-    elsif User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", "")).id != cookies[:user_id]
+    elsif @user.id != cookies[:user_id]
       puts "User wrong"
       redirect_to(user_path(User.find_by(user_id: cookies[:user_id]).id))
     else
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     if !User.find_by(user_id: user_profile_json['id'])
       @user = User.create(user_id: user_profile_json['id'], email: user_profile_json['email'], account_url: user_profile_json.dig('external_urls', 'spotify'), refresh_token: access_token_json['refresh_token'])
       @library = Library.create(user_id: @user.id)
-      cookies.permanent[:user_id] = @user.user_id
+      cookies.permanent[:user_id] = @user.id
       redirect_to controller: 'playlists', action: 'create', library_id: @library.id, access_token: access_token_json['access_token'], xt: '0'
     else
       redirect_to controller: 'playlists', action: 'update', library_id: @library.id, access_token: access_token_json['access_token'], xt: '0'
