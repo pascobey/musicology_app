@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def show
     puts @user = User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
-    if !@user
+    if @user == ""
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')
     else @user.user_id != cookies[:user_id]
