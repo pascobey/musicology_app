@@ -6,6 +6,7 @@ class User < ApplicationRecord
         temp_artists_array = []
         playlist = Playlist.find_by(spotify_unique: playlist_spotify_unique)
         playlist.tracks.each do |t|
+            artists_names_array = []
             artists_names_string = t.artists_names
             if artists_names_string.include?("|")
                 until artists_names_string.include?("|") == ""
