@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     end
     @playlists = @user.library.playlists
     @playlists.each do |p|
-      puts playlist_stratification_hash = User.stratify_artist_representation_in_playlist(p.spotify_unique)
+      playlist_stratification_hash = User.stratify_artist_representation_in_playlist(p.spotify_unique)
     end
   end
 

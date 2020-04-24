@@ -14,7 +14,7 @@ class User < ApplicationRecord
                         artists_names_array << artists_names_string[0, artists_names_string.index("|")]
                         artists_names_string = artists_names_string.gsub("#{artists_names_string[0, (artists_names_string.index("|") + 1)]}", "")
                     else
-                        artists_name_array << artists_names_string
+                        artists_names_array << artists_names_string
                         artists_names_string = ""
                     end
                 end
@@ -23,7 +23,7 @@ class User < ApplicationRecord
             end
             artists_names_array.each do |a|
                 puts a
-                # temp_artists_array << Artist.find_by(name: a).artist_spotify_unique
+                temp_artists_array << Artist.find_by(name: a).artist_spotify_unique
             end
         end
         counts = Hash.new(0)
