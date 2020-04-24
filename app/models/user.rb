@@ -26,8 +26,7 @@ class User < ApplicationRecord
                 temp_artists_array << Artist.find_by(name: a).artist_spotify_unique
             end
         end
-        counts = Hash.new(0)
-        return temp_artists_array.each { |artist_spotify_unique| counts[artist_spotify_unique] += 1 }
+        return temp_artists_array.inject(Hash.new(0)) { |total, e| total[e] += 1 ;total }
     end
 
 end
