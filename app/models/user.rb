@@ -22,7 +22,8 @@ class User < ApplicationRecord
                 artists_names_array << Artist.find_by(name: artists_names_string)
             end
             artists_names_array.each do |a|
-                temp_artists_array << Artist.find_by(name: a).artist_spotify_unique
+                puts a
+                # temp_artists_array << Artist.find_by(name: a).artist_spotify_unique
             end
         end
         counts = Hash.new(0)
