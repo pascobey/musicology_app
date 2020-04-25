@@ -8,6 +8,7 @@ class StatusController < ApplicationController
     @access_token = url_vars[:access_token]
     @playlists = Playlist.where(library_id: @library_id)
     puts "playlist tracks at @playlists.size #{@playlists.find_by(id: @playlists.size).tracks}"
+    puts "playlist tracks at 1 #{@playlists.find_by(id: 1).tracks}"
     @playlist_id = url_vars[:playlist_id]
     # Conditional checks if every playlist empty or are there new playlists?
     if @playlists.find_by(id: @playlists.size).tracks == []
