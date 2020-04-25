@@ -18,6 +18,7 @@ class UsersController < ApplicationController
       puts "User nil"
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')
+      return
     end
     puts "you belong here..."
     @user = User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
