@@ -19,7 +19,7 @@
     <div id="page-container" class="justify-content-center">
       <!-- Navbar container -->
       <nav id="navbar" class="navbar shadow fixed-top" style="background-color:rgb(255,240,245);">
-        <%= link_to(image_tag("main.png", width: "60", height: "60"), "/", class: "navbar-brand") %>
+        <%= link_to(image_tag("main.png", width: "60", height: "60"), "/", class: "navbar-brand", style: "left:24px;") %>
       </nav><!-- Navbar container -->
         <!-- yield container -->
         <div id="yield-container" style="background-color:rgb(225, 234, 225);">
@@ -29,9 +29,9 @@
     <script>
       if (document.getElementById("flash")) {
         document.getElementById("flash").classList.remove("shadow");
-        setTimeout(function() {
-          document.getElementById("flash").remove()
-        }, 3000);
+        // setTimeout(function() {
+        //   document.getElementById("flash").remove()
+        // }, 3000);
       }
   </script>
   </body>
