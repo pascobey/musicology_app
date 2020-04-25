@@ -3,7 +3,7 @@
     <!-- user show content container - column -->
     <div id="user-show-content-container" class="d-flex flex-column shadow-lg rounded dragscroll" style="position:fixed;left:24px;right:24px;top:110px;bottom:24px;background-color:rgb(255,240,245);overflow-x:scroll;overflow-y:scroll;">
         <!-- graph-window -->
-        <svg id="graph-window">
+        <svg id="graph-window" style="width:10000px;height:10000px;">
             <% vertices_count = rand(2..100) %>
             <% center = {:x => 50, :y => 50} %>
             <% q_one_bound_rad = Math::PI / 2 %>
