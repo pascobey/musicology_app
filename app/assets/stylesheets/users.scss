@@ -5,12 +5,19 @@
     width: 100vw;
     height: 100vh;
 }
-#sign-up-with-container {
-
-}
 #spotify-data-request-button {
     background-color: rgb(0,229,97);
 }
 .c-hover:hover {
     opacity: 0.6;
+}
+.zoom-btn {
+    background-color: rgba(37, 41, 36, 0.7);
+    color: rgb(255,240,245);
+}
+.zoom-btn:hover {
+    background-color: rgb(37, 41, 36);
+}
+.unavailable {
+    opacity: 20%;
 }
