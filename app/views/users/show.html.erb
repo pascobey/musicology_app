@@ -62,17 +62,19 @@
         </div><!-- create space -->
         <!-- zoom-buttons-container -->
         <div id="zoom-buttons-container" style="position:fixed;bottom:60px;left:60px;">
-            <button id="zoom-in" onlcick="zoomIn()">+</button>
-            <button id="zoom-out" onlcick="zoomOut()">-</button>
+            <button onlcick="zoomIn()">+</button>
+            <button onlcick="zoomOut()">-</button>
         </div><!-- zoom-buttons-container -->
     </div><!-- user show content container - column -->
 </div><!-- centering -->
 <script>
-    document.getElementById("user-show-content-container").scrollBy(450,650);
     function zoomIn() {
         document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) + 250) + "px";
+        document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) + 250) + "px";
     }
     function zoomOut() {
         document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) - 250) + "px";
+        document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) - 250) + "px";
     }
+    document.getElementById("user-show-content-container").scrollBy(450,650);
 </script>
