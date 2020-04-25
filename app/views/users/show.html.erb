@@ -60,8 +60,11 @@
                 <% end %>
             </svg><!-- graph-window -->
         </div><!-- create space -->
-        <button id="zoom-in" onlcick="zoomIn()">+</button>
-        <button id="zoom-out" onlcick="zoomOut()">-</button>
+        <!-- zoom-buttons-container -->
+        <div id="zoom-buttons-container" style="position:fixed;bottom:60px;left:60px;">
+            <button id="zoom-in" onlcick="zoomIn()">+</button>
+            <button id="zoom-out" onlcick="zoomOut()">-</button>
+        </div><!-- zoom-buttons-container -->
     </div><!-- user show content container - column -->
 </div><!-- centering -->
 <script>
