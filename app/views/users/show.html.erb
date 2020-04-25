@@ -87,7 +87,7 @@
     function zoomIn() {
         if (document.getElementById("scrollable-zoom-block").style.width == "5000px") {
             makeZoomInUnavailable();
-        else
+        } else {
             document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) + 250) + "px";
             document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) + 250) + "px";
         }
@@ -98,7 +98,7 @@
     function zoomOut() {
         if (document.getElementById("scrollable-zoom-block").style.width == "500px") {
             makeZoomOutUnavailable();
-        else 
+        } else { 
             document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) - 250) + "px";
             document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) - 250) + "px";
         }
