@@ -3,7 +3,7 @@
     <!-- user show content container - column -->
     <div id="user-show-content-container" class="d-flex flex-column shadow-lg rounded dragscroll" style="position:fixed;left:24px;right:24px;top:110px;bottom:24px;background-color:rgb(255,240,245);overflow-x:scroll;overflow-y:scroll;">
         <!-- create space -->
-        <div style="width:2000px;height:2000px;">
+        <div id="scrollable-zoom-block" style="width:2000px;height:2000px;">
             <!-- graph-window -->
             <svg id="graph-window" width="100%" height="100%">
                 <% vertices_count = rand(2..100) %>
@@ -70,9 +70,9 @@
 <script>
     document.getElementById("user-show-content-container").scrollBy(450,650);
     function zoomIn() {
-        document.getElementById("zoom-in").style.width = (parseInt(String(document.getElementById("zoom-in").style.width).replace("%", "")) + 20) + "%";
+        document.getElementById("scrollable-zoom-block").style.width = (parseInt(String(document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) + 100) + "px";
     }
     function zoomOut() {
-        document.getElementById("zoom-out").style.width = (parseInt(String(document.getElementById("zoom-out").style.width).replace("%", "")) - 20) + "%";
+        document.getElementById("scrollable-zoom-block").style.width = (parseInt(String(document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) - 100) + "px";
     }
 </script>
