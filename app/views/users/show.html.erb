@@ -68,41 +68,13 @@
     </div><!-- user show content container - column -->
 </div><!-- centering -->
 <script>
-    function makeZoomInUnavailable() {
-        document.getElementById("zoom-in-btn").classList.add("unavailable");
-        document.getElementById("zoom-in-btn").onclick = null;
-    }
-    function makeZoomOutUnavailable() {
-        document.getElementById("zoom-out-btn").classList.add("unavailable");
-        document.getElementById("zoom-out-btn").onclick = null;
-    }
-    function makeZoomInAvailable() {
-        document.getElementById("zoom-in-btn").classList.remove("unavailable");
-        document.getElementById("zoom-in-btn").onclick = "zoomIn()";
-    }
-    function makeZoomOutAvailable() {
-        document.getElementById("zoom-out-btn").classList.remove("unavailable");
-        document.getElementById("zoom-out-btn").onclick = "zoomOut()";
-    }
     function zoomIn() {
         document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) + 250) + "px";
         document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) + 250) + "px";
-        if (document.getElementById("zoom-out-btn").onclick == null) {
-            makeZoomOutAvailable();
-        }
-        if (document.getElementById("scrollable-zoom-block").style.width == "5000px") {
-            makeZoomInUnavailable();
-        }
     }
     function zoomOut() {
         document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) - 250) + "px";
         document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) - 250) + "px";
-        if (document.getElementById("zoom-in-btn").onclick == null) {
-            makeZoomInAvailable();
-        }
-        if (document.getElementById("scrollable-zoom-block").style.width == "750px") {
-            makeZoomOutUnavailable();
-        }
     }
     document.getElementById("user-show-content-container").scrollBy(450,650);
 </script>
