@@ -14,11 +14,8 @@
                 <div class="d-flex flex-column">
                     <%  i = 1 %>
                     <span id="js-click" style="display:none;"><%= "#{@playlist_id}" %></span>
+                    <div class="d-flex flex-row">
                     <% until i == (@playlists.size + 1) %>
-                        <% if ((i - 1) % 4) == 0 %>
-                            <div class="d-flex flex-row">
-                        <% end %>
-                        <div>
                             <% if @playlist_id.to_i > i %>
                                 <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;">
                             <% elsif @playlist_id.to_i < @playlists.size %>
@@ -28,12 +25,9 @@
                                 <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">
                                 <%= link_to "DONE - go to user", user_path(User.find_by(id: @library_id)), id: "#{i}", style: "display:none;" %>
                             <% end %>
-                        </div>
-                        <% if (i % 4) == 0 %>
-                            </div>
-                        <% end %>
                         <% i = i.next %>
                     <% end %>
+                    </div>
                 </div><!-- column -->
             </div><!-- row -->
         </div><!-- column -->
