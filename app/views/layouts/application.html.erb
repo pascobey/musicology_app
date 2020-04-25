@@ -10,7 +10,7 @@
   </head>
   <body style="background-color:rgb(248,248,255);">
     <!-- notice bar - flex-row -->
-    <div id="flash" class="d-flex flex-row justify-content-center shadow w-100" style="background-color:rgb(225, 234, 225);">
+    <div id="flash" class="d-flex flex-row justify-content-center shadow w-100" style="background-color:rgb(225, 234, 225);z-index:10;">
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, class: "#{name}" %>
       <% end %>
@@ -18,8 +18,8 @@
     <!-- Content Containter - flex-row -->
     <div id="page-container" class="justify-content-center">
       <!-- Navbar container -->
-      <nav id="navbar" class="navbar shadow fixed-top" style="background-color:rgb(255,240,245);z-index:10;">
-        <%= link_to(image_tag("main.png", width: "60", height: "60"), "/", class: "navbar-brand ml-2", style: "background-color:rgb(225, 234, 225);") %>
+      <nav id="navbar" class="navbar shadow fixed-top" style="background-color:rgb(255,240,245);">
+        <%= link_to(image_tag("main.png", width: "60", height: "60"), "/", class: "navbar-brand px-1 ml-2", style: "background-color:rgb(225, 234, 225);") %>
       </nav><!-- Navbar container -->
         <!-- yield container -->
         <div id="yield-container" style="background-color:rgb(225, 234, 225);">
