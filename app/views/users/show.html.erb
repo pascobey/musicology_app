@@ -90,7 +90,7 @@
         } else {
             document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) + 250) + "px";
             document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) + 250) + "px";
-            if ((parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) >= 500) && (document.getElementById("zoom-out-btn").onclick == null)) {
+            if ((parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) > 500) && (document.getElementById("zoom-out-btn").onclick == null)) {
                 makeZoomOutAvailable();
             }
         }
