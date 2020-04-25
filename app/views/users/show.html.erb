@@ -14,7 +14,7 @@
                 <% vertices_coordinates = {} %>
                 <% i = 1 %>
                 <% build_angle_sum_rad = 0 %>
-                <% circumradius = 50 %>
+                <% circumradius = 48 %>
                 <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
                 <% until i == (vertices_count + 1) %>
                     <% if i == 1 %>
@@ -62,8 +62,8 @@
         </div><!-- create space -->
         <!-- zoom-buttons-container -->
         <div id="zoom-buttons-container" style="position:fixed;bottom:60px;left:60px;">
-            <button onlcick="zoomIn()">+</button>
-            <button onlcick="zoomOut()">-</button>
+            <button onclick="zoomIn()">+</button>
+            <button onclick="zoomOut()">-</button>
         </div><!-- zoom-buttons-container -->
     </div><!-- user show content container - column -->
 </div><!-- centering -->
