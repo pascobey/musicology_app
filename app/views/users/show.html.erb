@@ -1,11 +1,11 @@
 <!-- centering -->
 <div class="d-flex justify-content-center">
     <!-- user show content container - column -->
-    <div id="user-show-content-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;left:24px;right:24px;top:110px;bottom:24px;background-color:rgb(255,240,245);">
+    <div id="user-show-content-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;left:24px;right:24px;top:110px;bottom:24px;background-color:rgb(255,240,245);overflow-x:scroll;overflow-y:scroll;">
         <!-- graph-window -->
-        <svg id="graph-window" height="100%" width="100%" style="overflow-x:scroll;overflow-y:scroll;">
+        <svg id="graph-window" height="1000%" width="1000%">
             <% vertices_count = 7 %>
-            <% center = {:x => 50, :y => 50} %>
+            <% center = {:x => 500, :y => 500} %>
             <% q_one_bound_rad = Math::PI / 2 %>
             <% q_two_bound_rad = Math::PI %>
             <% q_three_bound_rad = 3 * Math::PI / 2 %>
