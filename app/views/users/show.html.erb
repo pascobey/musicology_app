@@ -3,16 +3,16 @@
     <!-- user show content container - column -->
     <div id="user-show-content-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;left:24px;right:24px;top:110px;bottom:24px;background-color:rgb(255,240,245);overflow-x:scroll;overflow-y:scroll;">
         <!-- graph-window -->
-        <svg id="graph-window" height="1000%" width="1000%">
+        <svg id="graph-window" width="100%" height="100%">
             <% vertices_count = 7 %>
-            <% center = {:x => 500, :y => 500} %>
+            <% center = {:x => 50, :y => 50} %>
             <% q_one_bound_rad = Math::PI / 2 %>
             <% q_two_bound_rad = Math::PI %>
             <% q_three_bound_rad = 3 * Math::PI / 2 %>
             <% vertices_coordinates = {} %>
             <% i = 1 %>
             <% build_angle_sum_rad = 0 %>
-            <% circumradius = 120 %>
+            <% circumradius = 20 %>
             <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
             <% until i == (vertices_count + 1) %>
                 <% if i == 1 %>
@@ -56,6 +56,6 @@
                 <% end %>
                 <% l = l.next %>
             <% end %>
-        </svg>
+        </svg><!-- graph-window -->
     </div><!-- user show content container - column -->
 </div><!-- centering -->
