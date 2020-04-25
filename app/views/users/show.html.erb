@@ -71,6 +71,7 @@
     function makeZoomInUnavailable() {
         document.getElementById("zoom-in-btn").classList.add("unavailable");
         document.getElementById("zoom-in-btn").onclick = null;
+        makeZoomOutAvailable();
     }
     function makeZoomInAvailable() {
         document.getElementById("zoom-in-btn").classList.remove("unavailable");
@@ -79,6 +80,7 @@
     function makeZoomOutUnavailable() {
         document.getElementById("zoom-out-btn").classList.add("unavailable");
         document.getElementById("zoom-out-btn").onclick = "zoomIn()";
+        makeZoomInAvailable();
     }
     function makeZoomOutAvailable() {
         document.getElementById("zoom-out-btn").classList.remove("unavailable");
@@ -90,7 +92,7 @@
         } else {
             document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) + 250) + "px";
             document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) + 250) + "px";
-            if ((parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) > 500) && (document.getElementById("zoom-out-btn").onclick == null)) {
+            if ((parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) >= 500) && (document.getElementById("zoom-out-btn").onclick == null)) {
                 makeZoomOutAvailable();
             }
         }
