@@ -16,13 +16,13 @@
       <% end %>
     </div><!-- notice bar - flex-row -->
     <!-- Content Containter - flex-row -->
-    <div id="yield-container" class="d-flex flex-row justify-content-center">
+    <div id="page-container" class="justify-content-center">
       <!-- Navbar container -->
       <nav id="navbar" class="navbar">
-        <%= link_to(image_tag("main.png", width: "30", height: "30"), "/", class: "navbar-brand") %>
+        <%= link_to(image_tag("main.png", width: "40", height: "40"), "/", class: "navbar-brand") %>
       </nav><!-- Navbar container -->
         <!-- yield container -->
-        <div>
+        <div id="yield-container" class="d-flex flex-row">
           <%= yield %>
         </div><!-- yield container -->
     </div><!-- Content Containter - flex-row -->
