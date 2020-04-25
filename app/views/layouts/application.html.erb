@@ -20,7 +20,7 @@
       <nav id="navbar" class="navbar shadow fixed-top" style="background-color:rgb(255,240,245);">
         <%= link_to(image_tag("main.png", width: "60", height: "60"), "/", class: "navbar-brand px-1 ml-2 border border-dark", style: "background-color:rgb(225, 234, 225);") %>
         <div id="log-in-out-btn-container" style="background-color:rgb(0,229,97);">
-          <% if cookies[:user_id] %>
+          <% if @user.user_spotify_unique == cookies[:user_id] %>
             <%= link_to('Log Out', {controller: 'users', action: 'end'}, id: 'spotify-data-request-button', class: 'btn') %>
           <% else %>
             <%= link_to('Sign up with Spotify', @request, id: 'spotify-data-request-button', class: 'btn') %>
