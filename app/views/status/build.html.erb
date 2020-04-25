@@ -20,7 +20,7 @@
     </div>
 </div><!-- status build content container - column -->
 <script>
-    document.getElementById("scroll-load-row").scrollLeft = (document.getElementById(document.getElementById("js-click").innerHTML).id * 150);
+    document.getElementById("scroll-load-row").scrollLeft = ((document.getElementById(document.getElementById("js-click").innerHTML).id - 1) * 150);
     if (document.getElementById("flash")) {
         document.getElementById("flash").style.removeProperty("margin-top");
     }
