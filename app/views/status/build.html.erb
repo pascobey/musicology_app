@@ -1,19 +1,21 @@
 <h3><%= @header %></h3>
 <%  i = 1 %>
 <span id="js-click" style="display:none;"><%= "#{@playlist_id}" %></span>
-<div class="dragscroll" style="width:70vw;">
-<% until i == (@playlists.size + 1) %>
-        <% if @playlist_id.to_i > i %>
-            <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;">
-        <% elsif @playlist_id.to_i < @playlists.size %>
-            <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">
-            <%= link_to "playlist #{i} retrieval", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'}, id: "#{i}", style: "display:none;" %>
-        <% else %>
-            <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">
-            <%= link_to "DONE - go to user", user_path(User.find_by(id: @library_id)), id: "#{i}", style: "display:none;" %>
-        <% end %>
-    <% i = i.next %>
-<% end %>
+<div class="d-flex flex-row dragscroll" style="width:70vw;">
+    <div id="scrollable-zoom-block">
+    <% until i == (@playlists.size + 1) %>
+            <% if @playlist_id.to_i > i %>
+                <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;">
+            <% elsif @playlist_id.to_i < @playlists.size %>
+                <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">
+                <%= link_to "playlist #{i} retrieval", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'}, id: "#{i}", style: "display:none;" %>
+            <% else %>
+                <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">
+                <%= link_to "DONE - go to user", user_path(User.find_by(id: @library_id)), id: "#{i}", style: "display:none;" %>
+            <% end %>
+        <% i = i.next %>
+    <% end %>
+    </div>
 </div>
 <script>
     if (document.getElementById("flash")) {
