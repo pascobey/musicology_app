@@ -1,38 +1,20 @@
-<!-- page container - column -->
-<div id="build-content-container" class="d-flex flex-column shadow-lg" style="background-color:rgb(255,240,245);">
-    <!-- header container - row -->
-    <div class="d-flex flex-row justify-content-center">
-        <h3><%= @header %></h3>
-    </div><!-- header container - row -->
-    <!-- playlists image container - row -->
-    <div id="playlist-img-container" class="d-flex flex-row mx-2">
-        <!-- column -->
-        <div class="d-flex flex-column">
-            <!-- row -->
-            <div class="d-flex flex-row">
-                <!-- column -->
-                <div class="d-flex flex-column">
-                    <%  i = 1 %>
-                    <span id="js-click" style="display:none;"><%= "#{@playlist_id}" %></span>
-                    <div class="dragscroll" style="width:70vw;">
-                    <% until i == (@playlists.size + 1) %>
-                            <% if @playlist_id.to_i > i %>
-                                <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;">
-                            <% elsif @playlist_id.to_i < @playlists.size %>
-                                <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">
-                                <%= link_to "playlist #{i} retrieval", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'}, id: "#{i}", style: "display:none;" %>
-                            <% else %>
-                                <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">
-                                <%= link_to "DONE - go to user", user_path(User.find_by(id: @library_id)), id: "#{i}", style: "display:none;" %>
-                            <% end %>
-                        <% i = i.next %>
-                    <% end %>
-                    </div>
-                </div><!-- column -->
-            </div><!-- row -->
-        </div><!-- column -->
-    </div><!-- playlists image container - row -->
-</div><!-- page container - column -->
+<h3><%= @header %></h3>
+<%  i = 1 %>
+<span id="js-click" style="display:none;"><%= "#{@playlist_id}" %></span>
+<div class="dragscroll" style="width:70vw;">
+<% until i == (@playlists.size + 1) %>
+        <% if @playlist_id.to_i > i %>
+            <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;">
+        <% elsif @playlist_id.to_i < @playlists.size %>
+            <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">
+            <%= link_to "playlist #{i} retrieval", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'}, id: "#{i}", style: "display:none;" %>
+        <% else %>
+            <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:15vw;width:15vw;filter:grayscale(100%)blur(1px);">
+            <%= link_to "DONE - go to user", user_path(User.find_by(id: @library_id)), id: "#{i}", style: "display:none;" %>
+        <% end %>
+    <% i = i.next %>
+<% end %>
+</div>
 <script>
     if (document.getElementById("flash")) {
         document.getElementById("flash").style.removeProperty("margin-top");
