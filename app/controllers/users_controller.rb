@@ -54,5 +54,10 @@ class UsersController < ApplicationController
       redirect_to controller: 'playlists', action: 'update', library_id: @library.id, access_token: access_token_json['access_token'], xt: '0'
     end
   end
+  
+  def end
+    cookies[:user_id] = ''
+    redirect_to('/')
+  end
 
 end
