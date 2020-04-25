@@ -14,7 +14,7 @@
                 <% vertices_coordinates = {} %>
                 <% i = 1 %>
                 <% build_angle_sum_rad = 0 %>
-                <% circumradius = 20 %>
+                <% circumradius = 100 %>
                 <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
                 <% until i == (vertices_count + 1) %>
                     <% if i == 1 %>
@@ -41,7 +41,7 @@
                             <% vertices_coordinates.merge!(i => { :x => ( center[:x] + adjacent ), :y => ( center[:y] - opposite) }) %>
                         <% end %>
                     <% end %>
-                    <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="1%" stroke="black" stroke-width="2"></circle>
+                    <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="0.4%" stroke="black" stroke-width="2"></circle>
                     <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                     <% i = i.next %>
                 <% end %>
@@ -63,5 +63,5 @@
     </div><!-- user show content container - column -->
 </div><!-- centering -->
 <script>
-    document.getElementById('user-show-content-container').scrollBy(500,500);
+    document.getElementById('user-show-content-container').scrollBy(400,600);
 </script>
