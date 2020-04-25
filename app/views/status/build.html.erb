@@ -6,12 +6,11 @@
     </div><!-- header container - row -->
     <!-- playlists image container - row -->
     <div id="playlist-img-container" class="d-flex flex-row mx-2">
-        
-
-        <%# NEEDS LOGIC FOR LAYOUT FLOW %>
-
+        <!-- column -->
         <div class="d-flex flex-column">
+            <!-- row -->
             <div class="d-flex flex-row">
+                <!-- column -->
                 <div class="d-flex flex-column">
                     <%  i = 1 %>
                     <span id="js-click" style="display:none;"><%= "#{@playlist_id}" %></span>
@@ -35,11 +34,19 @@
                         <% end %>
                         <% i = i.next %>
                     <% end %>
-            </div>
-        </div>
-
-        <%# NEEDS LOGIC FOR LAYOUT FLOW %>
-
-
+                </div><!-- column -->
+            </div><!-- row -->
+        </div><!-- column -->
     </div><!-- playlists image container - row -->
 </div><!-- page container - column -->
+
+<script>
+    if (document.getElementById("build-content-container")) {
+        document.getElementById("navbar").remove();
+        if (document.getElementById("js-click").innerHTML) {
+            setTimeout(function() {
+                document.getElementById(document.getElementById("js-click").innerHTML).click();
+            }, 1000);
+        }
+    }
+</script>

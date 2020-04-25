@@ -15,18 +15,16 @@
         <%= content_tag :div, msg, class: "#{name}" %>
       <% end %>
     </div><!-- notice bar - flex-row -->
-    <!-- Content Containter - d-flex -->
+    <!-- Content Containter - flex-row -->
     <div id="yield-container" class="d-flex flex-row justify-content-center">
-      <%= yield %>
-    </div>
-    <script>
-      if (document.getElementById("build-content-container")) {
-          if (document.getElementById("js-click").innerHTML) {
-              setTimeout(function() {
-                  document.getElementById(document.getElementById("js-click").innerHTML).click();
-              }, 1000);
-          }
-      }
-    </script>
+      <!-- Navbar container -->
+      <nav id="navbar" class="navbar">
+        <%= link_to(image_tag("main.png"), "/", class: "navbar-brand") %>
+      </nav><!-- Navbar container -->
+        <!-- yield container -->
+        <div>
+          <%= yield %>
+        </div><!-- yield container -->
+    </div><!-- Content Containter - flex-row -->
   </body>
 </html>
