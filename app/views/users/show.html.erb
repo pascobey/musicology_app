@@ -4,7 +4,7 @@
     <div id="user-show-content-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;left:24px;right:24px;top:110px;bottom:24px;background-color:rgb(255,240,245);overflow-x:scroll;overflow-y:scroll;">
         <!-- graph-window -->
         <svg id="graph-window" width="100%" height="100%">
-            <% vertices_count = 7 %>
+            <% vertices_count = rand(2..100) %>
             <% center = {:x => 50, :y => 50} %>
             <% q_one_bound_rad = Math::PI / 2 %>
             <% q_two_bound_rad = Math::PI %>
@@ -39,7 +39,7 @@
                         <% vertices_coordinates.merge!(i => { :x => ( center[:x] + adjacent ), :y => ( center[:y] - opposite) }) %>
                     <% end %>
                 <% end %>
-                <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="0.4%" stroke="black" stroke-width="2"></circle>
+                <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="1%" stroke="black" stroke-width="2"></circle>
                 <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                 <% i = i.next %>
             <% end %>
@@ -51,7 +51,7 @@
                         y1="<%= vertices_coordinates.dig(l, :y) %>%" 
                         x2="<%= vertices_coordinates.dig((e), :x) %>%" 
                         y2="<%= vertices_coordinates.dig((e), :y) %>%" 
-                        style="stroke:black;stroke-width:8;" />
+                        style="stroke:black;stroke-width:2;" />
                     <% e = e.next %>
                 <% end %>
                 <% l = l.next %>
