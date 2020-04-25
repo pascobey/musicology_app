@@ -3,8 +3,60 @@
     <!-- user show content container - column -->
     <div id="user-show-content-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;left:24px;right:24px;top:110px;bottom:24px;background-color:rgb(255,240,245);">
         <!-- graph-window -->
-        <svg id="graph-window" height="100%" width="100%">
-
-        </svg>
+        <svg id="graph-window" height="100%" width="100%" style="overflow-x:scroll;overflow-y:scroll;">
+            <% vertices_count = 7 %>
+            <% center = {:x => 50, :y => 50} %>
+            <% q_one_bound_rad = Math::PI / 2 %>
+            <% q_two_bound_rad = Math::PI %>
+            <% q_three_bound_rad = 3 * Math::PI / 2 %>
+            <% vertices_coordinates = {} %>
+            <% i = 1 %>
+            <% build_angle_sum_rad = 0 %>
+            <% circumradius = 120 %>
+            <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
+                <% until i == (vertices_count + 1) %>
+                    <% if i == 1 %>
+                        <% vertices_coordinates.merge!( i => { :x => center[:x], :y => ( center[:y] - circumradius ) } )  %>
+                    <% elsif %>
+                        <% if build_angle_sum_rad <= q_one_bound_rad %>
+                            <% opposite = circumradius * Math.sin(build_angle_sum_rad) %>
+                            <% adjacent = circumradius * Math.cos(build_angle_sum_rad) %>
+                            <% vertices_coordinates.merge!(i => { :x => ( center[:x] - opposite ), :y => ( center[:y] - adjacent) }) %>
+                        <% elsif q_one_bound_rad < build_angle_sum_rad && build_angle_sum_rad <= q_two_bound_rad %>
+                            <% theta_rad = (build_angle_sum_rad - q_one_bound_rad) %>
+                            <% opposite = circumradius * Math.sin(theta_rad) %>
+                            <% adjacent = circumradius * Math.cos(theta_rad) %>
+                            <% vertices_coordinates.merge!(i => { :x => ( center[:x] - adjacent ), :y => ( center[:y] + opposite) }) %>
+                        <% elsif q_two_bound_rad < build_angle_sum_rad && build_angle_sum_rad <= q_three_bound_rad %>
+                            <% theta_rad = build_angle_sum_rad - q_two_bound_rad %>
+                            <% opposite = circumradius * Math.sin(theta_rad) %>
+                            <% adjacent = circumradius * Math.cos(theta_rad) %>
+                            <% vertices_coordinates.merge!(i => { :x => ( center[:x] + opposite ), :y => ( center[:y] + adjacent) }) %>
+                        <% elsif q_three_bound_rad < build_angle_sum_rad && build_angle_sum_rad <= (q_two_bound_rad * 2) %>
+                            <% theta_rad = build_angle_sum_rad - q_three_bound_rad %>
+                            <% opposite = circumradius * Math.sin(theta_rad) %>
+                            <% adjacent = circumradius * Math.cos(theta_rad) %>
+                            <% vertices_coordinates.merge!(i => { :x => ( center[:x] + adjacent ), :y => ( center[:y] - opposite) }) %>
+                        <% end %>
+                    <% end %>
+                    <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="0.4%" stroke="black" stroke-width="2"></circle>
+                    <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
+                    <% i = i.next %>
+                <% end %>
+                <% l = 1 %>
+                <% until l == (vertices_count + 1) %>
+                    <% e = 1 %>
+                    <% until e == (vertices_count) %>
+                        <line x1="<%= vertices_coordinates.dig(l, :x) %>%" 
+                            y1="<%= vertices_coordinates.dig(l, :y) %>%" 
+                            x2="<%= vertices_coordinates.dig((e), :x) %>%" 
+                            y2="<%= vertices_coordinates.dig((e), :y) %>%" 
+                            style="stroke:black;stroke-width:8;" />
+                        <% e = e.next %>
+                        <% end %>
+                    <% l = l.next %>
+                <% end %>
+            </svg>
+        <% end %>
     </div><!-- user show content container - column -->
 </div><!-- centering -->
