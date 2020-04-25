@@ -18,16 +18,15 @@ class UsersController < ApplicationController
       puts "User nil"
       flash[:notice] = "Not permitted, please sign in."
       redirect_to('/')
-    else
-      puts "you belong here..."
-      @user = User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
-      @playlists = Library.find_by(user_id: @user.id).playlists
-      @playlists_stratifications = []
-      @playlists.each do |p|
-        @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
-      end
-      @library_stratified = @playlists_stratifications.inject{ |artist_spotify_unique, pr| artist_spotify_unique.merge( pr ){ |k, pr, lr| pr + lr } }.sort_by{ |k,v| v }.to_a.reverse.to_h
     end
+    puts "you belong here..."
+    @user = User.find_by(id: request.original_url.gsub("#{APP_BASE_URL}/users/", ""))
+    @playlists = Library.find_by(user_id: @user.id).playlists
+    @playlists_stratifications = []
+    @playlists.each do |p|
+      @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
+    end
+    @library_stratified = @playlists_stratifications.inject{ |artist_spotify_unique, pr| artist_spotify_unique.merge( pr ){ |k, pr, lr| pr + lr } }.sort_by{ |k,v| v }.to_a.reverse.to_h
   end
 
   def create
