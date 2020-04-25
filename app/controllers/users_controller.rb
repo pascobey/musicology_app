@@ -51,7 +51,9 @@ class UsersController < ApplicationController
       cookies.permanent[:user_id] = @user.user_spotify_unique
       redirect_to controller: 'playlists', action: 'create', library_id: @library.id, access_token: access_token_json['access_token'], xt: '0'
     else
-      redirect_to controller: 'playlists', action: 'update', library_id: @library.id, access_token: access_token_json['access_token'], xt: '0'
+      @user = User.find_by(user_spotify_unique: user_profile_json['id'])
+
+      redirect_to controller: 'playlists', action: 'update', library_id: @user.id, access_token: @user.refresh_token, xt: '0'
     end
   end
   
