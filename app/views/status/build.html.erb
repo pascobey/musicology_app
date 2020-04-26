@@ -63,11 +63,11 @@
                         <% end %>
                     <% end %>
                     <defs>
-                        <pattern id="image" x="0" y="0" patternUnits="userSpaceOnUse" height="1" width="1">
-                            <image x="0" y="0" xlink:href="<%= @artists[i - 1].artist_image_url %>"></image>
+                        <pattern id="image" patternUnits="userSpaceOnUse" height="100" width="100">
+                            <image x="0" y="0" height="100" width="100" xlink:href="<%= @artists[i - 1].artist_image_url %>"></image>
                         </pattern>
                     </defs>
-                    <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="80" fill="url(#image)"></circle>
+                    <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="40" fill="url(#image)"/>
                     <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                     <% i = i.next %>
                 <% end %>
@@ -79,17 +79,17 @@
                             y1="<%= vertices_coordinates.dig(l, :y) %>%" 
                             x2="<%= vertices_coordinates.dig((e), :x) %>%" 
                             y2="<%= vertices_coordinates.dig((e), :y) %>%" 
-                            style="stroke:black;stroke-width:2;" />
+                            style="stroke:black;stroke-width:2;"/>
                         <% e = e.next %>
                     <% end %>
                     <% l = l.next %>
                 <% end %>
-                <!-- zoom-buttons-container -->
-                <div id="zoom-buttons-container" style="position:fixed;bottom:50px;left:50px;">
-                    <button id="zoom-out-btn" class="text-justified zoom-btn" style="width:29px;height:29px;" onclick="zoomOut()">-</button>
-                    <button id="zoom-in-btn" class="text-justified zoom-btn" style="width:29px;height:29px;" onclick="zoomIn()">+</button>
-                </div><!-- zoom-buttons-container -->
             </svg><!-- graph-window -->
+            <!-- zoom-buttons-container -->
+            <div id="zoom-buttons-container" style="position:fixed;bottom:50px;left:50px;">
+                <button id="zoom-out-btn" class="text-justified zoom-btn" style="width:29px;height:29px;" onclick="zoomOut()">-</button>
+                <button id="zoom-in-btn" class="text-justified zoom-btn" style="width:29px;height:29px;" onclick="zoomIn()">+</button>
+            </div><!-- zoom-buttons-container -->
         </div><!-- create space -->
     </div><!-- building playlist k graph container - column -->
 </div><!-- centering -->
@@ -102,6 +102,6 @@
     if (document.getElementById("js-click").innerHTML) {
         setTimeout(function() {
             document.getElementById(document.getElementById("js-click").innerHTML).click();
-        }, 10000);
+        }, 30000);
     }
 </script>
