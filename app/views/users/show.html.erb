@@ -68,6 +68,10 @@
                 <% until l == (master_coordinates.keys.size + 1) %>
                     <% @playlists.each do |playlist| %>
                         <% afl = playlist.artists.uniq %>
+                        <% outer_c = 1 %>
+                        <% until == (vertices_count + 1) %>
+                            <% l = l.next %>
+                        <% end %>
                     <% end %>
                     <% l = l.next %>
                 <% end %>
