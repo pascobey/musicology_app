@@ -11,8 +11,8 @@ class StatusController < ApplicationController
       @playlist_id = @playlists.first.id
     else
       @playlist_id = url_vars[:playlist_id]
+      @playlist = @playlists.find_by(id: @playlist_id - 1)
     end
-    @playlist = @playlists.find_by(id: @playlist_id)
     puts "status_build current_playlist - #{@playlist.name}"
     @artists = @playlist.artists
     puts "status_build current_playlist artists.size - #{@artists.size}"
