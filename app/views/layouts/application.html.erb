@@ -17,15 +17,15 @@
     <!-- Content Containter - flex-row -->
     <div id="page-container" class="justify-content-center">
       <!-- Navbar container -->
-      <nav id="navbar" class="navbar shadow fixed-top" style="background-color:rgb(255,240,245);">
+      <nav id="navbar" class="navbar shadow fixed-top" style="min-height:86px;background-color:rgb(255,240,245);">
         <%= link_to(image_tag("main.png", width: "60", height: "60"), "/", class: "navbar-brand px-1 ml-2 border border-dark", style: "background-color:rgb(225, 234, 225);") %>
         <div id="log-in-out-btn-container" class="mr-2">
-        <% if @user %>
-          <%= link_to('Log Out', {controller: 'users', action: 'end'}, style: "background-color:rgb(225, 234, 225);", class: 'btn') %>
-        <% else %>
-          <%= link_to('Sign up with Spotify', @request, id: 'spotify-data-request-button', class: 'btn') %>
-        <% end %>
-      </div>
+          <% if @user %>
+            <%= link_to('Log Out', {controller: 'users', action: 'end'}, style: "background-color:rgb(225, 234, 225);", class: 'btn') %>
+          <% else %>
+            <%= link_to('Sign up with Spotify', @request, id: 'spotify-data-request-button', class: 'btn') %>
+          <% end %>
+        </div>
       </nav><!-- Navbar container -->
         <!-- yield container -->
         <div id="yield-container" style="background-color:rgb(225, 234, 225);">
