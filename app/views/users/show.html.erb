@@ -10,7 +10,7 @@
                 <% until lsc == 0 %>
                     <% artists_spotify_uniques = @library_stratified.select{|k,v| v == lsc}.keys %>
                     <% artists = [] %>
-                    <% artists.each do |artist| %>
+                    <% artists_spotify_uniques.each do |artist| %>
                         <% artists << Artist.find_by(artist_spotify_unique: artist) %>
                     <% end %>
                     <% vertices_count = artists_spotify_uniques.size %>
