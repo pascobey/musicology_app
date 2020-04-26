@@ -73,7 +73,9 @@
                             <% inner_c = 1 %>
                             <% until inner_c == (afl.size) %>
                                 <line x1="<%= master_coordinates.dig(afl[t].artist_spotify_unique, :x) %>%" y1="<%= master_coordinates.dig(afl[t].artist_spotify_unique, :y) %>%" x2="<%= master_coordinates.dig(afl[inner_c].artist_spotify_unique, :x) %>%" y2="<%= master_coordinates.dig(afl[inner_c].artist_spotify_unique, :y) %>%" style="stroke:black;stroke-width:2;"/>
+                                <% inner_c = inner_c.next %>
                             <% end %>
+                            <% t = t.next %>
                         <% end %>
                     <% end %>
                     <% l = l.next %>
