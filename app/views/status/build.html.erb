@@ -70,7 +70,7 @@
                 <defs>
                     <% @artists.each do |a| %>
                         <pattern id="<%= a.name.gsub(/\s+/, "") %>-<%= a.id %>" patternUnits="userSpaceOnUse" height="100%" width="100%">
-                            <image x="<%= vertices_coordinates.dig(l, :x) %>%" y="<%= vertices_coordinates.dig(l, :y) %>%" height="60" width="60" xlink:href="<%= a.artist_image_url %>"></image>
+                            <image x="<%= vertices_coordinates.dig(c, :x) %>%" y="<%= vertices_coordinates.dig(c, :y) %>%" height="60" width="60" xlink:href="<%= a.artist_image_url %>"></image>
                         </pattern>
                         <% c = c.next %>
                     <% end %>
