@@ -22,7 +22,7 @@
 <!-- centering -->
 <div class="d-flex justify-content-center">
     <!-- building playlist k graph container - column -->
-    <div id="building-playlist-k-graph-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;left:24px;right:24px;top:189px;background-color:rgb(255,240,245);overflow-x:scroll;overflow-y:scroll;">
+    <div id="building-playlist-k-graph-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;left:24px;right:24px;bottom:24px;top:189px;background-color:rgb(255,240,245);overflow-x:scroll;overflow-y:scroll;">
         <!-- create space -->
         <div id="scrollable-zoom-block" style="width:2000px;height:2000px;">
             <% vertices_count = @artists.size %>
@@ -60,7 +60,7 @@
                         <% vertices_coordinates.merge!(i => { :x => ( center[:x] + adjacent ), :y => ( center[:y] - opposite) }) %>
                     <% end %>
                 <% end %>
-                <img src="<%= @artists[i].artist_image_url %>" class="shadow-sm" style="height:40px;width:40px;margin-left:<%= vertices_coordinates.dig(i, :x) %>%;margin-top:<%= vertices_coordinates.dig(i, :y) %>%">
+                <img src="<%= @artists[i - 1].artist_image_url %>" class="shadow-sm" style="height:40px;width:40px;margin-left:<%= vertices_coordinates.dig(i, :x) %>%;margin-top:<%= vertices_coordinates.dig(i, :y) %>%">
                 <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                 <% i = i.next %>
             <% end %>
