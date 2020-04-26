@@ -70,7 +70,7 @@
                         <% afl = playlist.artists.uniq %>
                         <% outer_c = 1 %>
                         <% until outer_c == (afl.size + 1) %>
-                            <% l = l.next %>
+                            <% outer_c = outer_c.next %>
                         <% end %>
                     <% end %>
                     <% l = l.next %>
