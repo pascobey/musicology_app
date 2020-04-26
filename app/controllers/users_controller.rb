@@ -28,6 +28,7 @@ class UsersController < ApplicationController
       @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
     end
     @library_stratified = @playlists_stratifications.inject{ |artist_spotify_unique, pr| artist_spotify_unique.merge( pr ){ |k, pr, lr| pr + lr } }.sort_by{ |k,v| v }.to_a.reverse.to_h
+    @user.library.update_column(library_stratified: @library_stratified)
   end
 
   def create
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
     )
     if !User.find_by(user_spotify_unique: user_profile_json['id'])
       @user = User.create(user_spotify_unique: user_profile_json['id'], email: user_profile_json['email'], account_url: user_profile_json.dig('external_urls', 'spotify'), refresh_token: access_token_json['refresh_token'])
-      @library = Library.create(user_id: @user.id)
+      @library = Library.create(user_id: @user.id, library_stratified: {})
       cookies.permanent[:user_id] = @user.user_spotify_unique
       redirect_to controller: 'playlists', action: 'create', library_id: @library.id, access_token: access_token_json['access_token'], xt: '0'
     else

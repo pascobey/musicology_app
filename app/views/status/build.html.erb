@@ -62,7 +62,6 @@
                             <% vertices_coordinates.merge!(i => { :x => ( center[:x] + adjacent ), :y => ( center[:y] - opposite) }) %>
                         <% end %>
                     <% end %>
-                    
                     <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                     <% i = i.next %>
                 <% end %>
@@ -84,7 +83,7 @@
                     <pattern id="<%= @artists[p - 1].name.gsub(/\s+/, "") %>-<%= @artists[p - 1].id %>" x="calc(<%= vertices_coordinates.dig(p, :x) %>% - 30px)" y="calc(<%= vertices_coordinates.dig(p, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
                         <image x="0" y="0" height="60" width="60" xlink:href="<%= @artists[p - 1].artist_image_url %>"></image>
                     </pattern>
-                    <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" fill="url(#<%= @artists[p - 1].name.gsub(/\s+/, "") %>-<%= @artists[p - 1].id %>)"/>
+                    <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" stroke="black" stroke-width="2" fill="url(#<%= @artists[p - 1].name.gsub(/\s+/, "") %>-<%= @artists[p - 1].id %>)"/>
                     <% p = p.next %>
                 <% end %>
             </svg><!-- graph-window -->
