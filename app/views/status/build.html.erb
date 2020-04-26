@@ -86,7 +86,7 @@
                             style="stroke:black;stroke-width:2;"/>
                         <% e = e.next %>
                     <% end %>
-                    <circle cx="<%= vertices_coordinates.dig(l, :x) %>%" cy="<%= vertices_coordinates.dig(l, :y) %>%" r="30" fill="url(#<%= @artists[l - 1].name.gsub(/\s+/, "") %>-<%= @artists[i - 1].id %>)"/>
+                    <circle cx="<%= vertices_coordinates.dig(l, :x) %>%" cy="<%= vertices_coordinates.dig(l, :y) %>%" r="30" fill="url(#<%= @artists[l - 1].name.gsub(/\s+/, "") %>-<%= @artists[l - 1].id %>)"/>
                     <% l = l.next %>
                 <% end %>
             </svg><!-- graph-window -->
