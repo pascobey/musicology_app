@@ -7,11 +7,15 @@ class StatusController < ApplicationController
     @library_id = url_vars[:library_id]
     @access_token = url_vars[:access_token]
     @playlists = Playlist.where(library_id: @library_id)
-    @playlist_id = url_vars[:playlist_id]
+    if url_vars[:playlist_id] == '1'
+      @playlist_id = @playlists.first.id
+    else
+      @playlist_id = url_vars[:playlist_id]
+    end
     # Conditional checks if every playlist empty or are there new playlists?
-    if @playlists.find_by(id: (@playlists.size - 1)).tracks == []
+    if @playlists.find_by(id: @playlists.last.id).tracks == []
       @header = 'Retrieving Playlists Data'
-    elsif @playlists.find_by(id: 1).tracks == []
+    elsif @playlists.find_by(id: @playlists.first.id).tracks == []
       @header = 'Updating Playlists Data'
     else
       redirect_to(user_path(User.find_by(id: @library_id)))

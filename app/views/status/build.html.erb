@@ -3,12 +3,12 @@
 <!-- status build content container - column -->
 <div id="status-build-content-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;top:200px;left:24px;right:24px;background-color:rgb(255,240,245);">
     <div id="scroll-load-row" class="d-flex flex-row m-1" style="overflow-x:scroll;">
-        <%  i = 1 %>
+        <%  i = @playlists.first.id %>
         <span id="js-click" style="display:none;"><%= "#{@playlist_id}" %></span>
-        <% until i == (@playlists.size + 1) %>
+        <% until i == (@playlists.last.id) %>
                 <% if @playlist_id.to_i > i %>
                     <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:150px;width:150px;">
-                <% elsif @playlist_id.to_i < @playlists.size %>
+                <% elsif @playlist_id.to_i < @playlists.last.id %>
                     <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:150px;width:150px;filter:grayscale(100%)blur(1px);">
                     <%= link_to "playlist #{i} retrieval", {controller: 'tracks', action: 'create', library_id: @library_id, access_token: @access_token, playlist_id: i, xt: '0'}, id: "#{i}", style: "display:none;" %>
                 <% else %>
