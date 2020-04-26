@@ -56,7 +56,7 @@
                         <pattern id="<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>" x="calc(<%= vertices_coordinates.dig(p, :x) %>% - 30px)" y="calc(<%= vertices_coordinates.dig(p, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
                             <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[p - 1].artist_image_url %>"></image>
                         </pattern>
-                        <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" stroke="black" stroke-width="2" fill="url(#<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>)"/>
+                        <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="1%" stroke="black" stroke-width="2" fill="url(#<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>)"/>
                         <% p = p.next %>
                     <% end %>
                     <% lsc = lsc - 1 %>
@@ -79,5 +79,5 @@
         document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) - 250) + "px";
         document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) - 250) + "px";
     }
-    document.getElementById("user-show-content-container").scrollBy(4000,4000);
+    document.getElementById("user-show-content-container").scrollBy(1500,1500);
 </script>
