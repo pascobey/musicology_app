@@ -8,7 +8,7 @@
             <svg id="graph-window" width="100%" height="100%">
                 <% @playlists.each do |playlist| %>
                     <% vertices_count = playlist.artists.size %>
-                    <% center = {:x => (50 * (@playlists.last.id - @playlists.first.id)), :y => (50 * (@playlists.last.id - @playlists.first.id))} %>
+                    <% center = {:x => (@playlists.size * (@playlists.last.id - @playlists.first.id)), :y => (@playlists.size * (@playlists.last.id - @playlists.first.id))} %>
                     <% q_one_bound_rad = Math::PI / 2 %>
                     <% q_two_bound_rad = Math::PI %>
                     <% q_three_bound_rad = 3 * Math::PI / 2 %>
