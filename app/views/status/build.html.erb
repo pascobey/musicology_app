@@ -27,6 +27,13 @@
         <div id="scrollable-zoom-block" style="width:100%;height:100%;">
             <!-- graph-window -->
             <svg id="graph-window" width="100%" height="100%">
+                <defs>
+                    <% @artists.each do |a| %>
+                        <pattern id="<%= a.name %>-<%= a.id %>" patternUnits="userSpaceOnUse" height="100" width="100">
+                            <image x="0" y="0" height="100" width="100" xlink:href="<%= a.artist_image_url %>"></image>
+                        </pattern>
+                    <% end %>
+                </defs>
                 <% vertices_count = @artists.size %>
                 <% center = {:x => 50, :y => 50} %>
                 <% q_one_bound_rad = Math::PI / 2 %>
@@ -62,12 +69,7 @@
                             <% vertices_coordinates.merge!(i => { :x => ( center[:x] + adjacent ), :y => ( center[:y] - opposite) }) %>
                         <% end %>
                     <% end %>
-                    <defs>
-                        <pattern id="image" patternUnits="userSpaceOnUse" height="100" width="100">
-                            <image x="0" y="0" height="100" width="100" xlink:href="<%= @artists[i - 1].artist_image_url %>"></image>
-                        </pattern>
-                    </defs>
-                    <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="40" fill="url(#image)"/>
+                    <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="40" fill="url(#<%= @artists[i - 1].name %>-<%= @artists[i - 1].id %>)"/>
                     <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                     <% i = i.next %>
                 <% end %>
