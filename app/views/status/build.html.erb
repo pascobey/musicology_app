@@ -1,7 +1,6 @@
-
-<h3 style="top:160px;"><%= @header %></h3>
+<h3 class="text-centeres" style="position:fixed;top:165px;"><%= @header %></h3>
 <!-- status build content container - column -->
-<div id="status-build-content-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;top:200px;left:24px;right:24px;background-color:rgb(255,240,245);">
+<div id="status-build-content-container" class="d-flex flex-column shadow-lg rounded-bottom" style="position:fixed;top:0px;left:0px;right:0px;background-color:rgb(255,240,245);">
     <div id="scroll-load-row" class="d-flex flex-row m-1" style="overflow-x:scroll;">
         <%  i = @playlists.first.id %>
         <span id="js-click" style="display:none;"><%= "#{@playlist_id}" %></span>
