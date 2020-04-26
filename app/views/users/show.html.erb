@@ -69,7 +69,7 @@
                     <% @playlists.each do |playlist| %>
                         <% afl = playlist.artists.uniq %>
                         <% outer_c = 1 %>
-                        <% until == (vertices_count + 1) %>
+                        <% until outer_c == (vertices_count + 1) %>
                             <% l = l.next %>
                         <% end %>
                     <% end %>
