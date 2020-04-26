@@ -7,7 +7,8 @@
             <!-- graph-window -->
             <svg id="graph-window" width="100%" height="100%">
                 <% @playlists.each do |playlist| %>
-                    <% vertices_count = playlist.artists.size %>
+                    <% artists = playlist.artists.uniq %>
+                    <% vertices_count = artists.size %>
                     <% center = {:x => (@playlists.size * (@playlists.size - (@playlists.last.id - playlist.id))), :y => (@playlists.size * (@playlists.size - (@playlists.last.id - playlist.id)))} %>
                     <% q_one_bound_rad = Math::PI / 2 %>
                     <% q_two_bound_rad = Math::PI %>
@@ -60,10 +61,10 @@
                     <% end %>
                     <% p = 1%>
                     <% until p == (vertices_count + 1) %>
-                        <pattern id="<%= playlist.artists[p - 1].name.gsub(/\s+/, "") %>-<%= playlist.artists[p - 1].id %>" x="calc(<%= vertices_coordinates.dig(p, :x) %>% - 30px)" y="calc(<%= vertices_coordinates.dig(p, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
-                            <image x="0" y="0" height="60" width="60" xlink:href="<%= playlist.artists[p - 1].artist_image_url %>"></image>
+                        <pattern id="<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>" x="calc(<%= vertices_coordinates.dig(p, :x) %>% - 30px)" y="calc(<%= vertices_coordinates.dig(p, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
+                            <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[p - 1].artist_image_url %>"></image>
                         </pattern>
-                        <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" stroke="black" stroke-width="2" fill="url(#<%= playlist.artists[p - 1].name.gsub(/\s+/, "") %>-<%= playlist.artists[p - 1].id %>)"/>
+                        <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" stroke="black" stroke-width="2" fill="url(#<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>)"/>
                         <% p = p.next %>
                     <% end %>
                 <% end %>
