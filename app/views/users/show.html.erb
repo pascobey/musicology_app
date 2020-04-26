@@ -67,7 +67,7 @@
                 <% l = 1 %>
                 <% until l == (master_coordinates.keys.size + 1) %>
                     <% @playlists.each do |playlist| %>
-                        <% afl = playlist.artist.uniq %>
+                        <% afl = playlist.artists.uniq %>
                     <% end %>
                     <% l = l.next %>
                 <% end %>
