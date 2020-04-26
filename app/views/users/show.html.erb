@@ -54,7 +54,7 @@
                     <% end %>
                     <% p = 1 %>
                     <% until p == (vertices_count + 1) %>
-                        <pattern id="<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>" x="calc(<%= vertices_coordinates.dig(p, :x) %> - 60px)%" y="calc(<%= vertices_coordinates.dig(p, :y) %> - 60px)%" patternUnits="userSpaceOnUse" height="60" width="60">
+                        <pattern id="<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>" x="calc(<%= vertices_coordinates.dig(p, :x) %>% - 60px)" y="calc(<%= vertices_coordinates.dig(p, :y) %>% - 60px)" patternUnits="userSpaceOnUse" height="60" width="60">
                             <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[p - 1].artist_image_url %>"></image>
                         </pattern>
                         <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" fill="url(#<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>)"/>
