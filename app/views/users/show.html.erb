@@ -72,11 +72,7 @@
                         <% until outer_c == (afl.size + 1) %>
                             <% inner_c = 1 %>
                             <% until inner_c == (afl.size) %>
-                                <line x1="<%= master_coordinates.values_at(afl[outer_c - 1].artist_spotify_unique) %>%"
-                                    y1="<%= master_coordinates.values_at(afl[outer_c - 1].artist_spotify_unique) %>%"
-                                    x2="<%= master_coordinates.values_at(afl[inner_c - 1].artist_spotify_unique) %>%"
-                                    y2="<%= master_coordinates.values_at(afl[inner_c - 1].artist_spotify_unique) %>%"
-                                    style="stroke:black;stroke-width:2;"/>
+                                
                                 <% inner_c = inner_c.next %>
                             <% end %>
                             <% outer_c = outer_c.next %>
