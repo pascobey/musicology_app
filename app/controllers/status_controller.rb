@@ -13,9 +13,9 @@ class StatusController < ApplicationController
       @playlist_id = url_vars[:playlist_id]
     end
     @playlist = @playlists.find_by(id: @playlist_id)
-    puts @playlist.name
+    puts "status_build current_playlist - #{@playlist.name}"
     @artists = @playlist.artists
-    puts @artists.size
+    puts "status_build current_playlist artists.size - #{@artists.size}"
     # Conditional checks if every playlist empty or are there new playlists?
     if @playlists.find_by(id: @playlists.last.id).tracks == [] && @playlists.find_by(id: @playlists.last.id - 1).tracks == []
       @header = 'Retrieving Playlists Data'
