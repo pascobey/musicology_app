@@ -64,22 +64,6 @@
                     <% end %>
                     <% lsc = lsc - 1 %>
                 <% end %>
-                <% l = 1 %>
-                <% until l > master_coordinates.keys.size %>
-                    <% @playlists.each do |playlist| %>
-                        <%= afl = playlist.artists.uniq %>
-                        <% t = 1 %>
-                        <% until t == (afl.size + 1) %>
-                            <% inner_c = 1 %>
-                            <% until inner_c == (afl.size) %>
-                                <%= afl %>
-                                <% inner_c = inner_c.next %>
-                            <% end %>
-                            <% t = t.next %>
-                        <% end %>
-                    <% end %>
-                    <% l = l.next %>
-                <% end %>
             </svg><!-- graph-window -->
         </div><!-- create space -->
         <!-- zoom-buttons-container -->
