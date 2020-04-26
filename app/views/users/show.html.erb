@@ -6,17 +6,22 @@
         <div id="scrollable-zoom-block" style="width:5000px;height:5000px;">
             <!-- graph-window -->
             <svg id="graph-window" width="100%" height="100%">
-                <% @playlists.each do |playlist| %>
-                    <% artists = playlist.artists.uniq %>
-                    <% vertices_count = artists.size %>
-                    <% center = {:x => (@playlists.size * (@playlists.size - (@playlists.last.id - playlist.id))), :y => (@playlists.size * (@playlists.size - (@playlists.last.id - playlist.id)))} %>
+                <% lsc = @library_stratified.values.max %>
+                <% until lsc == 0 %>
+                    <% artists_spotify_uniques = @library_stratified.select{|k,v| v == lsc}.keys %>
+                    <% artists = [] %>
+                    <% artists.each do |artist| %>
+                        <% artists << Artist.find_by(artist_spotify_unique: artist) %>
+                    <% end %>
+                    <% vertices_count = artists_spotify_uniques.size %>
+                    <% center = {:x => 50, :y => 50} %>
                     <% q_one_bound_rad = Math::PI / 2 %>
                     <% q_two_bound_rad = Math::PI %>
                     <% q_three_bound_rad = 3 * Math::PI / 2 %>
                     <% vertices_coordinates = {} %>
                     <% i = 1 %>
                     <% build_angle_sum_rad = 0 %>
-                    <% circumradius = (@playlists.size * (@playlists.size - (@playlists.last.id - playlist.id))) - 10 %>
+                    <% circumradius = 40 / lsc %>
                     <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
                     <% until i == (vertices_count + 1) %>
                         <% if i == 1 %>
@@ -46,20 +51,7 @@
                         <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                         <% i = i.next %>
                     <% end %>
-                    <% l = 1 %>
-                    <% until l == (vertices_count + 1) %>
-                        <% e = 1 %>
-                        <% until e == (vertices_count) %>
-                            <line x1="<%= vertices_coordinates.dig(l, :x) %>%" 
-                                y1="<%= vertices_coordinates.dig(l, :y) %>%" 
-                                x2="<%= vertices_coordinates.dig((e), :x) %>%" 
-                                y2="<%= vertices_coordinates.dig((e), :y) %>%" 
-                                style="stroke:black;stroke-width:2;"/>
-                            <% e = e.next %>
-                        <% end %>
-                        <% l = l.next %>
-                    <% end %>
-                    <% p = 1%>
+                    <% p = 1 %>
                     <% until p == (vertices_count + 1) %>
                         <pattern id="<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>" x="calc(<%= vertices_coordinates.dig(p, :x) %>% - 30px)" y="calc(<%= vertices_coordinates.dig(p, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
                             <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[p - 1].artist_image_url %>"></image>
