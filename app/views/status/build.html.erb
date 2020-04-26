@@ -64,7 +64,7 @@
                             <% vertices_coordinates.merge!(i => { :x => ( center[:x] + adjacent ), :y => ( center[:y] - opposite) }) %>
                         <% end %>
                     <% end %>
-                    <%= image_tag(artists[i].artist_image_url, style: "margin-left:#{vertices_coordinates.dig(i, :x)}%;margin-top:#{vertices_coordinates.dig(i, :y)}%;height:30px;width:30px;") %>
+                    <img src="<%= artists[i].artist_image_url %>" class="shadow-sm" style="height:40px;width:40px;margin-left:<%= vertices_coordinates.dig(i, :x)} %>%;margin-top:<%= vertices_coordinates.dig(i, :y)} %>%">
                     <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                     <% i = i.next %>
                 <% end %>
