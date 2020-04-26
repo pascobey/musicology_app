@@ -9,6 +9,7 @@ class StatusController < ApplicationController
     @playlists = Playlist.where(library_id: @library_id)
     if url_vars[:playlist_id] == '1'
       @playlist_id = @playlists.first.id
+      @artists = []
     else
       @playlist_id = url_vars[:playlist_id]
       @playlist = @playlists.find_by(id: @playlist_id.to_i - 1)
