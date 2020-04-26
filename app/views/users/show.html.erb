@@ -21,7 +21,7 @@
                     <% vertices_coordinates = {} %>
                     <% i = 1 %>
                     <% build_angle_sum_rad = 0 %>
-                    <% circumradius = 40 / lsc %>
+                    <% circumradius = ((40 / lsc) * 40) / lsc %>
                     <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
                     <% until i == (vertices_count + 1) %>
                         <% if i == 1 %>
@@ -53,7 +53,7 @@
                     <% end %>
                     <% p = 1 %>
                     <% until p == (vertices_count + 1) %>
-                        <pattern id="<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>" x="calc(<%= vertices_coordinates.dig(p, :x) %>% - 0.5%)" y="calc(<%= vertices_coordinates.dig(p, :y) %>% - 0.5%)" patternUnits="userSpaceOnUse" height="1%" width="1%">
+                        <pattern id="<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>" x="<%= vertices_coordinates.dig(p, :x) - 0.5 %>%" y="<%= vertices_coordinates.dig(p, :y) - 0.5 %>%" patternUnits="userSpaceOnUse" height="1%" width="1%">
                             <image x="0" y="0" height="1%" width="1%" xlink:href="<%= artists[p - 1].artist_image_url %>"></image>
                         </pattern>
                         <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="0.5%" fill="url(#<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>)"/>
@@ -79,5 +79,5 @@
         document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) - 250) + "px";
         document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) - 250) + "px";
     }
-    document.getElementById("user-show-content-container").scrollBy(1500,1500);
+    document.getElementById("user-show-content-container").scrollBy(2000,3000);
 </script>
