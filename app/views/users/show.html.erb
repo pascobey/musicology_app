@@ -8,7 +8,7 @@
             <svg id="graph-window" width="100%" height="100%">
                 <% lsc = @library_stratified.values.max %>
                 <% lsvm = lsc %>
-                <% vertices_coordinates = {} %>
+                <% master_coordinates = {} %>
                 <% until lsc == 0 %>
                     <% artists_spotify_uniques = @library_stratified.select{|k,v| v == lsc}.keys %>
                     <% artists = [] %>
@@ -20,6 +20,7 @@
                     <% q_one_bound_rad = Math::PI / 2 %>
                     <% q_two_bound_rad = Math::PI %>
                     <% q_three_bound_rad = 3 * Math::PI / 2 %>
+                    <% vertices_coordinates = {} %>
                     <% i = 1 %>
                     <% circumradius = (lsvm * ((lsvm - lsc) + 1)) - 5 %>
                     <% build_angle_sum_rad = 0 %>
@@ -58,9 +59,24 @@
                             <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[p - 1].artist_image_url %>"></image>
                         </pattern>
                         <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" fill="url(#<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>)"/>
+                        <% master_coordinates["#{artists[p - 1].artist_spotify_unique}"] = { x: vertices_coordinates.dig(p, :x), y: vertices_coordinates.dig(p, :y) } %>
                         <% p = p.next %>
                     <% end %>
                     <% lsc = lsc - 1 %>
+                <% end %>
+                <% l = 1 %>
+                <% until l > master_coordinates.keys.size %>
+                    <% @playlists.each do |playlist| %>
+                        <% afl = playlist.artists.uniq %>
+                        <% t = 1 %>
+                        <% until t == (afl.size + 1) %>
+                            <% inner_c = 1 %>
+                            <% until inner_c == (afl.size) %>
+                                <line x1="<%= master_coordinates.dig(afl[t].artist_spotify_unique, :x) %>%" y1="<%= master_coordinates.dig(afl[t].artist_spotify_unique, :y) %>%" x2="<%= master_coordinates.dig(afl[inner_c].artist_spotify_unique, :x) %>%" y2="<%= master_coordinates.dig(afl[inner_c].artist_spotify_unique, :y) %>%" style="stroke:black;stroke-width:2;"/>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <% l = l.next %>
                 <% end %>
             </svg><!-- graph-window -->
         </div><!-- create space -->
