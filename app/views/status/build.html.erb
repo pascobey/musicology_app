@@ -20,9 +20,10 @@
     </div>
 </div><!-- status build build loader -->
 <!-- centering -->
-<div class="d-flex flex-row justify-content-center">
-    <h3 style="margin-top:165px;"><%= @header %></h3>
-    <div id="user-show-content-container" class="d-flex flex-column shadow-lg rounded" style="margin-top:175px;overflow-x:scroll;overflow-y:scroll;">
+<div class="d-flex flex-row justify-content-center shadow-lg rounded" style="position:fixed;margin-top:165px;left:24px;right:24px;bottom:24px;background-color:rgb(255,240,245);">
+    <div class="d-flex flex-column justify-content-around">
+    <h3><%= @header %></h3>
+    <div class="d-flex" style="width:100%;height:100%;overflow-x:scroll;overflow-y:scroll;">
         <!-- create space -->
         <div id="scrollable-zoom-block" style="width:2000px;height:2000px;">
             <!-- graph-window -->
@@ -101,6 +102,6 @@
     if (document.getElementById("js-click").innerHTML) {
         setTimeout(function() {
             document.getElementById(document.getElementById("js-click").innerHTML).click();
-        }, 1000);
+        }, 30000);
     }
 </script>
