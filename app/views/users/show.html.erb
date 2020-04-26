@@ -59,6 +59,7 @@
                         <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" stroke="black" stroke-width="2" fill="url(#<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>)"/>
                         <% p = p.next %>
                     <% end %>
+                    <% lsc = lsc - 1 %>
                 <% end %>
             </svg><!-- graph-window -->
         </div><!-- create space -->
