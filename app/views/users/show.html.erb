@@ -72,6 +72,8 @@
                         <% until outer_c == (afl.size + 1) %>
                             <% inner_c = 1 %>
                             <% until inner_c == (afl.size) %>
+                                <% one = master_coordinates.values_at(afl[outer_c - 1].artist_spotify_unique) %>
+                                <% two = master_coordinates.values_at(afl[inner_c - 1].artist_spotify_unique) %>
                                 <line/>
                                 <%# <%= master_coordinates.values_at(afl[outer_c - 1].artist_spotify_unique) %>
                                 <% inner_c = inner_c.next %>
