@@ -64,6 +64,10 @@
                     <% end %>
                     <% lsc = lsc - 1 %>
                 <% end %>
+                <% l = 1 %>
+                <% until l == (master_coordinates.keys.size + 1) %>
+                    <% l = l.next %>
+                <% end %>
             </svg><!-- graph-window -->
         </div><!-- create space -->
         <!-- zoom-buttons-container -->
