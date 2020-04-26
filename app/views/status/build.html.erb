@@ -5,7 +5,7 @@
     <div id="scroll-load-row" class="d-flex flex-row m-1" style="overflow-x:scroll;">
         <%  i = @playlists.first.id %>
         <span id="js-click" style="display:none;"><%= "#{@playlist_id}" %></span>
-        <% until i == (@playlists.last.id) %>
+        <% until i == (@playlists.last.id + 1) %>
                 <% if @playlist_id.to_i > i %>
                     <img src="<%= Playlist.find_by(id: i).playlist_image_url %>" alt="PLAYLIST_IMAGE" class="m-1 shadow-sm" style="height:150px;width:150px;">
                 <% elsif @playlist_id.to_i < @playlists.last.id %>
