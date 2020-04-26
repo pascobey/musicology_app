@@ -7,6 +7,7 @@
             <!-- graph-window -->
             <svg id="graph-window" width="100%" height="100%">
                 <% lsc = @library_stratified.values.max %>
+                <% circumradius = 40 / lsc %>
                 <% until lsc == 0 %>
                     <% artists_spotify_uniques = @library_stratified.select{|k,v| v == lsc}.keys %>
                     <% artists = [] %>
@@ -21,7 +22,6 @@
                     <% vertices_coordinates = {} %>
                     <% i = 1 %>
                     <% build_angle_sum_rad = 0 %>
-                    <% circumradius = 40 / lsc %>
                     <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
                     <% until i == (vertices_count + 1) %>
                         <% if i == 1 %>
