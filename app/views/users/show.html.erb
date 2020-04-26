@@ -6,8 +6,8 @@
         <div id="scrollable-zoom-block" style="width:5000px;height:5000px;">
             <!-- graph-window -->
             <svg id="graph-window" width="100%" height="100%">
-                <!-- <% @playlists.each do |playlist| %> -->
-                <% playlist = @playlists.find_by(id: 1) %>
+                <% @playlists.each do |playlist| %>
+                <!-- <% playlist = @playlists.find_by(id: 1) %> -->
                     <% vertices_count = playlist.artists.size %>
                     <% center = {:x => (@playlists.size * (@playlists.size - (@playlists.last.id - playlist.id))), :y => (@playlists.size * (@playlists.size - (@playlists.last.id - playlist.id)))} %>
                     <% q_one_bound_rad = Math::PI / 2 %>
