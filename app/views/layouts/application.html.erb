@@ -19,13 +19,20 @@
       <!-- Navbar container -->
       <nav id="navbar" class="navbar shadow fixed-top" style="min-height:86px;background-color:rgb(255,240,245);">
         <%= link_to(image_tag("main.png", width: "60", height: "60"), "/", class: "navbar-brand px-1 ml-2 border border-dark", style: "background-color:rgb(225, 234, 225);") %>
-        <div id="log-in-out-btn-container" class="mr-2">
-          <% if @user %>
-            <%= link_to('Log Out', {controller: 'users', action: 'end'}, style: "background-color:rgb(225, 234, 225);", class: 'btn') %>
-          <% else %>
-            <%= link_to('Sign up with Spotify', @request, id: 'spotify-data-request-button', class: 'btn') %>
-          <% end %>
-        </div>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to('About', {controller: 'about', action: 'index'}, id: "link-to-about", style: "background-color:rgb(225, 234, 225);") %>
+            </li>
+          </ul>
+          <div id="log-in-out-btn-container" class="mr-2">
+            <% if @user %>
+              <%= link_to('Log Out', {controller: 'users', action: 'end'}, style: "background-color:rgb(225, 234, 225);", class: 'btn') %>
+            <% else %>
+              <%= link_to('Sign up with Spotify', @request, id: 'spotify-data-request-button', class: 'btn') %>
+            <% end %>
+          </div>
+        </div>]
       </nav><!-- Navbar container -->
         <!-- yield container -->
         <div id="yield-container" style="background-color:rgb(225, 234, 225);">
