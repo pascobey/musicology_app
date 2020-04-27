@@ -22,10 +22,10 @@
                     <% q_three_bound_rad = 3 * Math::PI / 2 %>
                     <% vertices_coordinates = {} %>
                     <% i = 1 %>
-                    <% circumradius = (40 / lsvm) * ((lsvm - lsc) + 1) %>
                     <% build_angle_sum_rad = 0 %>
                     <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
                     <% until i == (vertices_count + 1) %>
+                        <% circumradius = i %>
                         <% if i == 1 %>
                             <% vertices_coordinates.merge!( i => { :x => center[:x], :y => ( center[:y] - circumradius ) } )  %>
                         <% else %>
