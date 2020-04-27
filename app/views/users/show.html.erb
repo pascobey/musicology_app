@@ -59,7 +59,7 @@
                             <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[p - 1].artist_image_url %>"></image>
                         </pattern>
                         <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" fill="url(#<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>)"/>
-                        <% master_coordinates["#{artists[p - 1].artist_spotify_unique}"] = { x: vertices_coordinates.dig(p, :x), y: vertices_coordinates.dig(p, :y) } %>
+                        <% master_coordinates[artists[p - 1].id] = { x: vertices_coordinates.dig(p, :x), y: vertices_coordinates.dig(p, :y) } %>
                         <% p = p.next %>
                     <% end %>
                     <% lsc = lsc - 1 %>
@@ -72,8 +72,8 @@
                         <% until outer_c == (afl.size + 1) %>
                             <% inner_c = 1 %>
                             <% until inner_c == (afl.size) %>
-                                <%= one = master_coordinates.values_at(afl[outer_c - 1].artist_spotify_unique) %>
-                                <%= two = master_coordinates.values_at(afl[inner_c - 1].artist_spotify_unique) %>
+                                <%= one = master_coordinates.values_at(afl[outer_c - 1].id) %>
+                                <%= two = master_coordinates.values_at(afl[inner_c - 1].id) %>
                                 
                                 <% inner_c = inner_c.next %>
                             <% end %>
