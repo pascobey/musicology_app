@@ -51,10 +51,8 @@
                             <% end %>
                         <% end %>
                         <% master_coordinates[artists[i - 1].id] = { x: vertices_coordinates.dig(i, :x), y: vertices_coordinates.dig(i, :y) } %>
-                        <% x = vertices_coordinates.dig(i, :x) %>
-                        <% y = vertices_coordinates.dig(i, :y) %>
                         <pattern id="<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>" x="calc(<%= x %>% - 30px)" y="calc(<%= y %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
-                            <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[i - 1].artist_image_url %>"style="z-index:5*<%= i %>;"></image>
+                            <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[i - 1].artist_image_url %>"style="z-index:<%= 5 * i %>;"></image>
                         </pattern>
                         <circle cx="<%= x %>%" cy="<%= y %>%" r="30" fill="url(#<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>)"/>
                         <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
