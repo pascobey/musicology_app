@@ -72,7 +72,7 @@
                         <% until outer_c == (afl.size + 1) %>
                             <% inner_c = 1 %>
                             <% until inner_c == (afl.size) %>
-                                <%= one = master_coordinates.values_at(afl[outer_c - 1].id) %>
+                                <%= one = Hash[*(master_coordinates.values_at(afl[outer_c - 1].id))] %>
                                 <%= two = master_coordinates.values_at(afl[inner_c - 1].id) %>
                                 
                                 <% inner_c = inner_c.next %>
