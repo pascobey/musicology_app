@@ -51,12 +51,6 @@
                             <% end %>
                         <% end %>
                         <% master_coordinates[artists[i - 1].id] = { x: vertices_coordinates.dig(i, :x), y: vertices_coordinates.dig(i, :y) } %>
-                        <% x = vertices_coordinates.dig(i, :x) %>
-                        <% y = vertices_coordinates.dig(i, :y) %>
-                        <pattern id="<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>" x="calc(<%= x %>% - 30px)" y="calc(<%= y %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
-                            <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[i - 1].artist_image_url %>"style="z-index:<%= 5 * i %>;"></image>
-                        </pattern>
-                        <circle cx="<%= x %>%" cy="<%= y %>%" r="30" fill="url(#<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>)"/>
                         <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                         <% i = i.next %>
                     <% end %>
@@ -78,7 +72,12 @@
                         <% outer_c = outer_c.next %>
                     <% end %>
                 <% end %>
-                
+                <% @artists.each do |artist| %>
+                    <pattern id="<%= artist.name.gsub(/\s+/, "") %>-<%= artist.id %>" x="calc(<%= master_coordinates.dig(artist.id, :x) %>% - 30px)" y="calc(<%=  master_coordinates.dig(artist.id, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
+                        <image x="0" y="0" height="60" width="60" xlink:href="<%= artist.artist_image_url %>"></image>
+                    </pattern>
+                    <circle cx="<%= master_coordinates.dig(artist.id, :x) %>%" cy="<%= master_coordinates.dig(artist.id, :y) %>%" r="30" fill="url(#<%= artist.name.gsub(/\s+/, "") %>-<%= artist.id %>)"/>
+                <% end %>
             </svg><!-- graph-window -->
         </div><!-- create space -->
         <!-- zoom-buttons-container -->
