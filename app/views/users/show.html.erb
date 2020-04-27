@@ -72,11 +72,11 @@
                         <% outer_c = outer_c.next %>
                     <% end %>
                 <% end %>
-                <% @artists.each do |artist| %>
-                    <pattern id="<%= artist.name.gsub(/\s+/, "") %>-<%= artist.id %>" x="calc(<%= master_coordinates.dig(artist.id, :x) %>% - 30px)" y="calc(<%=  master_coordinates.dig(artist.id, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
-                        <image x="0" y="0" height="60" width="60" xlink:href="<%= artist.artist_image_url %>"></image>
+                <% @artists.each do |ma| %>
+                    <pattern id="<%= ma.name.gsub(/\s+/, "") %>-<%= ma.id %>" x="calc(<%= master_coordinates.dig(ma.id, :x) %>% - 30px)" y="calc(<%=  master_coordinates.dig(ma.id, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
+                        <image x="0" y="0" height="60" width="60" xlink:href="<%= ma.artist_image_url %>"></image>
                     </pattern>
-                    <circle cx="<%= master_coordinates.dig(artist.id, :x) %>%" cy="<%= master_coordinates.dig(artist.id, :y) %>%" r="30" fill="url(#<%= artist.name.gsub(/\s+/, "") %>-<%= artist.id %>)"/>
+                    <circle cx="<%= master_coordinates.dig(ma.id, :x) %>%" cy="<%= master_coordinates.dig(ma.id, :y) %>%" r="30" fill="url(#<%= ma.name.gsub(/\s+/, "") %>-<%= ma.id %>)"/>
                 <% end %>
             </svg><!-- graph-window -->
         </div><!-- create space -->
