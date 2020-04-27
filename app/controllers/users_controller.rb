@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       @playlists_stratifications << User.stratify_artist_representation_in_playlist(p.spotify_unique)
       @artists << p.artists
     end
-    @artists = @artists.uniq
+    @artists = @artists.uniq.flatten
     @library_stratified = @playlists_stratifications.inject{ |artist_spotify_unique, pr| artist_spotify_unique.merge( pr ){ |k, pr, lr| pr + lr } }.sort_by{ |k,v| v }.to_a.reverse.to_h
     # puts "@ artists_spotify_uniques #{@artists_spotify_unique = @library_stratified.select{|k,v| v == 7}.keys}"
   end
