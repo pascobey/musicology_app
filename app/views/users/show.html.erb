@@ -50,17 +50,15 @@
                                 <% vertices_coordinates.merge!(i => { :x => ( center[:x] + adjacent ), :y => ( center[:y] - opposite) }) %>
                             <% end %>
                         <% end %>
+                        <% master_coordinates[artists[i - 1].id] = { x: vertices_coordinates.dig(i, :x), y: vertices_coordinates.dig(i, :y) } %>
+                        <% x = vertices_coordinates.dig(i, :x) %>
+                        <% y = vertices_coordinates.dig(i, :y) %>
+                        <pattern id="<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>" x="calc(<%= x %>% - 30px)" y="calc(<%= y %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
+                            <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[i - 1].artist_image_url %>"></image>
+                        </pattern>
+                        <circle cx="<%= x %>%" cy="<%= y %>%" r="30" fill="url(#<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>)"/>
                         <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                         <% i = i.next %>
-                    <% end %>
-                    <% p = 1 %>
-                    <% until p == (vertices_count + 1) %>
-                        <pattern id="<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>" x="calc(<%= vertices_coordinates.dig(p, :x) %>% - 30px)" y="calc(<%= vertices_coordinates.dig(p, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
-                            <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[p - 1].artist_image_url %>"></image>
-                        </pattern>
-                        <circle cx="<%= vertices_coordinates.dig(p, :x) %>%" cy="<%= vertices_coordinates.dig(p, :y) %>%" r="30" fill="url(#<%= artists[p - 1].name.gsub(/\s+/, "") %>-<%= artists[p - 1].id %>)"/>
-                        <% master_coordinates[artists[p - 1].id] = { x: vertices_coordinates.dig(p, :x), y: vertices_coordinates.dig(p, :y) } %>
-                        <% p = p.next %>
                     <% end %>
                     <% lsc = lsc - 1 %>
                 <% end %>
