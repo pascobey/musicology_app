@@ -51,6 +51,8 @@
                             <% end %>
                         <% end %>
                         <% master_coordinates[artists[i - 1].id] = { x: vertices_coordinates.dig(i, :x), y: vertices_coordinates.dig(i, :y) } %>
+                        <% x = vertices_coordinates.dig(i, :x) %>
+                        <% y = vertices_coordinates.dig(i, :y) %>
                         <pattern id="<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>" x="calc(<%= x %>% - 30px)" y="calc(<%= y %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
                             <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[i - 1].artist_image_url %>"style="z-index:<%= 5 * i %>;"></image>
                         </pattern>
@@ -76,6 +78,7 @@
                         <% outer_c = outer_c.next %>
                     <% end %>
                 <% end %>
+                
             </svg><!-- graph-window -->
         </div><!-- create space -->
         <!-- zoom-buttons-container -->
