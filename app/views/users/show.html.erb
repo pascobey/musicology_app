@@ -6,7 +6,7 @@
         <div id="scrollable-zoom-block" style="width:5000px;height:5000px;">
             <!-- graph-window -->
             <svg id="graph-window" width="100%" height="100%">
-                <% lsc = @library_stratified.values.max - @library_stratified.values.uniq.size %>
+                <% lsc = @library_stratified.values.uniq.size %>
                 <% lsvm = lsc %>
                 <% master_coordinates = {} %>
                 <% until lsc == 0 %>
