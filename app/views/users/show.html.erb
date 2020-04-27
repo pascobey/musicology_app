@@ -68,7 +68,11 @@
                     <% until outer_c == (afl.size + 1) %>
                         <% inner_c = 1 %>
                         <% until inner_c == afl.size %>
-                            <%= master_coordinates %>
+                            <line x1="<%= master_coordinates.dig(afl[outer_c - 1].id, :x) %>%"
+                                y1="<%= master_coordinates.dig(afl[outer_c - 1].id, :y) %>%"
+                                x2="<%= master_coordinates.dig(afl[inner_c - 1].id, :x) %>%"
+                                y1="<%= master_coordinates.dig(afl[inner_c - 1].id, :y) %>%"
+                                style="stroke:black;stroke-width:2;"/>
                             <% inner_c = inner_c.next %>
                         <% end %>
                         <% outer_c = outer_c.next %>
