@@ -9,17 +9,17 @@
                 <% lsc = @library_stratified.values.max %>
                 <% lsvm = lsc %>
                 <% master_coordinates = {} %>
+                <% artists_spotify_uniques = @library_stratified.select{|k,v| v == lsc}.keys %>
+                <% artists = [] %>
+                <% artists_spotify_uniques.each do |artist| %>
+                    <% artists << Artist.find_by(artist_spotify_unique: artist) %>
+                <% end %>
+                <% vertices_count = artists_spotify_uniques.size %>
+                <% center = {:x => 50, :y => 50} %>
+                <% q_one_bound_rad = Math::PI / 2 %>
+                <% q_two_bound_rad = Math::PI %>
+                <% q_three_bound_rad = 3 * Math::PI / 2 %>
                 <% until lsc == 0 %>
-                    <% artists_spotify_uniques = @library_stratified.select{|k,v| v == lsc}.keys %>
-                    <% artists = [] %>
-                    <% artists_spotify_uniques.each do |artist| %>
-                        <% artists << Artist.find_by(artist_spotify_unique: artist) %>
-                    <% end %>
-                    <% vertices_count = artists_spotify_uniques.size %>
-                    <% center = {:x => 50, :y => 50} %>
-                    <% q_one_bound_rad = Math::PI / 2 %>
-                    <% q_two_bound_rad = Math::PI %>
-                    <% q_three_bound_rad = 3 * Math::PI / 2 %>
                     <% vertices_coordinates = {} %>
                     <% i = 1 %>
                     <% circumradius = (lsvm * ((lsvm - lsc) + 1)) - 20 %>
@@ -51,10 +51,10 @@
                             <% end %>
                         <% end %>
                         <% master_coordinates[artists[i - 1].id] = { x: vertices_coordinates.dig(i, :x), y: vertices_coordinates.dig(i, :y) } %>
-                        <pattern id="<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>" x="calc(<%= x %>% - 30px)" y="calc(<%= y %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
+                        <pattern id="<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>" x="calc(<%= vertices_coordinates.dig(i, :x) %>% - 30px)" y="calc(<%= vertices_coordinates.dig(i, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
                             <image x="0" y="0" height="60" width="60" xlink:href="<%= artists[i - 1].artist_image_url %>"style="z-index:<%= 5 * i %>;"></image>
                         </pattern>
-                        <circle cx="<%= x %>%" cy="<%= y %>%" r="30" fill="url(#<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>)"/>
+                        <circle cx="<%= vertices_coordinates.dig(i, :x) %>%" cy="<%= vertices_coordinates.dig(i, :y) %>%" r="30" fill="url(#<%= artists[i - 1].name.gsub(/\s+/, "") %>-<%= artists[i - 1].id %>)"/>
                         <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
                         <% i = i.next %>
                     <% end %>
