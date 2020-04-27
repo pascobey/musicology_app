@@ -72,11 +72,7 @@
                         <% until outer_c == (afl.size + 1) %>
                             <% inner_c = 1 %>
                             <% until inner_c == (afl.size) %>
-                                <%= one = master_coordinates.values_at(afl[outer_c - 1].id)[0] %>
-                                <%= two = master_coordinates.values_at(afl[inner_c - 1].id)[0] %>
-                                <line x1="<%= one[:x] %>%" y1="<%= one[:y] %>%"
-                                    x2="<%= two[:x] %>%" y2="<%= two[:y] %>%"
-                                    style="stroke:black;stroke-width:2;"/>
+                                
                                 <% inner_c = inner_c.next %>
                             <% end %>
                             <% outer_c = outer_c.next %>
