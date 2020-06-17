@@ -1,5 +1,5 @@
 # musicology_app
-### a.k.a. graphurmusic.com
+### a.k.a. <graphurmusic.com>
 
 ##### *If you are unable to use this app (because you do not have a Spotify account) check out the [demo video](https://youtu.be/YlqB5HX-Xm8)!* 
 
