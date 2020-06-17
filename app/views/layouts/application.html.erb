@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>graphurmusic</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body style="background-color:rgb(248,248,255);">
+    <!-- notice bar - flex-row -->
+    <div id="flash" class="d-flex flex-row justify-content-center shadow w-100" style="position:fixed;background-color:rgb(225, 234, 225);margin-top:86px;">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "#{name}" %>
+      <% end %>
+    </div><!-- notice bar - flex-row -->
+    <!-- Content Containter - flex-row -->
+    <div id="page-container" class="justify-content-center">
+      <!-- Navbar container -->
+      <nav id="navbar" class="navbar shadow fixed-top" style="min-height:86px;background-color:rgb(255,240,245);">
+        <a href="/" class="d-flex flex-column navbar-brand px-1 ml-2 border border-dark" style="background-color:rgb(225, 234, 225);">
+          <%= image_tag("main.png", width: "60", height: "60", class: 'align-self-center', style: "") %>
+          <span style="color:black;">graphurmusic</span>
+        </a>
+        <!-- <%= link_to(image_tag("main.png", width: "60", height: "60"), "/", class: "navbar-brand px-1 ml-2 border border-dark", style: "background-color:rgb(225, 234, 225);") %> -->
+        <div id="log-in-out-btn-container" class="mr-2">
+          <% if @user %>
+            <%= link_to('Log Out', {controller: 'users', action: 'end'}, style: "background-color:rgb(225, 234, 225);", class: 'btn') %>
+          <% else %>
+            <%= link_to('Sign up with Spotify', @request, id: 'spotify-data-request-button', class: 'btn') %>
+          <% end %>
+          <%= link_to(image_tag('github.png', width: '40', height: '40'), 'https://github.com/pascobey/musicology_app', class: 'ml-2') %>
+        </div>
+      </nav><!-- Navbar container -->
+        <!-- yield container -->
+        <div id="yield-container" style="background-color:rgb(225, 234, 225);">
+          <%= yield %>
+        </div><!-- yield container -->
+    </div><!-- Content Containter - flex-row -->
+    <script>
+      if (document.getElementById("flash")) {
+        document.getElementById("flash").classList.remove("shadow");
+        setTimeout(function() {
+          document.getElementById("flash").remove();
+        }, 3000);
+      }
+  </script>
+  </body>
+</html>

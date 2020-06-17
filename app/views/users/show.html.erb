@@ -1,0 +1,101 @@
+<!-- centering -->
+<div class="d-flex justify-content-center">
+    <!-- user show content container - column -->
+    <div id="user-show-content-container" class="d-flex flex-column shadow-lg rounded" style="position:fixed;left:24px;right:24px;top:110px;bottom:24px;background-color:rgb(255,240,245);overflow-x:scroll;overflow-y:scroll;">
+        <!-- create space -->
+        <div id="scrollable-zoom-block" style="width:1000px;height:1000px;">
+            <!-- graph-window -->
+            <svg id="graph-window" width="100%" height="100%">
+                <% lsc = @library_stratified.values.max %>
+                <% lss = @library_stratified.values.uniq.size %>
+                <% master_coordinates = {} %>
+                <% until lsc == 0 %>
+                    <% artists_spotify_uniques = @library_stratified.select{|k,v| v == lsc}.keys %>
+                    <% artists = [] %>
+                    <% artists_spotify_uniques.each do |artist| %>
+                        <% artists << Artist.find_by(artist_spotify_unique: artist) %>
+                    <% end %>
+                    <% vertices_count = artists_spotify_uniques.size %>
+                    <% center = {:x => 50, :y => 50} %>
+                    <% q_one_bound_rad = Math::PI / 2 %>
+                    <% q_two_bound_rad = Math::PI %>
+                    <% q_three_bound_rad = 3 * Math::PI / 2 %>
+                    <% vertices_coordinates = {} %>
+                    <% i = 1 %>
+                    <% circumradius = (40 / lsc) %>
+                    <% build_angle_sum_rad = 0 %>
+                    <% central_angle_rad = (360.0/vertices_count) * Math::PI / 180 %>
+                    <% until i == (vertices_count + 1) %>
+                        <% if i == 1 %>
+                            <% vertices_coordinates.merge!( i => { :x => center[:x], :y => ( center[:y] - circumradius ) } )  %>
+                        <% else %>
+                            <% if build_angle_sum_rad <= q_one_bound_rad %>
+                                <% opposite = circumradius * Math.sin(build_angle_sum_rad) %>
+                                <% adjacent = circumradius * Math.cos(build_angle_sum_rad) %>
+                                <% vertices_coordinates.merge!(i => { :x => ( center[:x] - opposite ), :y => ( center[:y] - adjacent) }) %>
+                            <% elsif q_one_bound_rad < build_angle_sum_rad && build_angle_sum_rad <= q_two_bound_rad %>
+                                <% theta_rad = (build_angle_sum_rad - q_one_bound_rad) %>
+                                <% opposite = circumradius * Math.sin(theta_rad) %>
+                                <% adjacent = circumradius * Math.cos(theta_rad) %>
+                                <% vertices_coordinates.merge!(i => { :x => ( center[:x] - adjacent ), :y => ( center[:y] + opposite) }) %>
+                            <% elsif q_two_bound_rad < build_angle_sum_rad && build_angle_sum_rad <= q_three_bound_rad %>
+                                <% theta_rad = build_angle_sum_rad - q_two_bound_rad %>
+                                <% opposite = circumradius * Math.sin(theta_rad) %>
+                                <% adjacent = circumradius * Math.cos(theta_rad) %>
+                                <% vertices_coordinates.merge!(i => { :x => ( center[:x] + opposite ), :y => ( center[:y] + adjacent) }) %>
+                            <% elsif q_three_bound_rad < build_angle_sum_rad && build_angle_sum_rad <= (q_two_bound_rad * 2) %>
+                                <% theta_rad = build_angle_sum_rad - q_three_bound_rad %>
+                                <% opposite = circumradius * Math.sin(theta_rad) %>
+                                <% adjacent = circumradius * Math.cos(theta_rad) %>
+                                <% vertices_coordinates.merge!(i => { :x => ( center[:x] + adjacent ), :y => ( center[:y] - opposite) }) %>
+                            <% end %>
+                        <% end %>
+                        <% master_coordinates[artists[i - 1].id] = { x: vertices_coordinates.dig(i, :x), y: vertices_coordinates.dig(i, :y) } %>
+                        <% build_angle_sum_rad = build_angle_sum_rad + central_angle_rad %>
+                        <% i = i.next %>
+                    <% end %>
+                    <% lss = lss - 1 %>
+                    <% lsc = lsc - 1 %>
+                <% end %>
+                <% @playlists.each do |playlist| %>
+                    <% afl = playlist.artists.uniq %>
+                    <% outer_c = 1 %>
+                    <% until outer_c == (afl.size + 1) %>
+                        <% inner_c = 1 %>
+                        <% until inner_c == afl.size %>
+                            <line x1="<%= master_coordinates.dig(afl[outer_c - 1].id, :x) %>%"
+                                y1="<%= master_coordinates.dig(afl[outer_c - 1].id, :y) %>%"
+                                x2="<%= master_coordinates.dig(afl[inner_c - 1].id, :x) %>%"
+                                y2="<%= master_coordinates.dig(afl[inner_c - 1].id, :y) %>%"
+                                style="stroke:black;stroke-width:2;"/>
+                            <% inner_c = inner_c.next %>
+                        <% end %>
+                        <% outer_c = outer_c.next %>
+                    <% end %>
+                <% end %>
+                <% @artists.each do |ma| %>
+                    <pattern id="<%= ma.name.gsub(/\s+/, "") %>-<%= ma.id %>" x="calc(<%= master_coordinates.dig(ma.id, :x) %>% - 30px)" y="calc(<%=  master_coordinates.dig(ma.id, :y) %>% - 30px)" patternUnits="userSpaceOnUse" height="60" width="60">
+                        <image x="0" y="0" height="60" width="60" xlink:href="<%= ma.artist_image_url %>"></image>
+                    </pattern>
+                    <circle cx="<%= master_coordinates.dig(ma.id, :x) %>%" cy="<%= master_coordinates.dig(ma.id, :y) %>%" r="30" fill="url(#<%= ma.name.gsub(/\s+/, "") %>-<%= ma.id %>)"/>
+                <% end %>
+            </svg><!-- graph-window -->
+        </div><!-- create space -->
+        <!-- zoom-buttons-container -->
+        <div id="zoom-buttons-container" style="position:fixed;bottom:50px;left:50px;">
+            <button id="zoom-out-btn" class="text-justified zoom-btn" style="width:29px;height:29px;" onclick="zoomOut()">-</button>
+            <button id="zoom-in-btn" class="text-justified zoom-btn" style="width:29px;height:29px;" onclick="zoomIn()">+</button>
+        </div><!-- zoom-buttons-container -->
+    </div><!-- user show content container - column -->
+</div><!-- centering -->
+<script>
+    function zoomIn() {
+        document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) + 250) + "px";
+        document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) + 250) + "px";
+    }
+    function zoomOut() {
+        document.getElementById("scrollable-zoom-block").style.width = (parseInt((document.getElementById("scrollable-zoom-block").style.width).replace("px", "")) - 250) + "px";
+        document.getElementById("scrollable-zoom-block").style.height = (parseInt((document.getElementById("scrollable-zoom-block").style.height).replace("px", "")) - 250) + "px";
+    }
+    document.getElementById("user-show-content-container").scrollBy(400,400);
+</script>
